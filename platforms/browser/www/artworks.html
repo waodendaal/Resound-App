@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<!--
+    Copyright (c) 2012-2016 Adobe Systems Incorporated. All rights reserved.
+
+    Licensed to the Apache Software Foundation (ASF) under one
+    or more contributor license agreements.  See the NOTICE file
+    distributed with this work for additional information
+    regarding copyright ownership.  The ASF licenses this file
+    to you under the Apache License, Version 2.0 (the
+    "License"); you may not use this file except in compliance
+    with the License.  You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing,
+    software distributed under the License is distributed on an
+    "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+     KIND, either express or implied.  See the License for the
+    specific language governing permissions and limitations
+    under the License.
+-->
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="msapplication-tap-highlight" content="no" />
+    <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width" />
+    <!-- This is a wide open CSP declaration. To lock this down for production, see below. -->
+    <meta http-equiv="Content-Security-Policy" content="default-src * 'unsafe-inline'; style-src 'self' 'unsafe-inline'; media-src *" />
+    <!-- Good default declaration:
+    * gap: is required only on iOS (when using UIWebView) and is needed for JS->native communication
+    * https://ssl.gstatic.com is required only on Android and is needed for TalkBack to function properly
+    * Disables use of eval() and inline scripts in order to mitigate risk of XSS vulnerabilities. To change this:
+        * Enable inline JS: add 'unsafe-inline' to default-src
+        * Enable eval(): add 'unsafe-eval' to default-src
+    * Create your own at http://cspisawesome.com
+    -->
+    <!-- <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: 'unsafe-inline' https://ssl.gstatic.com; style-src 'self' 'unsafe-inline'; media-src *" /> -->
+    <link rel="stylesheet" type="text/css" href="css/luxbar.css" />
+    <link rel="stylesheet" type="text/css" href="css/index.css" />
+    <link rel="stylesheet" type="text/css" href="css/all.css" />
+
+    <title>RE:SOUND Conference 2019 - Schedule</title>
+</head>
+
+<body>
+    <div id="loader">
+        <div id="bars">
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <p class="pulsate">loading</p>
+        </div>
+    </div>
+    <div id="navbar">
+        <!-- buildmen.js -->
+    </div>
+    
+    <div class="app">
+        <div class="page_container">
+            <div class="program_arttrack_banner" >
+                <h1>Artworks</h1>
+                <div style="width:100%;">
+                    <div style="width: max-content; float: left;">
+                        <a class="btn btn-small btn-gray btn-radius" href="#">Exhibitions</a>
+                    </div>
+                    <div style="width: max-content; float: left;">
+                        <a class="btn btn-small btn-gray btn-radius" href="#">Performances</a>
+                    </div>
+                    <div style="overflow: auto;">
+                        <form id="search_form" class="btn btn-small btn-gray btn-radius search_bar">
+                            <button type="submit"><i class="fa fa-search"></i></button>
+                            <input id="search_input" type="text" placeholder="Search.." name="search">
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div id="artwork_list" class="background_blue">
+                <table id="artwork_table" style="border-collapse: collapse">
+                                <!-- Populate tracks -->
+                </table>
+                <h1 id="no_results" style="text-align:center; color: white; display: none;">No Results</h1>
+            </div>
+            <div id="blue_bottom" style="position:absolute;" class="background_blue"></div>
+        </div>
+    </div>
+
+    <script type="text/javascript" src="cordova.js"></script>
+    <script type="text/javascript" src="js/index.js"></script>
+    <script type="text/javascript" src="js/buildmenu.js"></script>
+    <script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
+    <script type="text/javascript" src="js/jquerymobile/jquery.mobile-1.4.5.js"></script>
+    <script type="text/javascript" src="js/jquery.touchSwipe.min.js"></script>
+
+    <script type="text/javascript">
+        app.initialize();
+        $('#loader').fadeOut();
+        $('#nav_home').addClass('active');
+
+
+        
+            //Read json database
+            // $.ajax ({
+            //     url: "database/artworks.json",
+            //     beforeSend: function(xhr){
+            //         if (xhr.overrideMimeType)
+            //         {
+            //             xhr.overrideMimeType("application/json");
+            //         }
+            //         },
+            //     dataType: 'json',
+            // }).then(function(data){
+            //     // https://stackoverflow.com/questions/11197818/how-do-i-make-a-json-object-with-multiple-arrays
+            //     let records = data.ids;
+            //     for (key in data.ids){
+            //         let record = records[key];
+            //         alert('records ', record);
+            //         let DOM = $('<div id="'+ key + '" href="' +'artwork.html?variabletopass='+key + '"><p>'+ record.artwork +'</p><p>'+ record.artist+'</p></div>').appendTo('#artworks');                  
+            //     }
+            // })
+            // alert ('Foo');
+
+            let screen_width = document.documentElement.clientWidth;
+
+            // DB
+            var db  = window.openDatabase('ArtTestNew4.2', '4.2', 'Test_Art_Test_New4.2', 1000000);
+            db.transaction(GetInfo);
+            
+            //Style
+
+
+            //Search
+            $('#search_form').on('submit', function(e) { //use on if jQuery 1.7+
+                $('#artwork_table').empty();
+                e.preventDefault();  //prevent form from submitting
+                db.transaction(GetSearch);
+
+            });
+
+function GetSearch(tx){
+    var searchval = $("#search_input").val();
+    if (searchval== ""){
+        var query = "SELECT * FROM ART";
+        tx.executeSql(query, [], querySuccess, errorCB);
+    }
+    else {
+        var query = "SELECT * FROM ART WHERE artist LIKE '%"+ searchval +"%' OR artwork LIKE '%"+ searchval +"%'";
+        tx.executeSql(query, [], querySuccess, errorCB);
+    }
+    // Fill blue bottom
+    // let screen_height = document.documentElement.clientHeight;
+    // let offsetTop = $('#artwork_list').offset().top;
+    // alert('OffsetTop: ', String(offsetTop))
+    // $('#blue_bottom').css({'height':(offsetTop)})
+}
+
+function GetInfo(tx) {
+    tx.executeSql('SELECT * FROM ART', [], querySuccess, errorCB);
+
+}
+
+function querySuccess(tx, results) {
+    if (results.rows.length == 0){
+        $('#no_results').css({'display':'block'})
+    }
+    $('#no_results').css({'display':'none'})
+    // Create DOM 
+    let shellDOM = $('#artwork_table');
+    // $('#program_arttrack_banner h1').text(String(results.rows.length));
+    for (var i = 0; i < results.rows.length; i++){
+        let item = results.rows.item(i);
+        let itemDOM = $('<tr id="'+ String(item.id) +'_arttable" class="artwork_list_item" onclick="clickWork('+ item.id+')">\
+            <td valign="top">\
+                <div class="artwork_thumbnail">\
+                </div>\
+            </td>\
+            <td class="table_description" valign="top">\
+                <h2>' + item.artwork + '</h2>\
+                <p>' + item.artist + '</p>\
+            </td>\
+            <td class="last_item">\
+                            <div><img class="arrow_img" src="img/arrow_right.png"></div>\
+                <p style="background-color: black; padding:5px; text-align:center;">Floor '+ item.floor + '</p>\
+            </td>\
+        </tr>').appendTo(shellDOM);
+
+        $('.artwork_thumbnail').css({'width':((screen_width-50)/3),'height':((screen_width-50)/3) });
+        $('#'+item.id+'_arttable .artwork_thumbnail').css({'background-image':'url("img/artworks/'+item.image+'"', 'background-size':'cover'});
+        $('.last_item').css({'width':((screen_width-50)/3),'height':((screen_width-50)/3) });
+        let H2height = $('.table_description').height();
+        console.log('Height: ', H2height)
+        $('.table_description').next().css({'height':H2height});
+    }
+    // this will be true since it was a select statement and so rowsAffected was 0
+    if (!results.rowsAffected) {
+        console.log('No rows affected!');
+        return false;
+    }
+}
+
+    function errorCB(err) {
+        alert("Error processing SQL1: "+err.code);
+    }
+
+    function clickWork(id){
+        let elementId = id;
+        sessionStorage.param1 = elementId;
+        window.location.replace("artwork.html");
+    }
+
+    // Menu
+    var previouspage = window.sessionStorage.getItem("page");
+
+    $(document).on('click','.luxbar-brand', function(){
+        window.location.replace(previouspage);
+    });
+    let currentPage = 'artworks.html';
+    window.sessionStorage.setItem("page",currentPage); 
+
+    </script>
+</body>
+
+</html>

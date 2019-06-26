@@ -1,0 +1,79 @@
+[
+        {
+            "id": "1",
+            "artist": "Jordan Lacey ",
+            "artwork": "Ruptured Landscapes (2019)",
+            "type": "Exhibition",
+            "type_description": "10 min stereo audio file",
+            "description": "Combines field recordings from two sound installations: Fielding (2018) and Tochstone (2016). Fielding was a curated exhibition of ten sound artists responding to the theme of 'broken ecologies'. Each work was combined in a soundscape design played via three speakers in a site-specifc biophilic structure. Recordings of site-specific text readings by the lead-artists are included. Touchstone is a digital artwork that responds to touch. Its central stone is bounded by vibrating metal plates and speakers playing ethnographic sounds from the surrounding community. In combination these field recordings are composed to evoke the feeling of sonic landscapes being ruptured.",
+            "floor": "1",
+            "x_coordinate": "2",
+            "y_coordinate": "3"
+        },
+        {
+            "id": "2",
+            "artist": "Amanda Gutierrez",
+            "artwork": "Soundwalk (2019)",
+            "type": "Exhibition",
+            "type_description": "30 min",
+            "description": "The artist will provide a soundwalk, the beginning, and the endpoint will be the exhibition room of my piece to share and discuss the art process of the piece.",
+            "floor": "1",
+            "x_coordinate": "2",
+            "y_coordinate": "3"
+        },
+        {
+            "id": "3",
+            "artist": "Julieanna Preston and Max McAlpine (research assistant)",
+            "artwork": "breath-taking (2019)",
+            "type": "Exhibition",
+            "type_description": "Duration of the conference (96 hours)",
+            "description": "The installation breath-taking is a durational listening experience that traverses the stages of a dying person’s breath. As a live and generative encounter, breath-taking fosters embodied learning about breath, through breath, on a state of diminishing corporeality. Listeners are encouraged to visit the installation over the course of the conference to witness the slow and persistent emergence of the work in real time.",
+            "floor": "1",
+            "x_coordinate": "2",
+            "y_coordinate": "3",
+            "image": "julieanna.png"
+        },
+        {
+            "id": "4",
+            "artist": "Justin Bennetts",
+            "artwork": "Filters from Multiplicity.",
+            "description": "Multiplicity is a research project investigating the sonic environment of cites.\r\nAs part of the project, Bennett has found and made acoustic filters, which he uses\r\nto listen to, or record the city. He sees the soundscape of the city as an ecology where\r\nhumans, machines and animals all occupy and use part of the sonic spectrum. These filters\r\nwhich cut out some sounds, and emphasise others, are intended to focus on a particular part\r\nof the spectrum. They interfere with our normal way of listening so that we can perhaps\r\nhear things that we wouldn&#39;t normally notice. The audio is a collection of recordings made\r\nthrough different filters in Brussels.",
+            "floor": "1",
+            "x_coordinate": "2",
+            "y_coordinate": "3",
+            "image": "justinsize.jpg"
+        },
+        {
+            "id": "5",
+            "artist": "Claudia Robles-Angel",
+            "artwork": "SKIN II (2018)",
+            "type": "Performance",
+            "type_description": "20 min ",
+            "description": "Interactive Audiovisual Performance using Biomedical Signals. ",
+            "floor": "1",
+            "x_coordinate": "2",
+            "y_coordinate": "3",
+            "image": "claudia.png"
+        },
+        {
+            "id": "6",
+            "artist": "Leena Lee (Lena Ortega Atristain)",
+            "artwork": "Environments in the Air 002 (2019)",
+            "type_description": "6.30 min ",
+            "description": "Reinterpretation of an urban soundscape that involves the morning chorus of birds of a specific place in Mexico City. This piece seeks to question contemporary anthropocentrism and its consideration of the world as an exclusively human space from the perspective of the adaptation and construction of the significant sonorous environments of birds.",
+            "floor": "1",
+            "x_coordinate": "2",
+            "y_coordinate": "3",
+            "image": "Leena_Lee.JPG"
+        },
+        {
+            "id": "7",
+            "artist": "Polly Stanton",
+            "artwork": "Between Two Suns (2017)",
+            "type_description": "17 mins ",
+            "floor": "1",
+            "x_coordinate": "2",
+            "y_coordinate": "3",
+            "image": "polly1.jpg"
+        }
+]

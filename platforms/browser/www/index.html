@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<!--
+    Copyright (c) 2012-2016 Adobe Systems Incorporated. All rights reserved.
+
+    Licensed to the Apache Software Foundation (ASF) under one
+    or more contributor license agreements.  See the NOTICE file
+    distributed with this work for additional information
+    regarding copyright ownership.  The ASF licenses this file
+    to you under the Apache License, Version 2.0 (the
+    "License"); you may not use this file except in compliance
+    with the License.  You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing,
+    software distributed under the License is distributed on an
+    "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+     KIND, either express or implied.  See the License for the
+    specific language governing permissions and limitations
+    under the License.
+-->
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="msapplication-tap-highlight" content="no" />
+    <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width" />
+    <!-- This is a wide open CSP declaration. To lock this down for production, see below. -->
+    <meta http-equiv="Content-Security-Policy" content="default-src * 'unsafe-inline'; style-src 'self' 'unsafe-inline'; media-src *" />
+    <!-- Good default declaration:
+    * gap: is required only on iOS (when using UIWebView) and is needed for JS->native communication
+    * https://ssl.gstatic.com is required only on Android and is needed for TalkBack to function properly
+    * Disables use of eval() and inline scripts in order to mitigate risk of XSS vulnerabilities. To change this:
+        * Enable inline JS: add 'unsafe-inline' to default-src
+        * Enable eval(): add 'unsafe-eval' to default-src
+    * Create your own at http://cspisawesome.com
+    -->
+    <!-- <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: 'unsafe-inline' https://ssl.gstatic.com; style-src 'self' 'unsafe-inline'; media-src *" /> -->
+    <link rel="stylesheet" type="text/css" href="css/luxbar.css" />
+    <link rel="stylesheet" type="text/css" href="css/index.css" />
+    <link rel="stylesheet" type="text/css" href="css/all.css" />
+    <title>RE:SOUND Conference 2019</title>
+</head>
+
+<body id="index_page">
+    <div id="loader">
+        <div id="bars">
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <p class="pulsate">loading</p>
+        </div>
+    </div>
+    <div id="navbar" class="home_nav">
+        <!-- buildmen.js -->
+    </div>
+
+    <div class="app">
+        <div id="home_divs">
+            <div id="left_screen">
+                <div class="program_arttrack_banner background_blue">
+                    <h1>Program</h1>
+                    <p>Explore the lorem ipsum lorem ipsum</p>
+                    <div class="et_pb_column et_pb_column_4_4  et_pb_column_4">
+                        <div class="et_pb_code et_pb_module  et_pb_code_0">
+                            <a id="sched-embed" href="https://nime2017.sched.com/" data-sched-sidebar="no" style="display: none;">https://nime2017.sched.com/</a><div id="sched-iframe"><iframe name="easyXDM_default2745_provider" id="easyXDM_default2745_provider" style="width: 100%; height: 3289px;" scrolling="no" src="https://nime2017.sched.com/iframed.html?url=https%3A%2F%2Fnime2017.sched.com%2F%3Fiframe%3Dyes%26fixedHeight%3Dno%26w%3D100%25%26sidebar%3Dno%26bg%3Dfalse%26mobileoff%3DY%26ssl%3Dyes&amp;xdm_e=http%3A%2F%2Fwww.nime2017.org&amp;xdm_c=default2745&amp;xdm_p=1" frameborder="0"></iframe></div>
+                        </div> <!-- .et_pb_code -->
+                    </div>
+                    <script type="text/javascript" src="https://nime2017.sched.org/js/embed.js"></script>
+                </div>
+            </div>
+            <div id="home_screen">
+                <div id="home_banner">
+                    <img id="home_banner_img" src="img/home_banner.png">
+                    <div id="homebutton_Program" style='right:0;' class="homebutton">
+                        <div class="stripe">
+                            <h1>Program <img style="float:left; margin-right:10px;" src="img/bracket_left.png" class="bracket"></h1>
+                            <p>Lorem Ipsum</p>
+                        </div>
+                    </div>
+                    <div id="homebutton_ArtTrack" style='left:0;' class="homebutton">
+                        <div class="stripe">
+                            <h1><img style="float:right; margin-left: 10px;" src="img/bracket_right.png" class="bracket">Art Track</h1>
+                            <p>Lorem Ipsum</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- <div id="test"></div>
+                <div id="test2"></div> -->
+            </div>
+          
+            <div id="right_screen">
+                <div class="background_blue program_arttrack_banner">
+                    <h1>Art Track</h1>
+                    <p class="full_width">Explore the lorem ipsum lorem ipsum</p>
+                </div>
+                <div class="subcontent">
+                    <div>
+                        <div class="click_header_home" onclick="location.href='artworks.html'">
+                            <h2 style="float:left;">Artwork</h2>
+                            <img class="arrow_img" src="img/arrow_right.png">
+                        </div>
+                        <div class="art_preview">
+                            <div class=""></div>
+                            <div class=""></div>
+                            <div class=""></div>
+                        </div>
+                    </div>
+                    <hr>
+                    <div>
+                        <div class="click_header_home" onclick="location.href='floorplan.html'">
+                            <h2 style="float:left; margin-bottom: 0;">Musikken Hus</h2>
+                            <img class="arrow_img" src="img/arrow_right.png">
+                        </div>
+                        <p class="full_width">Explore the lorem ipsum lorem ipsum</p>
+                        <a class="btn btn-small btn-gray btn-radius" href="#">Floor 1</a>
+                        <a class="btn btn-small btn-gray btn-radius" href="#">Floor 2</a>
+                        <a class="btn btn-small btn-gray btn-radius" href="#">Floor 3</a>
+                        <a class="btn btn-small btn-gray btn-radius" href="#">Floor 4</a>
+                    </div>
+                    <hr>
+                    <div>
+                        <img class="qr_small" src="img/QR_small.png">
+                        <h2>Scan QR Code</h2>
+                        <p class="full_width">Explore the lorem ipsum lorem ipsum</p>
+                    </div>
+                </div>  
+            </div>
+        </div>
+    </div>
+
+    <script type="text/javascript" src="cordova.js"></script>
+    <script type="text/javascript" src="js/index.js"></script>
+    <script type="text/javascript" src="js/buildmenu.js"></script>
+    <script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
+    <script type="text/javascript" src="js/jquerymobile/jquery.mobile-1.4.5.js"></script>
+    <script type="text/javascript" src="js/jquery.touchSwipe.min.js"></script>
+
+    <script type="text/javascript">
+        app.initialize();
+        $('#loader').fadeOut();
+        $('#nav_home').addClass('active');
+        // Home Screens
+        console.log('Width...');
+        let screen_width = document.documentElement.clientWidth;
+        console.log('Width: ', screen_width); 
+        $('#home_screen, #left_screen, #right_screen').css({'width':screen_width+'px'});
+        $('#home_divs').css({'width':(screen_width*3)+'px'});
+        $('#home_divs').css({'right':(-screen_width)+'px'});
+        $('#home_divs').css({'left':(-screen_width)+'px'});
+        //Preview divs
+        $('.art_preview div').css({'width':((screen_width-50)/3),'height':((screen_width-50)/3) });
+        var center = 'center';
+
+        $('#homebutton_ArtTrack').on('click', function(){
+            
+            center = swipeLeft()
+            
+        })
+        $('#homebutton_Program').on('click', function(){
+            center = swipeRight()
+        })
+
+        
+        $(window).swipe( {
+            
+            //Generic swipe handler for all directions
+            swipe:function(event, direction, distance, duration, fingerCount, fingerData) {
+
+                
+                if (direction == 'left'){
+                    center = swipeLeft()
+
+                }
+                if (direction == 'right'){
+                    center = swipeRight()
+                }
+                
+            }
+        });
+
+        function swipeLeft(){
+            let currentLeft = $('#home_divs').css('left');
+            let currentRight = $('#home_divs').css('right');
+            if (center == 'right'){
+                $('#home_divs').css({'overflow':'hidden'});
+                $('#home_divs').css({'right':(-screen_width)+'px'});
+                $('#home_divs').css({'left':(-screen_width)+'px'});
+                $('.luxbar').fadeOut();
+                $('.program_arttrack_banner').fadeOut();
+                $('.subcontent').fadeOut();
+                $('#home_banner').fadeIn();
+                $('#homebutton_Program').css({'right': '0'});
+
+                return 'center';
+            }
+            if (center == 'center') {
+                $('#home_divs').css({'left': 'calc('+currentRight+' - '+screen_width+'px)'});
+                $('#home_divs').css({'right': 'calc('+currentRight+' + '+screen_width+'px)'});
+                $('.luxbar').fadeIn();
+                $('.program_arttrack_banner').fadeIn();
+                $('.subcontent').fadeIn();
+                $('#homebutton_ArtTrack').css({'left': screen_width+'px'});
+                $('#home_banner').fadeOut();
+
+                return 'left';
+            }
+            if (center == 'left')
+            {
+                return 'left'
+            }
+        }
+        function swipeRight(){
+            let currentLeft = $('#home_divs').css('left');
+            let currentRight = $('#home_divs').css('right');
+            if (center == 'left'){
+                $('#home_divs').css({'right':(-screen_width)+'px'});
+                $('#home_divs').css({'left':(-screen_width)+'px'});
+                $('.luxbar').fadeOut();
+                $('.program_arttrack_banner').fadeOut();
+                $('.subcontent').fadeOut();
+                $('#home_banner').fadeIn();
+                $('#homebutton_ArtTrack').css({'left': '0'});
+
+                return 'center';
+            }
+            if (center == 'center') {
+                $('#home_divs').css({'overflow':'scroll'});
+                $('#home_divs').css({'right': 'calc('+currentRight+' - '+screen_width+'px)'});
+                $('#home_divs').css({'left': 'calc('+currentRight+' + '+screen_width+'px)'});
+                $('.luxbar').fadeIn();
+                $('.program_arttrack_banner').fadeIn();
+                $('.subcontent').fadeIn();
+                $('#homebutton_Program').css({'right': screen_width+'px'});
+                $('#home_banner').fadeOut();
+                return 'right';
+            }             
+            if (center == 'right'){
+                return 'right';
+            }
+                    
+        }
+
+        // DB
+
+        createDB();      
+
+        function createDB() {
+
+            $.ajax ({
+                url: "database/artworks.json",
+                beforeSend: function(xhr){
+                    if (xhr.overrideMimeType)
+                    {
+                        xhr.overrideMimeType("application/json");
+                    }
+                    },
+                dataType: 'json',
+            }).then(function(data){
+                var firstCheck = true;
+                let recordslist = data;
+                for (key in recordslist){
+                    let record = recordslist[key];
+                    firstCheck = toSQLDB(record, key, firstCheck);
+                }
+            });
+
+        }
+
+        function toSQLDB(record, key, firstCheck) {
+
+            var db  = window.openDatabase('ArtTestNew4.2', '4.2', 'Test_Art_Test_New4.2', 1000000);
+            var record = record;
+            var key = key;
+            db.transaction(populateDB, errorCB, successCB);
+
+            function populateDB(tx){    
+                let id = Number(record.id);
+                let artist = String(record.artist);                
+                let artwork = String(record.artwork);
+                var type = String(record.type);
+                if (type == null || type == "" || type == undefined){
+                    type = 'N/A'
+                }
+                var type_description = String(record.type_description);
+                if (type_description == null || type_description == "" || type_description == undefined){
+                    type_description = 'N/A'
+                }
+                var description = String(record.description);
+                if (description == null || description == "" || description == undefined){
+                    description = 'N/A'
+                }
+                let floor = String(record.floor);
+                let x_coordinate = String(record.x_coordinate);
+                let y_coordinate = String(record.y_coordinate);
+                var image = String(record.image);
+                if (image == null || image == "" || image == undefined ||image == 'undefined'){
+                    image = 'temp.png'
+                }
+                if (firstCheck == true ){
+                    tx.executeSql('DROP TABLE IF EXISTS ART');
+                }
+                tx.executeSql('CREATE TABLE IF NOT EXISTS ART (id unique, artist, artwork, type, type_description, description, floor, x_coordinate, y_coordinate, image)');
+                let sql = 'INSERT INTO ART (id, artist, artwork, type, type_description, description, floor, x_coordinate, y_coordinate, image) VALUES ('+ id + ', "'+ artist + '", "'+ artwork + '", "'+ type + '", "'+ type_description + '", "'+ description + '", "'+ floor + '", "'+ x_coordinate + '", "'+ y_coordinate + '", "'+ image + '")';
+                // $('#program_arttrack_banner p').text(sql);
+                tx.executeSql(sql);
+                
+
+                //FIGURE OUT HOW TO READ >>> INTO DB
+                // tx.executeSql('INSERT INTO ART (id, artist, artwork, description, floor, x_coordiante, y_coordiante) VALUES ('+ id +','+ record.artist +','+ record.artwork +','+ record.description +','+ record.floor+','+ record.x_coordinate +','+ record.y_coordinate+')');
+                // tx.executeSql('INSERT INTO ART (id, artist, artwork, description, floor, x_coordiante, y_coordiante) VALUES ('+ 2 +','+ record.artist +','+ record.artwork +','+ record.description +','+ record.floor+','+ record.x_coordinate +','+ record.y_coordinate+')');
+                // tx.executeSql('INSERT INTO ART (id, artist, artwork, description, floor, x_coordiante, y_coordiante) VALUES ('+ 3 +','+ record.artist +','+ record.artwork +','+ record.description +','+ record.floor+','+ record.x_coordinate +','+ record.y_coordinate+')');
+                
+            }
+
+            return false; 
+
+        }
+    
+
+
+
+    // let DOM2 = $('<div style="color: red;"><p>' + String(records[0]) + '</p></div>').appendTo($('#test2'));
+
+    // alert('foo');
+    // alert();
+    // for (let i = 0; i < records.length; i ++){
+    //     alert('bar');
+    //     let tester = ('INSERT INTO ART (id, artist, artwork, description, floor, x_coordiante, y_coordiante) VALUES ('+ records[i][0] +',' + records[i][1] +',' + records[i][2] +',' + records[i][3] +',' + records[i][4] +',' + records[i][5] +',' + records[i][6] +')');
+    //     for (let y = 0; y < records[i].length; y++)
+    //     {
+    //         let DOM2 = $('<div style="color: red;"><p>' + tester + '</p></div>').appendTo($('#test2'));
+            
+
+    //     }
+    // }
+
+    function errorCB(tx, err) {
+        alert("Error processing SQL2.3: "+err);
+    }
+
+    // Transaction success callback
+
+    function successCB() {
+        console.log("success! Index.html ");
+    }
+
+    //Menu
+    $(document).on('click','.luxbar-brand', function(){
+        if (center == 'right'){
+            center = swipeLeft()
+
+        }
+        if (center == 'left'){
+            center = swipeRight()
+        }
+    });
+    let currentPage = 'index.html';
+    window.sessionStorage.setItem("page",currentPage); 
+
+    </script>
+</body>
+
+</html>
