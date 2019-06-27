@@ -39,6 +39,7 @@
     <!-- <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: 'unsafe-inline' https://ssl.gstatic.com; style-src 'self' 'unsafe-inline'; media-src *" /> -->
     <link rel="stylesheet" type="text/css" href="css/luxbar.css" />
     <link rel="stylesheet" type="text/css" href="css/index.css" />
+    <link rel="stylesheet" href="js/leaflet/leaflet.css"/>
     <title>RE:SOUND Conference 2019 - Schedule</title>
 </head>
 
@@ -52,13 +53,9 @@
                 <div class="program_arttrack_banner" >
                         <h1>Musikkens Hus</h1>
                         <h2>Ground Floor</h2>
-                        <a href="floorplanTest.html">Test</a>
                 </div>
             <div class="plan_div">
-                <img src="img/maps/mh_floor1.png" usemap="#plan1_map" style="height:100%; width: auto;"/>
-                <map name="plan1_map">
-                    <area id="basement_map" coords="0,0,0,0" href="#"  shape=rect>
-                </map>
+                    <div id="mapid" style="height: 500px; width: 500px;"></div>
             </div>
         </div>
     </div>
@@ -70,6 +67,7 @@
     <script type="text/javascript" src="js/jquerymobile/jquery.mobile-1.4.5.js"></script>
     <script type="text/javascript" src="js/jquerymobile/jquery.mobile-1.4.5.min.js"></script>
     <script type="text/javascript" src="js/jquery.touchSwipe.min.js"></script>
+    <script src="js/leaflet/leaflet.js"></script>
 
     <script type="text/javascript">
         app.initialize();
@@ -83,14 +81,32 @@
         } )
 
   
-        $(window).swipe( {
-            
-            //Generic swipe handler for all directions
-            swipe:function(event, direction, distance, duration, fingerCount, fingerData) {
-                // $('#test').text("You swiped " + direction );  
-                // alert('SWOPE!');
-            }
+        var map = L.map('mapid', {
+                crs: L.CRS.Simple
+            });
+        var bounds = [[0,0], [600,1200]];
+        var image = L.imageOverlay('img/maps/mh_floor1.png', bounds).addTo(map);
+        map.fitBounds(bounds);
+        map.setMaxBounds(bounds);
+
+        var marker = L.marker([231.5, 530.09]).addTo(map);
+        marker.bindPopup("<b>SKIN II (2018)</b><br><em>Claudia Robles-Angel</em><br><span onclick='clickWork(5)'>View</span>").openPopup();
+        function clickWork(id){
+            let elementId = id;
+            sessionStorage.param1 = elementId;
+            window.location.replace("artwork.html");
+        }
+
+        // Navigation
+        var previouspage = window.sessionStorage.getItem("page");
+
+        $(document).on('click','.luxbar-brand', function(){
+            window.location.replace(previouspage);
+            // window.location.replace('index.html')
         });
+        let currentPage = 'floorplanTest.html';
+        window.sessionStorage.setItem("page",currentPage); 
+
     </script>
 </body>
 

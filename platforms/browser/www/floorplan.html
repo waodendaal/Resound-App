@@ -48,15 +48,18 @@
     </div>
     
     <div class="app">
-        <div class="map_header">
-            <h1>Floorplan </h1>
-            <h2 id='test'>Test</h2>
-        </div>
-        <div class="plan_div">
-            <img src="img/4Map.png" usemap="#plan1_map" style="height:100%; width: auto;"/>
-            <map name="plan1_map">
-                <area id="basement_map" coords="0,0,0,0" href="#"  shape=rect>
-            </map>
+        <div class="page_container">
+                <div class="program_arttrack_banner" >
+                        <h1>Musikkens Hus</h1>
+                        <h2>Ground Floor</h2>
+                        <a href="floorplanTest.html">Test</a>
+                </div>
+            <div class="plan_div">
+                <img src="img/maps/mh_floor1.png" usemap="#plan1_map" style="height:100%; width: auto;"/>
+                <map name="plan1_map">
+                    <area id="basement_map" coords="0,0,0,0" href="#"  shape=rect>
+                </map>
+            </div>
         </div>
     </div>
 
@@ -75,8 +78,8 @@
 
         $('.map_header').css({'background-color':'red'});
         jQuery(window).on( "swipe", function( event ) { 
-            alert('SWIPE!');
-            $('.map_header').css({'background-color':'blue'});
+            // alert('SWIPE!');
+            // $('.map_header').css({'background-color':'blue'});
         } )
 
   
@@ -84,8 +87,8 @@
             
             //Generic swipe handler for all directions
             swipe:function(event, direction, distance, duration, fingerCount, fingerData) {
-                $('#test').text("You swiped " + direction );  
-                alert('SWOPE!');
+                // $('#test').text("You swiped " + direction );  
+                // alert('SWOPE!');
             }
         });
     </script>

@@ -45,7 +45,7 @@
 </head>
 
 <body>
-    <div id="loader">
+    <!-- <div id="loader">
         <div id="bars">
             <div class="bar"></div>
             <div class="bar"></div>
@@ -55,7 +55,7 @@
             <div class="bar"></div>
             <p class="pulsate">loading</p>
         </div>
-    </div>
+    </div> -->
     <div id="navbar">
         <!-- buildmen.js -->
     </div>
@@ -98,8 +98,9 @@
 
     <script type="text/javascript">
         app.initialize();
-        $('#loader').fadeOut();
+        // $('#loader').fadeOut();
         $('#nav_home').addClass('active');
+
 
 
         
@@ -124,14 +125,27 @@
             // })
             // alert ('Foo');
 
-            let screen_width = document.documentElement.clientWidth;
+            var screen_width = document.documentElement.clientWidth;
+            let screen_height = document.documentElement.clientHeight;
+
+            setBlueBottom();
+
+            
+            function setBlueBottom(){
+                let toppos = $('#blue_bottom').offset().top;
+                let height = screen_height-toppos;
+                // alert('Screenheight: ' + String(screen_height))
+                // alert(' Top: ' + String(toppos))
+                // alert(' Height: ' + String(height))
+
+                $('#blue_bottom').css({'height':String(height)+'px'});
+            }
 
             // DB
             var db  = window.openDatabase('ArtTestNew4.2', '4.2', 'Test_Art_Test_New4.2', 1000000);
             db.transaction(GetInfo);
             
-            //Style
-
+            
 
             //Search
             $('#search_form').on('submit', function(e) { //use on if jQuery 1.7+
@@ -140,6 +154,7 @@
                 db.transaction(GetSearch);
 
             });
+
 
 function GetSearch(tx){
     var searchval = $("#search_input").val();
@@ -160,6 +175,7 @@ function GetSearch(tx){
 
 function GetInfo(tx) {
     tx.executeSql('SELECT * FROM ART', [], querySuccess, errorCB);
+    
 
 }
 
@@ -192,14 +208,17 @@ function querySuccess(tx, results) {
         $('#'+item.id+'_arttable .artwork_thumbnail').css({'background-image':'url("img/artworks/'+item.image+'"', 'background-size':'cover'});
         $('.last_item').css({'width':((screen_width-50)/3),'height':((screen_width-50)/3) });
         let H2height = $('.table_description').height();
-        console.log('Height: ', H2height)
         $('.table_description').next().css({'height':H2height});
     }
+    setBlueBottom()
+
     // this will be true since it was a select statement and so rowsAffected was 0
     if (!results.rowsAffected) {
         console.log('No rows affected!');
         return false;
     }
+
+
 }
 
     function errorCB(err) {
@@ -212,11 +231,22 @@ function querySuccess(tx, results) {
         window.location.replace("artwork.html");
     }
 
-    // Menu
+    // Navigation
+    $(window).swipe( {    
+        //Generic swipe handler for all directions
+        swipe:function(event, direction, distance, duration, fingerCount, fingerData) {     
+            if (direction == 'right'){
+                window.location.replace('index.html')
+            }
+            
+        }
+    });
+
     var previouspage = window.sessionStorage.getItem("page");
 
     $(document).on('click','.luxbar-brand', function(){
-        window.location.replace(previouspage);
+        // window.location.replace(previouspage);
+        window.location.replace('index.html')
     });
     let currentPage = 'artworks.html';
     window.sessionStorage.setItem("page",currentPage); 

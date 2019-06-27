@@ -45,7 +45,7 @@
 </head>
 
 <body>
-    <div id="loader">
+    <!-- <div id="loader">
         <div id="bars">
             <div class="bar"></div>
             <div class="bar"></div>
@@ -55,7 +55,7 @@
             <div class="bar"></div>
             <p class="pulsate">loading</p>
         </div>
-    </div>
+    </div> -->
     <div id="navbar">
         <!-- buildmen.js -->
     </div>
@@ -73,11 +73,16 @@
                 <img id="artwork_image">
             </div>
         <div class="artwork_description">
-            <h1 id="artist_name">Name</h1>
-            <h2 id="artwork_name" style="font-family: 'Roboto-Light-Italic';">Artwork</h2>
+            <h1 id="artwork_name">Artwork</h1>
+            <h2 id="artist_name" style="font-family: 'Roboto-Light-Italic';">Name</h2>
             <hr>
             <p id='artwork_typedescription' style="color:white; font-style: italic;">Type and duration</p>
             <p id='artwork_description' style="color:white;">Decscription</p>
+            <div style="width:100%; margin-bottom: 10px;">
+                <div class="artwork_list_icon"></div>
+                    <a class="btn btn-small btn-gray btn-radius"  href="floorplanTest.html">Find on Map</a>
+                </div>
+            </div>
         </div>
         <div style="z-index: 0;position: fixed;background-color: black;width: 100%;margin-top: 0;padding: 0;height: 50%;bottom: 0;/*! top: -10px; */" class="\">
         </div>
@@ -89,10 +94,12 @@
     <script type="text/javascript" src="cordova.js"></script>
     <script type="text/javascript" src="js/index.js"></script>
     <script type="text/javascript" src="js/buildmenu.js"></script>
+    <script type="text/javascript" src="js/jquery.touchSwipe.min.js"></script>
+
 
     <script type="text/javascript">
         app.initialize();
-        $('#loader').fadeOut();
+        // $('#loader').fadeOut();
         $('#nav_home').addClass('active');
 
 
@@ -114,7 +121,7 @@
 
             $('#artist_name').text(item.artist);
             $('#artwork_name').text(item.artwork);
-            $('#artwork_typedescription').text(item.type + '('+ item.type_description+')')
+            $('#artwork_typedescription').text(item.type + ' ('+ item.type_description+')')
             $('#artwork_description').text(item.description);
             $('#artwork_image').css({'background-image':'url("img/artworks/'+item.image+'"', 'background-size':'cover'});
         }
@@ -130,11 +137,22 @@
 //     console.log (info);
 // }
 
-    // Menu
+    // Navigation
+    $(window).swipe( {    
+        //Generic swipe handler for all directions
+        swipe:function(event, direction, distance, duration, fingerCount, fingerData) {     
+            if (direction == 'right'){
+                window.location.replace('artworks.html')
+            }
+            
+        }
+    });
+
     var previouspage = window.sessionStorage.getItem("page");
 
     $(document).on('click','.luxbar-brand', function(){
         window.location.replace(previouspage);
+        // if comes from map...
     });
     let currentPage = 'artwork.html';
     window.sessionStorage.setItem("page",currentPage); 

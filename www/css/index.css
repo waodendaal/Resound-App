@@ -126,6 +126,10 @@ h1 {
 }
 #sched-iframe {
     background-color: white;
+    margin-top:50px;
+}
+#sched-iframe article {
+    display:none;
 }
 /* Home */
 
@@ -198,6 +202,9 @@ h1 {
     text-align: right !important;
 }
 /* Art List */
+#blue_bottom {
+    width: 100%;
+}
 #artwork_list  {
     padding: 15px;
     padding-bottom: 80px;
@@ -208,6 +215,10 @@ h1 {
 }
 .artwork_list_icon {
     width: max-content; float: left; position:fixed; z-index: 900; margin-top: 15px;
+}
+.artwork_list_icon a {
+    text-shadow: 0.1em 0.1em 0.3em rgba(0,0,0,0.7) !important; 
+    box-shadow: 0.1em 0.1em 0.3em rgba(0,0,0,0.7);
 }
 .table_description, .artwork_thumbnail, .last_item {
     padding: 10px 0px 10px 0px;
@@ -314,14 +325,14 @@ input::placeholder {
     text-align:left !important;
 }
 .artwork_description {
-    text-align: justify;
     height:fit-content;
+    text-align: left;
     padding:15px;
- background-color:black;
- border-radius:25px 25px 0px 0px;
- z-index: 111;
- position: relative;
- top:-20px;
+    background-color:black;
+    border-radius:25px 25px 0px 0px;
+    z-index: 111;
+    position: relative;
+    top:-20px;
  
 }
 .artwork_banner{
