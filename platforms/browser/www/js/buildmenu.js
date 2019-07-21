@@ -13,14 +13,31 @@ document.addEventListener('deviceready', function() {
                         </li>\
                         <li id="nav_home" class="luxbar-item"><a href="index.html">Home</a></li>\
                         <li id="nav_sched" class="luxbar-item"><a href="schedule.html">Schedule</a></li>\
-                        <li class="luxbar-item"><a href="floorplan.html">Floorplan</a></li>\
+                        <li class="luxbar-item"><a href="floorplan.html">Map</a></li>\
                         <li class="luxbar-item"><a href="artworks.html">Artworks</a></li>\
+                        <li class="luxbar-item"><a href="fileTest.html">Test</a></li>\
                         </ul>\
                     </div>\
                 </div>').appendTo(container);
-    if ($('body').prop('id') == 'index_page'){
-        $('.luxbar').hide();
+                
+    // Page dependend changes
+
+    if ($('body').prop('id') == 'index_page') {
+        // alert(String(window.sessionStorage.getItem("artTrack")))
+        if (window.sessionStorage.getItem("artTrack") == "no" || window.sessionStorage.getItem("artTrack") == null){
+            $('.luxbar').hide();
+        }
     }
+    if (window.sessionStorage.getItem("artTrack") == 'yes_p' && $('body').prop('id') == 'index_page' ){
+        $('.luxbar-brand').html('<i class="fas fa-chevron-right"></i>');
+    }
+
+    if (window.sessionStorage.getItem('page') == 'schedule.html'){
+        $('.luxbar-brand').attr('data-rel', 'back')
+    } 
+    $('#nav_home').on('click', function(){
+        window.sessionStorage.setItem("artTrack","no"); 
+    })
 });
 
 

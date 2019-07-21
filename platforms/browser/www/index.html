@@ -44,6 +44,7 @@
 </head>
 
 <body id="index_page">
+    <!-- <div id="supersede_div" style="width: 100vw;height: 100vh;z-index: 500000;position: absolute;background-color: red;"> -->
     <div id="loader">
         <div id="bars">
             <div class="bar"></div>
@@ -64,13 +65,25 @@
             <div id="left_screen">
                 <div class="program_arttrack_banner background_blue">
                     <h1>Program</h1>
-                    <p>Explore the lorem ipsum lorem ipsum</p>
-                    <div class="et_pb_column et_pb_column_4_4  et_pb_column_4">
-                        <div class="et_pb_code et_pb_module  et_pb_code_0">
-                            <a id="sched-embed" href="https://nime2017.sched.com/" data-sched-sidebar="no" style="display: none;">https://nime2017.sched.com/</a><div id="sched-iframe"><iframe name="easyXDM_default2745_provider" id="easyXDM_default2745_provider" style="width: 100%; height: 3289px;" scrolling="no" src="https://nime2017.sched.com/iframed.html?url=https%3A%2F%2Fnime2017.sched.com%2F%3Fiframe%3Dyes%26fixedHeight%3Dno%26w%3D100%25%26sidebar%3Dno%26bg%3Dfalse%26mobileoff%3DY%26ssl%3Dyes&amp;xdm_e=http%3A%2F%2Fwww.nime2017.org&amp;xdm_c=default2745&amp;xdm_p=1" frameborder="0"></iframe></div>
-                        </div> <!-- .et_pb_code -->
+                    <p>Explore the Conference Tracks, Keynotes, and Papers Below</p>
+                </div>
+                    <div class="subcontent">
+                    <div>
+                        <div class="click_header_home" onclick="location.href='happeningnow.html'" >
+                            <h2 style="float:left;">What's On Next</h2>
+                            <img class="arrow_img" src="img/arrow_right.png">
+
+                        </div>
+
                     </div>
-                    <script type="text/javascript" src="https://nime2017.sched.org/js/embed.js"></script>
+                    <hr>
+                    <div>
+                        <div class="click_header_home" onclick="location.href='schedule.html'">
+                            <h2 style="float:left; margin-bottom: 0;">See Full Program</h2>
+                            <img class="arrow_img" src="img/arrow_right.png">
+                        </div>
+                    </div>
+                    
                 </div>
             </div>
             <div id="home_screen">
@@ -79,13 +92,13 @@
                     <div id="homebutton_Program" style='right:0;' class="homebutton">
                         <div class="stripe">
                             <h1>Program <img style="float:left; margin-right:10px;" src="img/bracket_left.png" class="bracket"></h1>
-                            <p>Lorem Ipsum</p>
+                            <p>Keynotes, Papers, and More</p>
                         </div>
                     </div>
                     <div id="homebutton_ArtTrack" style='left:0;' class="homebutton">
                         <div class="stripe">
                             <h1><img style="float:right; margin-left: 10px;" src="img/bracket_right.png" class="bracket">Art Track</h1>
-                            <p>Lorem Ipsum</p>
+                            <p style="margin-right:30px;">Performances, Exhibitions, and More</p>
                         </div>
                     </div>
                 </div>
@@ -96,38 +109,40 @@
             <div id="right_screen">
                 <div class="background_blue program_arttrack_banner">
                     <h1>Art Track</h1>
-                    <p class="full_width">Explore the lorem ipsum lorem ipsum</p>
+                    <p class="full_width">Explore the Conference Performances, Exhibitions, and Installations Below</p>
                 </div>
                 <div class="subcontent">
-                    <div>
-                        <div class="click_header_home" onclick="location.href='artworks.html'">
+                    <div onclick="location.href='artworks.html'">
+                        <div class="click_header_home" >
                             <h2 style="float:left;">Artwork</h2>
                             <img class="arrow_img" src="img/arrow_right.png">
                         </div>
                         <div class="art_preview">
-                            <div class=""></div>
-                            <div class=""></div>
-                            <div class=""></div>
+                            <div class="" style="background-image:url('img/artworks/exile1.PNG');"></div>
+                            <div class="" style="background-image:url('img/artworks/claudia2.jpg');"></div>
+                            <div class="" style="background-image:url('img/artworks/polly1.jpg');"></div>
                         </div>
                     </div>
                     <hr>
                     <div>
                         <div class="click_header_home" onclick="location.href='floorplan.html'">
-                            <h2 style="float:left; margin-bottom: 0;">Musikken Hus</h2>
+                            <h2 style="float:left; margin-bottom: 0;">Map</h2>
                             <img class="arrow_img" src="img/arrow_right.png">
                         </div>
-                        <p class="full_width">Explore the lorem ipsum lorem ipsum</p>
-                        <a class="btn btn-small btn-gray btn-radius" href="#">Floor 1</a>
-                        <a class="btn btn-small btn-gray btn-radius" href="#">Floor 2</a>
-                        <a class="btn btn-small btn-gray btn-radius" href="#">Floor 3</a>
-                        <a class="btn btn-small btn-gray btn-radius" href="#">Floor 4</a>
+                        <p class="full_width">Explore CREATE Campus and Musikken Hus</p>
+                        <a class="btn btn-small btn-gray btn-radius floors" href="#" id="floor_basement">Basement</a>
+                        <a class="btn btn-small btn-gray btn-radius floors" href="#" id="floor_ground">Ground Level</a>
+                        <a class="btn btn-small btn-gray btn-radius floors" href="#" id="floor_1">Level 1</a>
+                        <a class="btn btn-small btn-gray btn-radius floors" href="#" id="floor_2">Level 2</a>
+                        <!-- <a class="btn btn-small btn-gray btn-radius floors" href="#" id="floor_3">Level 3</a> -->
+                        
                     </div>
                     <hr>
-                    <div>
+                    <!-- <div>
                         <img class="qr_small" src="img/QR_small.png">
                         <h2>Scan QR Code</h2>
                         <p class="full_width">Explore the lorem ipsum lorem ipsum</p>
-                    </div>
+                    </div> -->
                 </div>  
             </div>
         </div>
@@ -142,19 +157,36 @@
 
     <script type="text/javascript">
         app.initialize();
-        $('#loader').fadeOut();
+
+        var center = 'center';
         $('#nav_home').addClass('active');
         // Home Screens
-        console.log('Width...');
         let screen_width = document.documentElement.clientWidth;
-        console.log('Width: ', screen_width); 
         $('#home_screen, #left_screen, #right_screen').css({'width':screen_width+'px'});
         $('#home_divs').css({'width':(screen_width*3)+'px'});
         $('#home_divs').css({'right':(-screen_width)+'px'});
         $('#home_divs').css({'left':(-screen_width)+'px'});
         //Preview divs
         $('.art_preview div').css({'width':((screen_width-50)/3),'height':((screen_width-50)/3) });
-        var center = 'center';
+        $('#loader').fadeOut();
+
+        window.sessionStorage.setItem("floor","ground"); 
+        var previouspage = window.sessionStorage.getItem("page");
+        // var menuclick =  window.sessionStorage.getItem("menuClick");
+        // if (previouspage != '' || previouspage != null || previouspage !='index.html'){
+        //     if (menuclick != "home_menu")
+        //     alert('Swipe Left')
+        // }
+        // window.sessionStorage.setItem('menuClick', '')
+        if (previouspage == 'artworks.html'){
+            center = swipeLeft()
+            
+        }
+        if (previouspage == 'schedule.html' || previouspage=='happeningnow.html'){
+            center = swipeRight()
+            
+            
+        }
 
         $('#homebutton_ArtTrack').on('click', function(){
             
@@ -165,6 +197,12 @@
             center = swipeRight()
         })
 
+        $('.floors').on("click", function(){
+            let floor = (this.id).split("_")
+            // console.log("ID: ", this.id[1])
+            window.sessionStorage.setItem("floor",floor[1]); 
+            location.href='floorplan.html'
+        })
         
         $(window).swipe( {
             
@@ -178,6 +216,7 @@
                 }
                 if (direction == 'right'){
                     center = swipeRight()
+                    
                 }
                 
             }
@@ -206,6 +245,7 @@
                 $('.subcontent').fadeIn();
                 $('#homebutton_ArtTrack').css({'left': screen_width+'px'});
                 $('#home_banner').fadeOut();
+                $('.luxbar-brand').html('<i class="fas fa-chevron-left"></i>');
 
                 return 'left';
             }
@@ -217,6 +257,7 @@
         function swipeRight(){
             let currentLeft = $('#home_divs').css('left');
             let currentRight = $('#home_divs').css('right');
+
             if (center == 'left'){
                 $('#home_divs').css({'right':(-screen_width)+'px'});
                 $('#home_divs').css({'left':(-screen_width)+'px'});
@@ -225,7 +266,6 @@
                 $('.subcontent').fadeOut();
                 $('#home_banner').fadeIn();
                 $('#homebutton_ArtTrack').css({'left': '0'});
-
                 return 'center';
             }
             if (center == 'center') {
@@ -237,6 +277,8 @@
                 $('.subcontent').fadeIn();
                 $('#homebutton_Program').css({'right': screen_width+'px'});
                 $('#home_banner').fadeOut();
+                $('.luxbar-brand').html('<i class="fas fa-chevron-right"></i>');
+
                 return 'right';
             }             
             if (center == 'right'){
@@ -349,6 +391,30 @@
         console.log("success! Index.html ");
     }
 
+    // Check network connection
+    checkConnection()
+    function checkConnection() {
+        var networkState = navigator.network.connection.type;
+        var states = {};
+        // states[Connection.UNKNOWN]  = 'Unknown connection';
+        // states[Connection.ETHERNET] = 'Ethernet connection';
+        // states[Connection.WIFI]     = 'WiFi connection';
+        // states[Connection.CELL_2G]  = 'Cell 2G connection';
+        // states[Connection.CELL_3G]  = 'Cell 3G connection';
+        // states[Connection.CELL_4G]  = 'Cell 4G connection';
+        // states[Connection.NONE]     = 'No network connection';
+        if (networkState == Connection.NONE){
+            alert('Connection type: ' + states[networkState]);
+            let html = "<div>\
+                        <div class='click_header_home' onclick='"+"location.href='#'"+" >\
+                            <h2 style='float:left;'>View Offline Program</h2>\
+                            <img class='arrow_img' src='img/arrow_right.png'>\
+                        </div>\
+                    </div>";
+            $('#left_screen .subcontent').html(html)
+        }
+    }
+
     //Menu
     $(document).on('click','.luxbar-brand', function(){
         if (center == 'right'){
@@ -361,8 +427,14 @@
     });
     let currentPage = 'index.html';
     window.sessionStorage.setItem("page",currentPage); 
+    window.sessionStorage.setItem("artwork_map", "all");
 
-    </script>
+
+    $('#event-name').css({'background-color':'red !important'})
+
+
+</script>
+    </div>
 </body>
 
 </html>

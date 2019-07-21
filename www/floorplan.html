@@ -39,26 +39,38 @@
     <!-- <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: 'unsafe-inline' https://ssl.gstatic.com; style-src 'self' 'unsafe-inline'; media-src *" /> -->
     <link rel="stylesheet" type="text/css" href="css/luxbar.css" />
     <link rel="stylesheet" type="text/css" href="css/index.css" />
+    <link rel="stylesheet" href="js/leaflet/leaflet.css"/>
     <title>RE:SOUND Conference 2019 - Schedule</title>
 </head>
 
 <body>
+    <!-- <div id="loader">
+        <div id="bars">
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <p class="pulsate">loading</p>
+        </div>
+    </div> -->
     <div id="navbar">
         <!-- buildmen.js -->
     </div>
     
     <div class="app">
         <div class="page_container">
-                <div class="program_arttrack_banner" >
+                <div class="program_arttrack_banner" style="height:auto;" >
                         <h1>Musikkens Hus</h1>
-                        <h2>Ground Floor</h2>
-                        <a href="floorplanTest.html">Test</a>
+                        <h2 id="floorname">&nbsp;</h2>
+                        <a id="-1_M" class="btn btn-small btn-gray btn-radius level" href="#">Basement</a>
+                        <a id ="0_M" class="btn btn-small btn-gray btn-radius level" href="#">Ground Level</a>
+                        <a id = "1_M" id class="btn btn-small btn-gray btn-radius level" href="#">Level 1</a>
+                        <a id = "2_M" class="btn btn-small btn-gray btn-radius level" href="#">Level 2</a>
                 </div>
-            <div class="plan_div">
-                <img src="img/maps/mh_floor1.png" usemap="#plan1_map" style="height:100%; width: auto;"/>
-                <map name="plan1_map">
-                    <area id="basement_map" coords="0,0,0,0" href="#"  shape=rect>
-                </map>
+            <div id="map_container" class="plan_div">
+                    <div id="mapid" style="height: 500px; width: 500px;"></div>
             </div>
         </div>
     </div>
@@ -68,29 +80,145 @@
     <script type="text/javascript" src="js/buildmenu.js"></script>
     <script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
     <script type="text/javascript" src="js/jquerymobile/jquery.mobile-1.4.5.js"></script>
-    <script type="text/javascript" src="js/jquerymobile/jquery.mobile-1.4.5.min.js"></script>
     <script type="text/javascript" src="js/jquery.touchSwipe.min.js"></script>
+    <script src="js/leaflet/leaflet.js"></script>
 
     <script type="text/javascript">
         app.initialize();
-        $('#loader').fadeOut();
         $('#nav_sched').addClass('active');
+        
+        // Level selector
+        var floor = window.sessionStorage.getItem("floor")
+        floor = floor.split('_')
+        levelSelector(floor)
 
-        $('.map_header').css({'background-color':'red'});
-        jQuery(window).on( "swipe", function( event ) { 
-            // alert('SWIPE!');
-            // $('.map_header').css({'background-color':'blue'});
-        } )
-
-  
-        $(window).swipe( {
-            
-            //Generic swipe handler for all directions
-            swipe:function(event, direction, distance, duration, fingerCount, fingerData) {
-                // $('#test').text("You swiped " + direction );  
-                // alert('SWOPE!');
+        function levelSelector(floor){
+            // alert(String(floor))
+            if (floor[0] == "-1"){
+                $('#floorname').text("Basement")
+                Promise.resolve(createMap('img/maps/Map_Basement.svg')).then(function(map){
+                        createDB('-1', map)
+                    }
+                )
             }
+            else if (floor[0] == "1"){
+                $('#floorname').text("Level 1")
+                Promise.resolve(createMap('img/maps/Map_1.svg')).then(function(map){
+                        createDB('1', map)
+                    }
+                )
+            }
+            else if (floor[0] == "2"){
+                $('#floorname').text("Level 2")
+                createDB('2')
+                Promise.resolve(createMap('img/maps/Map_2.svg')).then(function(map){
+                        createDB('2', map)
+                    }
+                )
+            }
+            else {
+                // alert('Ground level')
+                $('#floorname').text("Ground Level")
+                Promise.resolve(createMap('img/maps/Map_Groundfloor.svg')).then(function(map){
+                        createDB('0', map)
+                    }
+                )
+            }
+
+        }
+
+        function createMap(imageFile){
+            // MAP
+            var map = L.map('mapid', {
+                    crs: L.CRS.Simple
+                });
+
+            var bounds = [[0,0], [1800,1600]];
+            var image = L.imageOverlay(imageFile, bounds).addTo(map);
+            map.fitBounds(bounds);
+            map.setMaxBounds(bounds);
+            map.setMaxZoom(2);
+            map.setMinZoom(-1);
+            map.setZoom(-1);
+            // alert('Map Created')
+            return map
+        }
+
+        function clickWork(id){
+            let elementId = id;
+            sessionStorage.param1 = elementId;
+            window.location.replace("artwork.html");
+        }
+
+        function createDB(DBfloor, map){
+            // DB
+            // alert('createDB '+ String(DBfloor))
+            var db  = window.openDatabase('ArtTestNew4.2', '4.2', 'Test_Art_Test_New4.2', 1000000);
+            db.transaction(GetInfo);
+
+            function GetInfo(tx) {
+                // alert('GetInfo')
+                let query = 'SELECT * FROM ART WHERE floor LIKE "%'+ DBfloor+'%"'
+                // let  query = 'SELECT * FROM ART'
+                // alert(String(query))
+                tx.executeSql(query, [], querySuccess, errorCB);  
+                // Last item
+                var artworkLast = window.sessionStorage.getItem("artwork_map");
+                window.sessionStorage.setItem("artwork_map", "all");
+                // From artwork.html page
+                if (artworkLast != null && artworkLast !='all'){
+                    let sqlQuery = 'SELECT * FROM ART WHERE id=' + Number(artworkLast) +''; 
+                    tx.executeSql(sqlQuery, [], querySuccess, errorCB);  
+                }         
+            }
+
+            function querySuccess(tx, results) {
+                // alert('Lenght '+String(results.rows.length))
+                for (var i = 0; i < results.rows.length; i++){
+                    let record = results.rows[i];
+                    // alert('floor: '+ String(record.floor))
+                    let marker = L.marker([(1800-Number(record.y_coordinate)), Number(record.x_coordinate)]).addTo(map);
+                    marker.bindPopup("<b>"+record.artwork+"</b><br><em>"+record.artist+"</em><br><span onclick='clickWork("+ record.id+")'>View</span>").openPopup();
+                }
+
+
+                // this will be true since it was a select statement and so rowsAffected was 0
+                if (!results.rowsAffected) {
+                    console.log('No rows affected!');
+                    return false;
+                }
+            }
+
+            function errorCB(err) {
+                alert("Error processing SQL1: "+err.code);
+            }
+
+        }
+        $('#loader').fadeOut();
+
+        // Buttons
+        $('.level').on('click', function(){
+            $('.level').removeClass('btn-gray_active')
+            $(this).addClass('btn-gray_active')
+            $("#map_container").html('<div id="mapid" style="height: 500px; width: 500px;"></div>')
+            let levelSelected = $(this).attr('id')
+            // alert(String(levelSelected)) 
+            let  floor = levelSelected.split('_')
+            // alert('click: '+String(floor))
+            levelSelector(floor)
+        })
+
+        // Navigation
+        var previouspage = window.sessionStorage.getItem("page");
+
+        $(document).on('click','.luxbar-brand', function(){
+            window.location.replace(previouspage);
+            // window.location.replace('index.html')
         });
+        let currentPage = 'floorplan.html';
+        window.sessionStorage.setItem("page",currentPage); 
+        window.sessionStorage.setItem("floor", "0_M")
+
     </script>
 </body>
 

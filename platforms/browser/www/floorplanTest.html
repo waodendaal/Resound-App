@@ -74,28 +74,57 @@
         $('#loader').fadeOut();
         $('#nav_sched').addClass('active');
 
+
         $('.map_header').css({'background-color':'red'});
         jQuery(window).on( "swipe", function( event ) { 
             // alert('SWIPE!');
             // $('.map_header').css({'background-color':'blue'});
         } )
 
-  
+        // MAP
         var map = L.map('mapid', {
                 crs: L.CRS.Simple
             });
-        var bounds = [[0,0], [600,1200]];
-        var image = L.imageOverlay('img/maps/mh_floor1.png', bounds).addTo(map);
+        var bounds = [[0,0], [1800,1600]];
+        var image = L.imageOverlay('img/maps/map_large.png', bounds).addTo(map);
         map.fitBounds(bounds);
         map.setMaxBounds(bounds);
+        map.setMaxZoom(2);
+        map.setMinZoom(-1);
+        map.setZoom(-1);
 
-        var marker = L.marker([231.5, 530.09]).addTo(map);
-        marker.bindPopup("<b>SKIN II (2018)</b><br><em>Claudia Robles-Angel</em><br><span onclick='clickWork(5)'>View</span>").openPopup();
         function clickWork(id){
+            alert('Clicked')
             let elementId = id;
             sessionStorage.param1 = elementId;
             window.location.replace("artwork.html");
         }
+
+        // DB
+        var db  = window.openDatabase('ArtTestNew4.2', '4.2', 'Test_Art_Test_New4.2', 1000000);
+        db.transaction(GetInfo);
+
+        function GetInfo(tx) {
+            tx.executeSql('SELECT * FROM ART', [], querySuccess, errorCB);           
+        }
+
+        function querySuccess(tx, results) {
+            for (var i = 0; i < results.rows.length; i++){
+                let record = results.rows[i];
+                let marker = L.marker([(1800-Number(record.y_coordinate)), Number(record.x_coordinate)]).addTo(map);
+                marker.bindPopup("<b>"+record.artwork+"</b><br><em>"+record.artist+"</em><br><span onclick='clickWork("+ record.id+")'>View</span>").openPopup();
+
+            }
+            // this will be true since it was a select statement and so rowsAffected was 0
+            if (!results.rowsAffected) {
+                console.log('No rows affected!');
+                return false;
+            }
+        }
+
+    function errorCB(err) {
+        alert("Error processing SQL1: "+err.code);
+    }
 
         // Navigation
         var previouspage = window.sessionStorage.getItem("page");
@@ -106,6 +135,9 @@
         });
         let currentPage = 'floorplanTest.html';
         window.sessionStorage.setItem("page",currentPage); 
+
+
+        
 
     </script>
 </body>

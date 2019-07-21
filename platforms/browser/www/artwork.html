@@ -40,6 +40,7 @@
     <link rel="stylesheet" type="text/css" href="css/luxbar.css" />
     <link rel="stylesheet" type="text/css" href="css/index.css" />
     <link rel="stylesheet" type="text/css" href="css/all.css" />
+    
 
     <title>RE:SOUND Conference 2019</title>
 </head>
@@ -66,6 +67,7 @@
                 <div style="width:100%;">
                         <div class="artwork_list_icon">
                             <a class="btn btn-small btn-gray btn-radius" href="artworks.html"><i class="fas fa-list-ul"></i></a>
+                            <a class="btn btn-small btn-gray btn-radius"  href="floorplan.html">Find on Map</a>
                         </div>
                 </div>
             </div>
@@ -80,7 +82,6 @@
             <p id='artwork_description' style="color:white;">Decscription</p>
             <div style="width:100%; margin-bottom: 10px;">
                 <div class="artwork_list_icon"></div>
-                    <a class="btn btn-small btn-gray btn-radius"  href="floorplanTest.html">Find on Map</a>
                 </div>
             </div>
         </div>
@@ -95,8 +96,7 @@
     <script type="text/javascript" src="js/index.js"></script>
     <script type="text/javascript" src="js/buildmenu.js"></script>
     <script type="text/javascript" src="js/jquery.touchSwipe.min.js"></script>
-
-
+   
     <script type="text/javascript">
         app.initialize();
         // $('#loader').fadeOut();
@@ -120,10 +120,13 @@
             let item = results.rows.item(0);
 
             $('#artist_name').text(item.artist);
+            window.sessionStorage.setItem('floor', item.floor)
             $('#artwork_name').text(item.artwork);
             $('#artwork_typedescription').text(item.type + ' ('+ item.type_description+')')
             $('#artwork_description').text(item.description);
             $('#artwork_image').css({'background-image':'url("img/artworks/'+item.image+'"', 'background-size':'cover'});
+                //Store for map info
+            window.sessionStorage.setItem('artwork_map', item.id)
         }
         function errorCB(err) {
             alert("Error processing SQL1: "+err.code);
@@ -157,7 +160,8 @@
     let currentPage = 'artwork.html';
     window.sessionStorage.setItem("page",currentPage); 
 
-    
+
+
 
     </script>
 </body>
