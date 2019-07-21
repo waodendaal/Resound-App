@@ -117,7 +117,7 @@
                 )
             }
             else {
-                alert('Ground level')
+                // alert('Ground level')
                 $('#floorname').text("Ground Level")
                 Promise.resolve(createMap('img/maps/Map_Groundfloor.svg')).then(function(map){
                         createDB('0', map)
@@ -140,7 +140,7 @@
             map.setMaxZoom(2);
             map.setMinZoom(-1);
             map.setZoom(-1);
-            alert('Map Created')
+            // alert('Map Created')
             return map
         }
 
