@@ -146,7 +146,7 @@
             let captureError = function(error) {
                 alert('Error code: ' + error.code, null, 'Capture Error');
             };
-            var options = { limit: 1, duration: 5 };
+            var options = { limit: 1 };
             // start audio capture
             navigator.device.capture.captureAudio(captureSuccess, captureError, options);
         })
@@ -167,32 +167,32 @@
 
 
     })
-//     function playMedia(fileName){
-//  // Play the audio file at url
-//     var my_media = new Media(fileName,
-//                         // success callback
-//                         function () { console.log("playAudio():Audio Success"); },
-//                         // error callback
-//                         function (err) { console.log("playAudio():Audio Error: " + err); }
-//                     );
+    function playMedia(fileName){
+ // Play the audio file at url
+    var my_media = new Media(fileName,
+                        // success callback
+                        function () { console.log("playAudio():Audio Success"); },
+                        // error callback
+                        function (err) { console.log("playAudio():Audio Error: " + err); }
+                    );
 
-//                     // Play audio
-//                     my_media.play();
+                    // Play audio
+                    my_media.play();
 
-//                     // Pause after 10 seconds
-//                     setTimeout(function () {
-//                         // alert('Pause')
-//                         my_media.pause();
-//                     }, 5000);
-//     }
+                    // Pause after 10 seconds
+                    setTimeout(function () {
+                        // alert('Pause')
+                        my_media.pause();
+                    }, 5000);
+    }
 
-//     $('#artist_name').on('click', function(){
+    $('#artist_name').on('click', function(){
             
             
-//       playMedia('http://www.orangefreesounds.com/wp-content/uploads/2017/03/Cannon-sound-effect.mp3')
+      playMedia('http://www.orangefreesounds.com/wp-content/uploads/2017/03/Cannon-sound-effect.mp3')
                
         
-//         } )
+        } )
 
     </script>
 </body>

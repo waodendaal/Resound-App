@@ -146,7 +146,7 @@
             let captureError = function(error) {
                 alert('Error code: ' + error.code, null, 'Capture Error');
             };
-            var options = { limit: 1, duration: 5 };
+            var options = { limit: 1 };
             // start audio capture
             navigator.device.capture.captureAudio(captureSuccess, captureError, options);
         })
