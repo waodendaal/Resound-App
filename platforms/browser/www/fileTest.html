@@ -65,8 +65,8 @@
             <div style="padding:0px 15px 0 15px">
                 <div style="width:100%;">
                         <div class="artwork_list_icon">
-                            <a class="btn btn-small btn-gray btn-radius" href="artworks.html"><i class="fas fa-list-ul"></i></a>
-                            <a class="btn btn-small btn-gray btn-radius"  href="floorplan.html">Find on Map</a>
+                            <a class="btn btn-small btn-gray btn-radius" href=""><i class="fas fa-list-ul"></i></a>
+                            <a class="btn btn-small btn-gray btn-radius"  href="">Find on Map</a>
 
                         </div>
                 </div>
@@ -130,7 +130,26 @@
         app.initialize();
         // $('#loader').fadeOut();
         $('#nav_home').addClass('active');
+        $('.artwork_list_icon').on('click', function(){
+            // capture callback
+            let captureSuccess = function(mediaFiles) {
+                alert('SUCCESS')
+                var i, path, len;
+                for (i = 0, len = mediaFiles.length; i < len; i += 1) {
+                    path = mediaFiles[i].fullPath;
+                    alert('PATH: ', String(path))
+                    // playMedia(path)
+                }
+            };
 
+            // capture error callback
+            let captureError = function(error) {
+                alert('Error code: ' + error.code, null, 'Capture Error');
+            };
+            var options = { limit: 1, duration: 5 };
+            // start audio capture
+            navigator.device.capture.captureAudio(captureSuccess, captureError, options);
+        })
 
      
         // Firebase
@@ -148,30 +167,32 @@
 
 
     })
+//     function playMedia(fileName){
+//  // Play the audio file at url
+//     var my_media = new Media(fileName,
+//                         // success callback
+//                         function () { console.log("playAudio():Audio Success"); },
+//                         // error callback
+//                         function (err) { console.log("playAudio():Audio Error: " + err); }
+//                     );
 
+//                     // Play audio
+//                     my_media.play();
 
-    $('#artist_name').on('click', function(){
+//                     // Pause after 10 seconds
+//                     setTimeout(function () {
+//                         // alert('Pause')
+//                         my_media.pause();
+//                     }, 5000);
+//     }
+
+//     $('#artist_name').on('click', function(){
             
             
-                
-                // Play the audio file at url
-                var my_media = new Media('http://www.orangefreesounds.com/wp-content/uploads/2017/03/Cannon-sound-effect.mp3',
-                    // success callback
-                    function () { console.log("playAudio():Audio Success"); },
-                    // error callback
-                    function (err) { console.log("playAudio():Audio Error: " + err); }
-                );
-
-                // Play audio
-                my_media.play();
-
-                // Pause after 10 seconds
-                setTimeout(function () {
-                    // alert('Pause')
-                    my_media.pause();
-                }, 5000);
+//       playMedia('http://www.orangefreesounds.com/wp-content/uploads/2017/03/Cannon-sound-effect.mp3')
+               
         
-        } )
+//         } )
 
     </script>
 </body>
