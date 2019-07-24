@@ -79,7 +79,7 @@
                     </div>
                 </div>
             </div>
-            <div id="artwork_list" class="background_blue">
+            <div id="artwork_list">
                 <table id="artwork_table" style="border-collapse: collapse">
                                 <!-- Populate tracks -->
                 </table>
@@ -100,14 +100,16 @@
         app.initialize();
         // $('#loader').fadeOut();
         $('#nav_home').addClass('active');
+        $("#blue_bottom").hide()
 
         var screen_width = document.documentElement.clientWidth;
         let screen_height = document.documentElement.clientHeight;
 
-        setBlueBottom();
+        // setBlueBottom();
 
         
         function setBlueBottom(){
+            $("#blue_bottom").show()
             let toppos = $('#blue_bottom').offset().top;
             let height = screen_height-toppos;
             // alert('Screenheight: ' + String(screen_height))
@@ -141,7 +143,9 @@
         })
 
         function GetSearch(tx){
+            $('#artwork_list').removeClass('background_blue')
             $('#artwork_table').empty();
+            $('#blue_bottom').hide()
 
             let orderBy = ""
             
@@ -211,9 +215,10 @@ function querySuccess(tx, results) {
 
 //      Order By 
         // alert('Has case: '+ String($('#orderbyartwork').hasClass('btn-gray_active')))
+        $('#artwork_list').addClass('background_blue')
+
         if ($('#orderbyartwork').hasClass('btn-gray_active')){
             
-
             let itemDOM = $('<tr id="'+ String(item.id) +'_arttable" class="artwork_list_item" onclick="clickWork('+ item.id+')">\
             <td valign="top">\
                 <div class="artwork_thumbnail">\

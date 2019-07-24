@@ -45,6 +45,14 @@
 
 <body id="index_page">
     <!-- <div id="supersede_div" style="width: 100vw;height: 100vh;z-index: 500000;position: absolute;background-color: red;"> -->
+    <div id="splash">
+        <div style="top:58px;position:fixed;">
+                <img id="home_banner_img" style="opacity: 0.7;" src="img/home_banner_splash.png">
+
+        </div>
+
+    </div>
+
     <div id="loader">
         <div id="bars">
             <div class="bar"></div>
@@ -119,7 +127,7 @@
                         </div>
                         <div class="art_preview">
                             <div class="" style="background-image:url('img/artworks/exile1.PNG');"></div>
-                            <div class="" style="background-image:url('img/artworks/claudia2.jpg');"></div>
+                            <div class="" style="background-image:url('img/artworks/claudia.png');"></div>
                             <div class="" style="background-image:url('img/artworks/polly1.jpg');"></div>
                         </div>
                     </div>
@@ -156,7 +164,14 @@
 
     <script type="text/javascript">
         app.initialize();
-
+        $('#splash').hide()
+        // window.alert(window.sessionStorage.getItem("page"))
+        if (window.sessionStorage.getItem("page") == null){
+            $('#splash').show()
+            setTimeout(function(){ 
+                $("#splash").fadeOut(2000)
+            }, 2000);
+        }
         var center = 'center';
         $('#nav_home').addClass('active');
         // Home Screens
@@ -203,7 +218,7 @@
             location.href='floorplan.html'
         })
         
-        $(window).swipe( {
+        $('.app').swipe( {
             
             //Generic swipe handler for all directions
             swipe:function(event, direction, distance, duration, fingerCount, fingerData) {
@@ -393,8 +408,9 @@
     // Check network connection
     checkConnection()
     function checkConnection() {
+        // alert('Check connection')
         var networkState = navigator.network.connection.type;
-        var states = {};
+        
         // states[Connection.UNKNOWN]  = 'Unknown connection';
         // states[Connection.ETHERNET] = 'Ethernet connection';
         // states[Connection.WIFI]     = 'WiFi connection';
@@ -402,8 +418,8 @@
         // states[Connection.CELL_3G]  = 'Cell 3G connection';
         // states[Connection.CELL_4G]  = 'Cell 4G connection';
         // states[Connection.NONE]     = 'No network connection';
+        // alert('Connection type: ' + networkState);
         if (networkState == Connection.NONE){
-            alert('Connection type: ' + states[networkState]);
             let html = "<div>\
                         <div class='click_header_home' onclick='"+"location.href='#'"+" >\
                             <h2 style='float:left;'>View Offline Program</h2>\

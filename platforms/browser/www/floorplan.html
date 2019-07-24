@@ -178,7 +178,7 @@
                     let record = results.rows[i];
                     // alert('floor: '+ String(record.floor))
                     let marker = L.marker([(1800-Number(record.y_coordinate)), Number(record.x_coordinate)]).addTo(map);
-                    marker.bindPopup("<b>"+record.artwork+"</b><br><em>"+record.artist+"</em><br><span onclick='clickWork("+ record.id+")'>View</span>").openPopup();
+                    marker.bindPopup("<b>"+record.artwork+"</b><br><em>"+record.artist+"</em><div onclick='clickWork("+ record.id+")' style='width:100%; height:100px; background-size:cover; background-image: url(\"img/artworks/"+record.image+"\");'></div><div style='background-color:black; width:100%; color:white; text-align:center;' onclick='clickWork("+ record.id+")'>View</div>").openPopup();
                 }
 
 
