@@ -62,9 +62,9 @@
     
     <div class="app">
         <div class="page_container">
-            <a class="program_arttrack_banner">
+            <!-- <a class="program_arttrack_banner">
                 <h1 style="padding:15px;">Program</h1>
-            </a>
+            </a> -->
                 <div style="width:100%;">
                     <div>
                         <!-- class="et_pb_column et_pb_column_4_4  et_pb_column_4 subcontent" -->
@@ -110,10 +110,13 @@
     var previouspage = window.sessionStorage.getItem("page");
     window.sessionStorage.setItem("artTrack","yes_p");
     window.sessionStorage.setItem("artwork_map", "all");
-
     $(document).on('click','.luxbar-brand', function(){
+        window.history.back();
+
+        // alert("BACK")
+        $.mobile.back();
         // window.location.replace(previouspage);
-        window.location.replace('index.html')
+        // window.location.replace('index.html')
     });
 
     

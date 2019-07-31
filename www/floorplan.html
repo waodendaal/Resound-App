@@ -39,6 +39,7 @@
     <!-- <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: 'unsafe-inline' https://ssl.gstatic.com; style-src 'self' 'unsafe-inline'; media-src *" /> -->
     <link rel="stylesheet" type="text/css" href="css/luxbar.css" />
     <link rel="stylesheet" type="text/css" href="css/index.css" />
+    <link rel="stylesheet" type="text/css" href="css/all.css" />
     <link rel="stylesheet" href="js/leaflet/leaflet.css"/>
     <title>RE:SOUND Conference 2019 - Schedule</title>
 </head>
@@ -63,11 +64,10 @@
         <div class="page_container">
                 <div class="program_arttrack_banner" style="height:auto;" >
                         <h1>Musikkens Hus</h1>
-                        <h2 id="floorname">&nbsp;</h2>
                         <a id="-1_M" class="btn btn-small btn-gray btn-radius level" href="#">Basement</a>
-                        <a id ="0_M" class="btn btn-small btn-gray btn-radius level" href="#">Ground Level</a>
-                        <a id = "1_M" id class="btn btn-small btn-gray btn-radius level" href="#">Level 1</a>
-                        <a id = "2_M" class="btn btn-small btn-gray btn-radius level" href="#">Level 2</a>
+                        <a id ="0_M" class="btn btn-small btn-gray btn-radius level" href="#">Ground</a>
+                        <a id = "1_M" id class="btn btn-small btn-gray btn-radius level" href="#">Lvl 1</a>
+                        <a id = "2_M" class="btn btn-small btn-gray btn-radius level" href="#">Lvl 2</a>
                 </div>
             <div id="map_container" class="plan_div">
                     <div id="mapid" style="height: 500px; width: 500px;"></div>
@@ -95,21 +95,24 @@
         function levelSelector(floor){
             // alert(String(floor))
             if (floor[0] == "-1"){
-                $('#floorname').text("Basement")
+                $('.level').removeClass('btn-gray_active')
+                $(this).addClass('btn-gray_active')
                 Promise.resolve(createMap('img/maps/Map_Basement.svg')).then(function(map){
                         createDB('-1', map)
                     }
                 )
             }
             else if (floor[0] == "1"){
-                $('#floorname').text("Level 1")
+                $('.level').removeClass('btn-gray_active')
+                $(this).addClass('btn-gray_active')
                 Promise.resolve(createMap('img/maps/Map_1.svg')).then(function(map){
                         createDB('1', map)
                     }
                 )
             }
             else if (floor[0] == "2"){
-                $('#floorname').text("Level 2")
+                $('.level').removeClass('btn-gray_active')
+                $(this).addClass('btn-gray_active')
                 createDB('2')
                 Promise.resolve(createMap('img/maps/Map_2.svg')).then(function(map){
                         createDB('2', map)
@@ -118,7 +121,8 @@
             }
             else {
                 // alert('Ground level')
-                $('#floorname').text("Ground Level")
+                $('.level').removeClass('btn-gray_active')
+                $('#0_M').addClass('btn-gray_active')
                 Promise.resolve(createMap('img/maps/Map_Groundfloor.svg')).then(function(map){
                         createDB('0', map)
                     }

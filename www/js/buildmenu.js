@@ -12,7 +12,7 @@ document.addEventListener('deviceready', function() {
                             </label>\
                         </li>\
                         <li id="nav_home" class="luxbar-item"><a href="index.html">Home</a></li>\
-                        <li id="nav_sched" class="luxbar-item"><a href="schedule.html">Schedule</a></li>\
+                        <li id="nav_sched" class="luxbar-item"><a href="schedule.html">Program</a></li>\
                         <li class="luxbar-item"><a href="floorplan.html">Map</a></li>\
                         <li class="luxbar-item"><a href="artworks.html">Artworks</a></li>\
                         <li class="luxbar-item"><a href="fileTest.html">Test</a></li>\
@@ -36,6 +36,10 @@ document.addEventListener('deviceready', function() {
         $('.luxbar-brand').attr('data-rel', 'back')
     } 
     $('#nav_home').on('click', function(){
+        window.sessionStorage.setItem("artTrack","no"); 
+    })
+    $('#nav_home').on('click', function(){
+        window.sessionStorage.setItem("page","index.html")
         window.sessionStorage.setItem("artTrack","no"); 
     })
 });

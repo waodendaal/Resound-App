@@ -1,3 +1,8 @@
+@font-face {
+  font-family: Roboto-Light;
+  src: url(fonts/Roboto-Light.ttf) format("opentype");
+}
+
 .luxbar-default {
   width: 100%;
   position: relative;
@@ -56,7 +61,7 @@
   margin-left: auto; }
 
 .luxbar-brand {
-  font-size: 1.6em;
+  font-size: 1.6em !important;
   padding: 18px 24px 18px 24px; }
 
 .luxbar-menu {
@@ -75,11 +80,16 @@
 
 .luxbar-menu a,
 .luxbar-item a {
+  font-family: "Roboto-Light", sans-serif;
+  letter-spacing: 0.3em;
   text-decoration: none;
   color: inherit;
+  text-align: center;
+  font-size:2em;
   cursor: pointer; }
 
 .luxbar-item {
+  padding:20px 0px 20px 0px;
   height: 58px; }
   .luxbar-item a {
     padding: 18px 24px 18px 24px;
@@ -185,7 +195,7 @@
 
 .luxbar-menu-dark .active,
 .luxbar-menu-dark .luxbar-item:hover {
-  background-color: #424242; }
+  background-color: #8ba0bf; }
 .luxbar-menu-dark .luxbar-hamburger span,
 .luxbar-menu-dark .luxbar-hamburger span::before,
 .luxbar-menu-dark .luxbar-hamburger span::after {
@@ -258,12 +268,12 @@
 
 .luxbar-menu-material-brown,
 .luxbar-menu-material-brown .dropdown ul {
-  background-color: #3e2723;
+  background-color: #8ba0bf;
   color: #fff; }
 
 .luxbar-menu-material-brown .active,
 .luxbar-menu-material-brown .luxbar-item:hover {
-  background-color: #4e342e; }
+  background-color: #8ba0bf; }
 .luxbar-menu-material-brown .luxbar-hamburger span,
 .luxbar-menu-material-brown .luxbar-hamburger span::before,
 .luxbar-menu-material-brown .luxbar-hamburger span::after {
@@ -276,7 +286,7 @@
 
 .luxbar-menu-material-bluegrey .active,
 .luxbar-menu-material-bluegrey .luxbar-item:hover {
-  background-color: #37474f; }
+  background-color: #8ba0bf; }
 .luxbar-menu-material-bluegrey .luxbar-hamburger span,
 .luxbar-menu-material-bluegrey .luxbar-hamburger span::before,
 .luxbar-menu-material-bluegrey .luxbar-hamburger span::after {

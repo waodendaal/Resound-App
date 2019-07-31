@@ -64,7 +64,7 @@
         <div class="page_container">
             <div class="program_arttrack_banner" >
                 <h1>Artworks</h1>
-                <div style="width:100%;">
+                <div style="width:100%; margin-top:15px;">
                     <div style="width: max-content; float: left;">
                         <a id="orderbyartwork" class="btn btn-small btn-gray btn-radius btn-gray_active" href="#">Artworks</a>
                     </div>
@@ -80,7 +80,7 @@
                 </div>
             </div>
             <div id="artwork_list">
-                <table id="artwork_table" style="border-collapse: collapse">
+                <table id="artwork_table" style="border-collapse: collapse;">
                                 <!-- Populate tracks -->
                 </table>
                 <h1 id="no_results" style="text-align:center; color: white; display: none;">No Results</h1>
@@ -224,19 +224,18 @@ function querySuccess(tx, results) {
                 <div class="artwork_thumbnail">\
                 </div>\
             </td>\
-            <td class="table_description" valign="top">\
-                <h2>' + item.artwork + '</h2>\
-                <p>' + item.artist + '</p>\
-            </td>\
-            <td class="last_item">\
-                            <div><img class="arrow_img" src="img/arrow_right.png"></div>\
-                <p style="background-color: black; padding:5px;">'+ floor + '</p>\
+            <td class="table_description" valign="top" style="display:flex; flex-direction:column; justify-content: space-between;">\
+                <div><h2>' + item.artwork + '</h2>\
+                <p>' + item.artist + '</p></div>\
+                <p style="background-color: black; margin-bottom:0px !important; width:max-content; padding:3px 10px 3px 10px;">'+ floor + '</p>\
             </td>\
         </tr>').appendTo(shellDOM);
-
+        // <td class="last_item">\
+        //                     <div><img class="arrow_img" src="img/arrow_right.png"></div>\
+        //     </td>\
+        $('.table_description').css({'width':((screen_width-50)*(2/3)),'height':((screen_width-50)/3)})
         $('.artwork_thumbnail').css({'width':((screen_width-50)/3),'height':((screen_width-50)/3) });
         $('#'+item.id+'_arttable .artwork_thumbnail').css({'background-image':'url("img/artworks/'+item.image+'"', 'background-size':'cover'});
-        $('.last_item').css({'width':((screen_width-50)/3),'height':((screen_width-50)/3) });
         let H2height = $('.table_description').height();
         $('.table_description').next().css({'height':H2height});
 
@@ -247,21 +246,40 @@ function querySuccess(tx, results) {
                 <div class="artwork_thumbnail">\
                 </div>\
             </td>\
-            <td class="table_description" valign="top">\
-                <h2>' + item.artist + '</h2>\
-                <p>' +  item.artwork + '</p>\
+            <td class="table_description" valign="top" style="display:flex; flex-direction:column; justify-content: space-between;">\
+                <div><h2>' + item.artist + '</h2>\
+                        <p>' +  item.artwork + '</p>\</div>\
+                <p style="background-color: black; margin-bottom:0px !important; width:max-content; padding:3px 10px 3px 10px;">'+ floor + '</p>\
             </td>\
-            <td class="last_item">\
-                            <div><img class="arrow_img" src="img/arrow_right.png"></div>\
-                <p style="background-color: black; padding:5px;">'+ floor + '</p>\
-            </td>\
-            </tr>').appendTo(shellDOM);
+        </tr>').appendTo(shellDOM);
+        // <td class="last_item">\
+        //                     <div><img class="arrow_img" src="img/arrow_right.png"></div>\
+        //     </td>\
+        $('.table_description').css({'width':((screen_width-50)*(2/3)),'height':((screen_width-50)/3)})
+        $('.artwork_thumbnail').css({'width':((screen_width-50)/3),'height':((screen_width-50)/3) });
+        $('#'+item.id+'_arttable .artwork_thumbnail').css({'background-image':'url("img/artworks/'+item.image+'"', 'background-size':'cover'});
+        let H2height = $('.table_description').height();
+        $('.table_description').next().css({'height':H2height});
+            // let itemDOM = $('<tr id="'+ String(item.id) +'_arttable" class="artwork_list_item" onclick="clickWork('+ item.id+')">\
+            // <td valign="top">\
+            //     <div class="artwork_thumbnail">\
+            //     </div>\
+            // </td>\
+            // <td class="table_description" valign="top">\
+            //     <h2>' + item.artist + '</h2>\
+            //     <p>' +  item.artwork + '</p>\
+            // </td>\
+            // <td class="last_item">\
+            //                 <div><img class="arrow_img" src="img/arrow_right.png"></div>\
+            //     <p style="background-color: black; padding:5px;">'+ floor + '</p>\
+            // </td>\
+            // </tr>').appendTo(shellDOM);
 
-            $('.artwork_thumbnail').css({'width':((screen_width-50)/3),'height':((screen_width-50)/3) });
-            $('#'+item.id+'_arttable .artwork_thumbnail').css({'background-image':'url("img/artworks/'+item.image+'"', 'background-size':'cover'});
-            $('.last_item').css({'width':((screen_width-50)/3),'height':((screen_width-50)/3) });
-            let H2height = $('.table_description').height();
-            $('.table_description').next().css({'height':H2height});
+            // $('.artwork_thumbnail').css({'width':((screen_width-50)/3),'height':((screen_width-50)/3) });
+            // $('#'+item.id+'_arttable .artwork_thumbnail').css({'background-image':'url("img/artworks/'+item.image+'"', 'background-size':'cover'});
+            // $('.last_item').css({'width':((screen_width-50)/3),'height':((screen_width-50)/3) });
+            // let H2height = $('.table_description').height();
+            // $('.table_description').next().css({'height':H2height});
         }
 
     }

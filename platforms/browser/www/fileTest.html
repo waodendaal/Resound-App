@@ -65,8 +65,8 @@
             <div style="padding:0px 15px 0 15px">
                 <div style="width:100%;">
                         <div class="artwork_list_icon">
-                            <a class="btn btn-small btn-gray btn-radius" href=""><i class="fas fa-list-ul"></i></a>
-                            <a class="btn btn-small btn-gray btn-radius"  href="">Find on Map</a>
+                            <span class="btn btn-small btn-gray btn-radius"><i class="fas fa-list-ul"></i></span>
+                            <span class="btn btn-small btn-gray btn-radius"  href="">Find on Map</span>
 
                         </div>
                 </div>
@@ -128,17 +128,21 @@
     <script type="text/javascript">
 
         app.initialize();
+        $('#artist_name').text("foo")
         // $('#loader').fadeOut();
         $('#nav_home').addClass('active');
         $('.artwork_list_icon').on('click', function(){
+            $('#artist_name').text("bar")
+
             // capture callback
             let captureSuccess = function(mediaFiles) {
-                alert('SUCCESS')
+                $('#artist_name').text("roo")
+                
                 var i, path, len;
                 for (i = 0, len = mediaFiles.length; i < len; i += 1) {
                     path = mediaFiles[i].fullPath;
                     alert('PATH: ', String(path))
-                    // playMedia(path)
+                    playMedia(path)
                 }
             };
 
@@ -154,26 +158,28 @@
      
         // Firebase
     $('#myFile').on('change',function(){
+        alert('Storage')
         var fileList = this.files
-        console.log('Filelist ',fileList[0])
+        alert('Filelist '+String(fileList[0]))
         let date = new Date();
         let artwork_name = $('#artwork_name').text()
         // Create a storage reference from our storage service
         var storageRef = storage.ref();
-        var imageRef = storageRef.child(String(date)+'_'+String(artwork_name)+'.jpg');
+        var imageRef = storageRef.child('images/'+String(date)+'_'+String(artwork_name)+'.jpg');
         imageRef.put(fileList[0]).then(function(snapshot) {
-              
+              alert("Successfully uploaded")
         });
 
 
     })
     function playMedia(fileName){
+        alert('audio')
  // Play the audio file at url
     var my_media = new Media(fileName,
                         // success callback
-                        function () { console.log("playAudio():Audio Success"); },
+                        function () { aler("playAudio():Audio Success"); },
                         // error callback
-                        function (err) { console.log("playAudio():Audio Error: " + err); }
+                        function (err) { alert("playAudio():Audio Error: " + err); }
                     );
 
                     // Play audio

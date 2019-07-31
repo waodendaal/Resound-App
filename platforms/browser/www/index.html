@@ -40,6 +40,7 @@
     <link rel="stylesheet" type="text/css" href="css/luxbar.css" />
     <link rel="stylesheet" type="text/css" href="css/index.css" />
     <link rel="stylesheet" type="text/css" href="css/all.css" />
+    <link rel="stylesheet" type="text/css" href="css/splash.css" />
     <title>RE:SOUND Conference 2019</title>
 </head>
 
@@ -48,7 +49,46 @@
     <div id="splash">
         <div style="top:58px;position:fixed;">
                 <img id="home_banner_img" style="opacity: 0.7;" src="img/home_banner_splash.png">
+                <div class="page">
 
+                </div>
+                
+                <div class="container">
+                  <svg class="loader" viewBox="0 0 100 100" overflow="visible">
+                    <g class="core">
+                      <circle class="path" cx="50" cy="50" r="1" fill="none" />
+                    </g>
+                    <g class="spinner">
+                      <circle class="path" cx="50" cy="50" r="20" fill="none" />
+                    </g>
+                    <g class="layer-1">
+                      <circle class="path" cx="50" cy="50" r="70" fill="none" />
+                    </g>
+                    <g class="layer-2">
+                      <circle class="path" cx="50" cy="50" r="120" fill="none" />
+                    </g>
+                    <g class="layer-3">
+                      <circle class="path" cx="50" cy="50" r="180" fill="none" />
+                    </g>
+                    <g class="layer-4">
+                      <circle class="path" cx="50" cy="50" r="240" fill="none" />
+                    </g>
+                    <g class="layer-5">
+                      <circle class="path" cx="50" cy="50" r="300" fill="none" />
+                    </g>
+                    <g class="layer-6">
+                      <circle class="path" cx="50" cy="50" r="380" fill="none" />
+                    </g>
+                    <g class="layer-7">
+                      <circle class="path" cx="50" cy="50" r="450" fill="none" />
+                    </g>
+                    <g class="layer-8">
+                      <circle class="path" cx="50" cy="50" r="540" fill="none" />
+                    </g>
+                  </svg>
+                </div>
+                
+                
         </div>
 
     </div>
@@ -91,7 +131,15 @@
                             <img class="arrow_img" src="img/arrow_right.png">
                         </div>
                     </div>
-                    
+                    <hr>
+                    <div>
+                        <div class="click_header_home" onclick="location.href='#'" >
+                            <h2 style="float:left;">Download Program PDF</h2>
+                            <img class="arrow_img" src="img/arrow_right.png">
+
+                        </div>
+
+                    </div>
                 </div>
             </div>
             <div id="home_screen">
@@ -120,15 +168,15 @@
                     <p class="full_width">Explore the Conference Performances, Exhibitions, and Installations Below</p>
                 </div>
                 <div class="subcontent">
-                    <div onclick="location.href='artworks.html'">
-                        <div class="click_header_home" >
+                    <div >
+                        <div onclick="location.href='artworks.html'" class="click_header_home" >
                             <h2 style="float:left;">Artwork</h2>
                             <img class="arrow_img" src="img/arrow_right.png">
                         </div>
                         <div class="art_preview">
-                            <div class="" style="background-image:url('img/artworks/exile1.PNG');"></div>
-                            <div class="" style="background-image:url('img/artworks/claudia.png');"></div>
-                            <div class="" style="background-image:url('img/artworks/polly1.jpg');"></div>
+                            <div id="arttile0" class=""></div>
+                            <div id="arttile1" class=""></div>
+                            <div id="arttile2" class=""></div>
                         </div>
                     </div>
                     <hr>
@@ -139,12 +187,12 @@
                         </div>
                         <p class="full_width">Explore CREATE Campus and Musikken Hus</p>
                         <a class="btn btn-small btn-gray btn-radius floors" href="#" id="floor_basement">Basement</a>
-                        <a class="btn btn-small btn-gray btn-radius floors" href="#" id="floor_ground">Ground Level</a>
-                        <a class="btn btn-small btn-gray btn-radius floors" href="#" id="floor_1">Level 1</a>
-                        <a class="btn btn-small btn-gray btn-radius floors" href="#" id="floor_2">Level 2</a>
+                        <a class="btn btn-small btn-gray btn-radius floors" href="#" id="floor_ground">Ground</a>
+                        <a class="btn btn-small btn-gray btn-radius floors" href="#" id="floor_1">Lvl 1</a>
+                        <a class="btn btn-small btn-gray btn-radius floors" href="#" id="floor_2">Lvl 2</a>
                         <!-- <a class="btn btn-small btn-gray btn-radius floors" href="#" id="floor_3">Level 3</a> -->
                     </div>
-                    <hr>
+                    
                     <!-- <div>
                         <img class="qr_small" src="img/QR_small.png">
                         <h2>Scan QR Code</h2>
@@ -165,12 +213,17 @@
     <script type="text/javascript">
         app.initialize();
         $('#splash').hide()
+        
         // window.alert(window.sessionStorage.getItem("page"))
         if (window.sessionStorage.getItem("page") == null){
+            createDB();
             $('#splash').show()
             setTimeout(function(){ 
-                $("#splash").fadeOut(2000)
+                splash()
+                // $("#splash").fadeOut(2000)
             }, 2000);
+        }else{
+            getPictureDB()
         }
         var center = 'center';
         $('#nav_home').addClass('active');
@@ -198,6 +251,7 @@
         }
         if (previouspage == 'schedule.html' || previouspage=='happeningnow.html'){
             center = swipeRight()
+            // alert(center.toString())
             
             
         }
@@ -237,6 +291,7 @@
         });
 
         function swipeLeft(){
+
             let currentLeft = $('#home_divs').css('left');
             let currentRight = $('#home_divs').css('right');
             if (center == 'right'){
@@ -300,11 +355,19 @@
             }
                     
         }
+ 
 
+    //Menu
+    $(document).on('click','.luxbar-brand', function(){
+        if (center == 'right'){
+            center = swipeLeft()
+
+        }
+        if (center == 'left'){
+            center = swipeRight()
+        }
+    });
         // DB
-
-        createDB();      
-
         function createDB() {
 
             $.ajax ({
@@ -319,8 +382,11 @@
             }).then(function(data){
                 var firstCheck = true;
                 let recordslist = data;
+                console.log(recordslist)
+                getPicture(recordslist)
                 for (key in recordslist){
                     let record = recordslist[key];
+                    
                     firstCheck = toSQLDB(record, key, firstCheck);
                 }
             });
@@ -378,6 +444,36 @@
         }
     
 
+// imitation of new page loading
+
+    function splash(){
+  $body = $("#splash")
+
+  loader(10);
+
+  function loader(delay) {
+    setTimeout(function() {
+      $body.addClass("loading");
+    }, delay);
+
+    setTimeout(function() {
+      $body.addClass("loaded");
+    }, delay + 1700);
+
+    setTimeout(function() {
+      $body.removeClass("restart").addClass("new-page");
+    //   console.log('SPLASH')
+        $("#splash").fadeOut()
+    }, delay + 2550);
+
+    // Splash end
+
+  }
+
+  function getRandomNumber(min, max) {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+  }
+}
 
 
     // let DOM2 = $('<div style="color: red;"><p>' + String(records[0]) + '</p></div>').appendTo($('#test2'));
@@ -402,6 +498,7 @@
     // Transaction success callback
 
     function successCB() {
+        // getPictures()
         console.log("success! Index.html ");
     }
 
@@ -420,26 +517,72 @@
         // states[Connection.NONE]     = 'No network connection';
         // alert('Connection type: ' + networkState);
         if (networkState == Connection.NONE){
-            let html = "<div>\
-                        <div class='click_header_home' onclick='"+"location.href='#'"+" >\
-                            <h2 style='float:left;'>View Offline Program</h2>\
-                            <img class='arrow_img' src='img/arrow_right.png'>\
-                        </div>\
-                    </div>";
-            $('#left_screen .subcontent').html(html)
+//          HIDE Sched
         }
     }
+    
+    //The pictures
+    function getPictureDB(){
+        var db  = window.openDatabase('ArtTestNew4.2', '4.2', 'Test_Art_Test_New4.2', 1000000);
+        db.transaction(GetInfo);
 
-    //Menu
-    $(document).on('click','.luxbar-brand', function(){
-        if (center == 'right'){
-            center = swipeLeft()
+        function GetInfo(tx) {
+            let sqlQuery = 'SELECT * FROM ART'; 
+            $('#artwork_description').text(sqlQuery);
+            tx.executeSql(sqlQuery, [], querySuccess, errorCB);
+        }
 
+        function querySuccess(tx, results) {
+            getPicture(results.rows)
         }
-        if (center == 'left'){
-            center = swipeRight()
+        function errorCB(err) {
+            alert("Error processing SQL1: "+err.code);
         }
-    });
+    }
+    
+    function getPicture(recordlist){
+            console.log("PICS")
+            // Select 3 random
+            var random1 = 0
+            var random2 = 0
+            var random3 = 0
+            for(var i = 0; i< 3; i++){
+                console.log("FOR "+i)
+                if (i == 0){
+                    random1 = Math.floor(Math.random()*recordlist.length);
+                    var randomnow = random1
+                }
+                else if (i== 1){
+                    do{
+                        random2 = Math.floor(Math.random()*recordlist.length);
+                    }
+                    while (random2 == random1)
+                    var randomnow = random2
+                }
+                else if (i == 2){
+                    do{
+                        random3 = Math.floor(Math.random()*recordlist.length);
+                    }
+                    while (random3 == random1 || random3 == random2)
+                    var randomnow = random3
+                }               
+                let item = recordlist[randomnow];
+                console.log("PICS",randomnow," ", item, "id ", "#arttile"+i)
+                $('#arttile'+i).css({"background-image":"url('img/artworks/"+String(item.image)+"')"},{"background-color":"red"})
+                console.log("EXECUTED")
+                $('#arttile'+i).on('click', function(){
+                    window.sessionStorage.setItem("page","artworks.html"); 
+                    let elementId = item.id;
+                    sessionStorage.param1 = elementId;
+                    window.sessionStorage.setItem("artwork_map", "all");
+                    window.location.replace("artwork.html");
+                        
+                    
+                })
+            }
+            
+    }
+
     let currentPage = 'index.html';
     window.sessionStorage.setItem("page",currentPage); 
     window.sessionStorage.setItem("artwork_map", "all");

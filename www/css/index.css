@@ -219,7 +219,7 @@ h1 {
     width: max-content; float: left; position:fixed; z-index: 900; margin-top: 15px;
 }
 .artwork_list_icon a {
-    text-shadow: 0.1em 0.1em 0.3em rgba(0,0,0,0.7) !important; 
+    /* text-shadow: 0.1em 0.1em 0.3em rgba(0,0,0,0.7) !important;  */
     box-shadow: 0.1em 0.1em 0.3em rgba(0,0,0,0.7);
 }
 .table_description, .artwork_thumbnail, .last_item {
@@ -329,7 +329,7 @@ input::placeholder {
 .artwork_description {
     height:fit-content;
     text-align: left;
-    padding:15px;
+    padding:20px;
     background-color:black;
     border-radius:25px 25px 0px 0px;
     z-index: 111;
@@ -350,6 +350,12 @@ input::placeholder {
 }
 
 /* Map */
+.level {
+    margin-top:15px;
+}
+#map_container {
+    margin-top:15px;
+}
 .map_header {
     color:white;
 }
@@ -389,6 +395,7 @@ hr, h2, h3 {
 }
 .click_header_home {
     display: flex; 
+    margin:15px 0px 15px 0px;
     justify-content:space-between;
     cursor:pointer
 }
@@ -475,8 +482,9 @@ a.btn,.btn {
 .btn-gray_active {
   background: white;
   color: #2b2b2b;
-  border-color: white;	
+  border-color: white !important;	
 }
+
 /* Respnsive */
 /* Smartphones (portrait and landscape) ----------- */
     
@@ -524,8 +532,8 @@ a.btn,.btn {
     text-align: center;
     /* top: 58px; */
     z-index: 1000;
-    background-color:#3460A9;
-    background-blend-mode: soft-light;
+    background-color:rgba(50,95,168,1);
+    background-blend-mode: multiply;
 
 }
 .pulsate {    
