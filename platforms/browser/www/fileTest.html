@@ -105,22 +105,25 @@
     <!-- TODO: Add SDKs for Firebase products that you want to use
         https://firebase.google.com/docs/web/setup#config-web-app -->
     <script src="https://www.gstatic.com/firebasejs/6.2.4/firebase-storage.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/6.3.4/firebase-firestore.js"></script>
+
+  <!-- Initialize Firebase -->
+  <script src="/__/firebase/init.js"></script>
 
     <script>
-
-    // Your web app's Firebase configuration
-    var firebaseConfig = {
-        apiKey: "AIzaSyDMk_zJFzk4b_zLoms5FN9Kc-RDbpljbR0",
-        authDomain: "resound-e743c.firebaseapp.com",
-        databaseURL: "https://resound-e743c.firebaseio.com",
-        projectId: "resound-e743c",
-        storageBucket: "resound-e743c.appspot.com",
-        messagingSenderId: "444661942566",
-        appId: "1:444661942566:web:5e5a0fa83969fabd"
-    };
-    // Initialize Firebase
-    firebase.initializeApp(firebaseConfig);
-    </script>
+        // Your web app's Firebase configuration
+        var firebaseConfig = {
+          apiKey: "AIzaSyDMk_zJFzk4b_zLoms5FN9Kc-RDbpljbR0",
+          authDomain: "resound-e743c.firebaseapp.com",
+          databaseURL: "https://resound-e743c.firebaseio.com",
+          projectId: "resound-e743c",
+          storageBucket: "resound-e743c.appspot.com",
+          messagingSenderId: "444661942566",
+          appId: "1:444661942566:web:1234937ea5ea6351"
+        };
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+      </script>
 
 
 
@@ -141,8 +144,8 @@
                 var i, path, len;
                 for (i = 0, len = mediaFiles.length; i < len; i += 1) {
                     path = mediaFiles[i].fullPath;
-                    alert('PATH: ', String(path))
-                    playMedia(path)
+                    alert('PATH: '+String(path))
+                    upload(path)
                 }
             };
 
@@ -164,20 +167,83 @@
         let date = new Date();
         let artwork_name = $('#artwork_name').text()
         // Create a storage reference from our storage service
-        var storageRef = storage.ref();
-        var imageRef = storageRef.child('images/'+String(date)+'_'+String(artwork_name)+'.jpg');
+        var storageRef = firebase.storage().ref();
+
+        var imageRef = storageRef.child('images/123.jpg');
         imageRef.put(fileList[0]).then(function(snapshot) {
               alert("Successfully uploaded")
-        });
+        }, function(error) {
+
+// A full list of error codes is available at
+// https://firebase.google.com/docs/storage/web/handle-errors
+switch (error.code) {
+  case 'storage/unauthorized':
+    // User doesn't have permission to access the object
+    alert("ERROR"+String(error))
+    break;
+
+  case 'storage/canceled':
+    // User canceled the upload
+    alert("ERROR"+String(error))
+    break;
+  case 'storage/unknown':
+  alert("ERROR"+String(error))
+    // Unknown error occurred, inspect error.serverResponse
+    break;
+}
+}, function() {
+// Upload completed successfully, now we can get the download URL
+uploadTask.snapshot.ref.getDownloadURL().then(function(downloadURL) {
+  alert('File available at'+String(downloadURL));
+});
+});
+
 
 
     })
+
+
+    function upload(path){
+    alert('uploading FOO')
+        // Download from URL
+        // Get file name from url.
+        var filename = path.substring(path.lastIndexOf("/") + 1).split("?")[0];
+        var xhr = new XMLHttpRequest();
+        xhr.responseType = 'blob';
+        xhr.onload = function() {      
+            let file = xhr.response
+            
+        // Firebase
+        // var fileList = (path)
+        // console.log('Filelist ',fileList[0])
+        let date = new Date();
+        let artwork_name = $('#artwork_name').text()
+        // Create a storage reference from our storage service
+        alert("uploading Foo2")
+        var storageRef = firebase.storage().ref();
+        var imageRef = storageRef.child('images/'+String(date)+'_'+String(artwork_name));
+        alert("uploading Bar2")
+        imageRef.put(file).then(function(snapshot) {
+              alert('Success')
+        });
+        alert("uploading Roo2")
+        };
+        alert("uploading BAR")
+        xhr.open('GET', path);
+        xhr.send();
+        alert("uploading ROO")
+
+
+
+
+    }
+
     function playMedia(fileName){
         alert('audio')
  // Play the audio file at url
     var my_media = new Media(fileName,
                         // success callback
-                        function () { aler("playAudio():Audio Success"); },
+                        function () { alert("playAudio():Audio Success"); },
                         // error callback
                         function (err) { alert("playAudio():Audio Error: " + err); }
                     );
@@ -199,6 +265,40 @@
                
         
         } )
+
+    // var dbFire = firebase.firestore();
+    // let toBreakList = [
+    // "LabSynthE//One Breath Poem (2018)//Exhibition// //One Breath Poem is a participatory art and technology project that synthesizes poetry, sound, and the performance of silence. A breath is the first calibration of life and expression. As a collection, breathing presents patterns and silences from the moment we are born until the moment of our last breaths. It is a unit of activity and resting. LabSynthE considers the breath as a universal performative unit, used in One Breath Poem as an auditory fingerprint. One Breath Poem is a mechanism for contemplative and empathetic listening. Purposeful breathing initiates a multi-modal sound sculpture. In this work, we invite visitors to breathe into our tin can telephone to emancipate the sound of John Cage’s silent pauses during a recording made in Dallas, Texas. This project is informed by intimacy.  When two people perform a communicative act it is mediated by an asynchronous alternation of listening to the other and responding. This natural form of attention and dialogue replicates on a greater scale the pattern of exhaling and inhaling. When visitors engage in this act of communication with our tin can telephone, they transform the technological device into a living and breathing system. One Breath Poem takes the spoken word beyond the confines of language and into the embodied, universal language of breath.We suggest that breathing is a metaphor for the unsaid, infused with what has been said and what is still to be said. With One Breath Poem, Telephone Edition, we intend to allow the unveiling of the imaginative possibility of language.//1//2//3//onebreath1.jpg",
+    // "Anna Walker//Six Fragments (2015-2017)// // //Six Fragments is a series of six interconnected sound and video interactions about my experience of the events that took place in New York on September 11, 2001. The artwork formed part of PhD research and examined the consistency of my belief, throughout that time, and the years that followed, that the day’s events had unfolded silently. In the process of researching the place where trauma and memory meet, noise began to bleed into the threshold of the visual, and through this permeation the forgotten or unheard sounds of the falling Twin Towers began to emerge. The work begins with ‘These Are My Mountains’ a layered sound work that bridges personal memories of a song my mother used to sing to us as children, with the voices of air traffic controllers on duty on the day of 9/11. 'Falling' follows, and is my interpretation of the violent explosion of the Twin Towers Falling. ‘Walk II’ is a sound piece in which the ghosts of 9/11 start to take form. The echoing voice, repetition of language and word games explore the concept of flashbacks and anchor the fragile position of those early stages in traversing the traumatic past. ‘Ghost Walk’ is made up of sound and moving imagery is about the representation of traumatic traces. ‘Briefcase’ is the story of an event within an event. And finally, ‘Ghost II,’ travels back the beginning to the building of the Twin Towers. The aim, in making the work was to further question the inaccessibility of the traumatic memory using sound and moving imagery to navigate and interrupt the dissociative space. It was an investigation of the potential for a ‘full’ remembering, and the establishment of an 'atmosphere' to resonate and transfer the affect to viewers.//1//2//3//annawalker.png",
+    // "Budhaditya Chattopadhyay//Exile and Other Syndromes (2019)//Performance//22 min//The generative composition Exile and Other Syndromes is part of an augmented book project that responds to the current indisposition of migration, mobility, placeless-ness and nomadism, which are the impulses of a contemporary condition that eventually blurs the boundaries between the local and the global, the digital and the corporeal, the private and the public, or the intimate and the dehumanizing spaces, instilling a sense of semantic fatigue. The composition aims to transmute the contemporary city’s volatile, oppressing and tensed environments to encourage the contemplation and poetic musing of the listener navigating the intercepting urban spaces. The work develops fluid sculptural form of sound in a closely mediated interaction with sound-generated text patterns framing the contemplation of a nomadic listener as an artifact using an AI algorithm to read and transform the book’s content into live visuals. The performance of the work incorporates multichannel live projection of the visuals on multiple screens augmented with multi-channel sound. This specific method of artistic intervention examines the way memory, imagination and subjectivity of an itinerant listener frames the character of sound in the context of intensified urban interaction, mobility and nomadism.//1//2//3//exile1.png",
+    // "Ian Costabile//Sound Graffiti//Exhibition// //Sound Graffiti is a series of installations of interactive sonic networks in urban areas. Walls are sprayed with sound and sensors, where multiple loudspeakers interact to express statements and harmonise with city and machinery sounds.//1//2//3// ",
+    // "Gilles Aubry//Salam Godzilla (2019)//Film//40:35:00//When the terrible 1960 earthquake hit Agadir, the local cinema Salam was showing the Japanese-American movie 'Godzilla, King of Monsters!'. Weirdly enough, it was also one of the few buildings to survive the tragedy. Many years later, Gilles Aubry revisits the disaster from various angles, including newsreels, seismic science, and a local poem interpreted by singer Ali Faiq. Shot inside the cinema and in the surroundings of Agadir, the film is driven by an abstract soundtrack recorded on location. Traces of dinosaur footprints found on a nearby beach add further layers of complexity and compose a puzzling mosaic of heteroclite elements. Without trying to force the different pieces of his film in one single frame, the filmmaker challenges the viewer to create his own way through the sensory labyrinth he conjures.//1//2//3//godzilla2.jpg",
+    // "Willard Van De Bogart & Lemon DeGeorge//Language of Life (2019)// //30min//The 'Language of Life' composition is an original electronic music score which incorporates the sonification of the molecular wave dynamics of proteins. The Eigenprot protein synthesizer, developed at MIT by Zhao Qin and Markus Buehler, will be mixed with other electronic sounds produced from various synthesizers and modular effects generators. The goal is to provide the listener with a musical expression that represents the creation of life represented by all the information that is communicated with the unique wave dynamics of protein creation so as to give the audience an experience of the creative vibrations which exist in the universe. Our technology and understanding has reached a level whereby we can now create with the basic building blocks of nature which affects our consciousness and is part of our consciousness within the universe.//1//2//3//languageoflife.PNG",
+    // "Willard Van De Bogart & Lemon DeGeorge//Ether Ship//Ether Ship was a multimedia space performance group created by Willard Van De Bogart in the late 1960s in Pittsburgh, Pennsylvania, with partner and cofounder Michael Lemon DeGeorge. They took an experimental approach to live entertainment—a live performing lab of image and sound, utilizing then-exotic technologies of expressive physical constructs, laser shows, video art, and light-form art; while playing live electronic synthesizers with radically altered instruments from mouth harp to Hammond organ, electronic cello, and classical screwdriver guitar.//1//2//3// ",
+    // "Heidi Barkun//Quantified Failure (2016)//Performance//20 min// In this 20 minute spoken record, I recite all the medications, medical appointments and intimate measurements taken day-to-day during my fifth and final cycle of in vitro fertilization, which lasted 56 days. This diary uses voice to activate memory, as reading the list becomes a vehicle of translation for my multilayered experience. At times I trip or stutter over scientific names of medications; these linguistic difficulties reflect my attempts to surmount all the foreign substances injected and ingested during the protocol. My body becomes increasingly medicalized for procreative means and in the end is confirmed as a dysfunctional space; the artwork ends with the thud of the final result: “zero embryos”. My reproductive and medical failure is measured, calculated, and put on display. This speaking of my corporeal failure is a conscious act of resistance against the taboo of infertility, the veneration of science, and the normative voices of Western society.//1//2//3// "
+    // ];
+    // alert(String(toBreakList.length))
+    // for(var i =0;i<toBreakList.length;i++){
+    //     let Broken = toBreakList[i].split('//')
+    //     alert(String(Broken[0])+" "+String(Broken[8]))
+    //     dbFire.collection("works").add({
+    //             artist: Broken[0],
+    //             artwork: Broken[1],
+    //             type:Broken[2],
+    //             type_description:Broken[3],
+    //             description:Broken[4],
+    //             floor:Broken[5],
+    //             x_coordinate:Broken[6],
+    //             y_coordinate:Broken[7],
+    //             image:Broken[8]
+    //         }).then(function(docRef) {
+    //         alert("Document written with ID: "+String(docRef.id));
+    //     })
+
+    // }
+
+
+
 
     </script>
 </body>

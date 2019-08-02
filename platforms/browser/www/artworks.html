@@ -45,7 +45,7 @@
 </head>
 
 <body>
-    <!-- <div id="loader">
+    <div id="loader">
         <div id="bars">
             <div class="bar"></div>
             <div class="bar"></div>
@@ -55,7 +55,7 @@
             <div class="bar"></div>
             <p class="pulsate">loading</p>
         </div>
-    </div> -->
+    </div>
     <div id="navbar">
         <!-- buildmen.js -->
     </div>
@@ -98,7 +98,7 @@
 
     <script type="text/javascript">
         app.initialize();
-        // $('#loader').fadeOut();
+        
         $('#nav_home').addClass('active');
         $("#blue_bottom").hide()
 
@@ -219,7 +219,7 @@ function querySuccess(tx, results) {
 
         if ($('#orderbyartwork').hasClass('btn-gray_active')){
             
-            let itemDOM = $('<tr id="'+ String(item.id) +'_arttable" class="artwork_list_item" onclick="clickWork('+ item.id+')">\
+            let itemDOM = $('<tr id="'+ String(item.id) +'_arttable" class="artwork_list_item" onclick="clickWork(\''+ item.id+'\')">\
             <td valign="top">\
                 <div class="artwork_thumbnail">\
                 </div>\
@@ -241,7 +241,7 @@ function querySuccess(tx, results) {
 
         }
         if ($('#orderbyartist').hasClass('btn-gray_active')){
-            let itemDOM = $('<tr id="'+ String(item.id) +'_arttable" class="artwork_list_item" onclick="clickWork('+ item.id+')">\
+            let itemDOM = $('<tr id="'+ String(item.id) +'_arttable" class="artwork_list_item" onclick="clickWork(\''+ item.id+'\')">\
             <td valign="top">\
                 <div class="artwork_thumbnail">\
                 </div>\
@@ -283,7 +283,9 @@ function querySuccess(tx, results) {
         }
 
     }
-    setBlueBottom()
+    setTimeout(function(){ 
+            $('#loader').fadeOut();
+        }, 500);    setBlueBottom()
 
     // this will be true since it was a select statement and so rowsAffected was 0
     if (!results.rowsAffected) {
@@ -324,8 +326,9 @@ function querySuccess(tx, results) {
     });
     let currentPage = 'artworks.html';
     window.sessionStorage.setItem("page",currentPage); 
-
+    
     </script>
+    
 </body>
 
 </html>

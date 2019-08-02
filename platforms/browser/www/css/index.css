@@ -29,6 +29,10 @@
     font-family: Roboto-Light-Italic;
     src: url(fonts/Roboto-LightItalic.ttf) format("opentype");
 }
+@font-face {
+    font-family: Roboto-Light;
+    src: url(fonts/Roboto-Light.ttf) format("opentype");
+}
 
 * {
     -webkit-tap-highlight-color: rgba(0,0,0,0); /* make transparent link selection, adjust last value opacity 0 to 1.0 */
@@ -326,6 +330,51 @@ input::placeholder {
     height: 100px;
     text-align:left !important;
 }
+#archive_actions {
+    z-index: 10;
+    position: absolute;
+    float: right;
+    right: 0;
+    bottom: 0;
+    padding: 25px;
+    display:flex;
+    justify-content: end;
+    flex-direction:column;
+}
+.archive_sub {
+    display:flex;
+    justify-content: end;
+    flex-direction:row;
+}
+#archive_actions h5{
+    text-shadow: 0.1em 0.1em 0.2em black;
+    width:max-content;
+    float:left;
+    margin: auto;
+    margin-right: 5px;
+    font-family: "Roboto-Light";
+    font-size: 15pt;
+}
+.archive_circle{
+    float:left;
+    background-color:#3460A9;
+    height:35px;
+    width:35px;
+    padding:5px;
+    text-align: center;
+    border-radius:25px;
+    border:white 1px solid;
+    color:white!important;
+    display:flex;
+    flex-direction: column;
+    justify-content:center;
+    margin: 0px 5px 0px 5px;
+    font-size:10pt;
+}
+.archive_circle:hover, .archive_circle:active {
+    background-color:rgb(115, 160, 233);
+
+}
 .artwork_description {
     height:fit-content;
     text-align: left;
@@ -511,9 +560,45 @@ a.btn,.btn {
     }
     
 
-    
-
+/* Archive */
+#archive_popup{
+    width:100%; 
+    height:100vh; 
+    background-color:#3460A9; 
+    position: absolute; 
+    z-index: 1000;
+    display:none;
+}
+.content_archive {
+    display:flex;
+    width:100%;
+    justify-content: center;
+}
+.archive_form{
+    display:flex;
+    flex-direction:column;
+}
+#image_archive {
+    width: 90vw;
+    height:90vw;
+    background-color:white;
+}
+#audio_archive{
+    height:50vw;
+    width:50vw;
+    /* background-color:black; */
+    border: 1px solid white;
+    border-radius:25vw;
+}
 /* Loader */
+#snow {
+    display: block;
+    width: 100%;
+    height: 100%;
+    margin: 0 0 0 0;
+    padding: 0 0 0 0;
+}
+
 #loader {
     width:100%; 
     height:100%; 
@@ -522,7 +607,7 @@ a.btn,.btn {
     z-index: 1000;
 }
 #splash{
-    background-image: url('../img/background.png');
+    /* background-image: url('../img/background.png'); */
     background-repeat: no-repeat;
     background-size: cover;
     position: absolute;
@@ -532,8 +617,8 @@ a.btn,.btn {
     text-align: center;
     /* top: 58px; */
     z-index: 1000;
-    background-color:rgba(50,95,168,1);
-    background-blend-mode: multiply;
+    /* background-color:rgba(50,95,168,1); */
+    /* background-blend-mode: multiply; */
 
 }
 .pulsate {    

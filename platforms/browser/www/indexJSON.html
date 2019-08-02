@@ -54,7 +54,7 @@
 
         </canvas> 
     </div>
-    <!-- <div id="loader">
+    <div id="loader">
         <div id="bars">
             <div class="bar"></div>
             <div class="bar"></div>
@@ -64,7 +64,7 @@
             <div class="bar"></div>
             <p class="pulsate">loading</p>
         </div>
-    </div> -->
+    </div>
     <div id="navbar" class="home_nav">
         <!-- buildmen.js -->
     </div>
@@ -201,22 +201,10 @@
         app.initialize();
         $('#splash').hide()
 
-        // Home Screens
-        var center = 'center';
-        $('#nav_home').addClass('active');
-        let screen_width = document.documentElement.clientWidth;
-        $('#home_screen, #left_screen, #right_screen').css({'width':screen_width+'px'});
-        $('#home_divs').css({'width':(screen_width*3)+'px'});
-        $('#home_divs').css({'right':(-screen_width)+'px'});
-        $('#home_divs').css({'left':(-screen_width)+'px'});
-        
-        //Preview divs
-        $('.art_preview div').css({'width':((screen_width-50)/3),'height':((screen_width-50)/3) });
-        
         // Splash screen
         if (window.sessionStorage.getItem("page") == null){
-            $('#splash').show()
             createDB();
+            $('#splash').show()
             setTimeout(function(){ 
                 console.log('cancel')
                 cancelAnimationFrame(snowloop)
@@ -225,7 +213,6 @@
         }else{
             getPictureDB()
         }
-        
         
         //Menu
         $(document).on('click','.luxbar-brand', function(){
@@ -239,11 +226,11 @@
         });
 
         // Check network connection        
-        // var networkState = navigator.connection.type;  
-        // if (networkState == "none"){
-        //     //HIDE Sched
-        //     $('.sched_online').hide()
-        // }
+        var networkState = navigator.connection.type;  
+        if (networkState == "none"){
+            //HIDE Sched
+            $('.sched_online').hide()
+        }
 
         // Splash
 
@@ -295,7 +282,7 @@
         
         function snowloop(value) {
         // console.log(value)
-        if (value < 3500){
+        if (value < 3000){
             requestAnimationFrame(snowloop); 	
         }
             for (i = 0; i <= tiles_h; i++) {
@@ -402,7 +389,18 @@
             // ...
         });
 
-       
+        // Home Screens
+        var center = 'center';
+        $('#nav_home').addClass('active');
+        let screen_width = document.documentElement.clientWidth;
+        $('#home_screen, #left_screen, #right_screen').css({'width':screen_width+'px'});
+        $('#home_divs').css({'width':(screen_width*3)+'px'});
+        $('#home_divs').css({'right':(-screen_width)+'px'});
+        $('#home_divs').css({'left':(-screen_width)+'px'});
+        
+        //Preview divs
+        $('.art_preview div').css({'width':((screen_width-50)/3),'height':((screen_width-50)/3) });
+        $('#loader').fadeOut();
 
         window.sessionStorage.setItem("floor","ground"); 
         var previouspage = window.sessionStorage.getItem("page");
@@ -518,42 +516,39 @@
 
         // DB
         function createDB() {
-            // alert("DB")
-            var dbFire = firebase.firestore();
-            var DBRef = dbFire.collection("works");
-            var firstCheck = true;
-            var pictureList = []
-            DBRef.get().then(function(querySnapshot) {
-                querySnapshot.forEach(function(doc) {
-                    let record = (doc.data())
-                    firstCheck = toSQLDB(record, firstCheck);
-                    pictureList.push([record.image,record.id])
-                    
-                    if (pictureList.length==10){
-                        console.log("picturelist ", pictureList)
-                        // alert("PIC")
-                        getPicture(pictureList, "Firebase")
-                    }
 
-                });
+            $.ajax ({
+                url: "database/artworks.json",
+                beforeSend: function(xhr){
+                    if (xhr.overrideMimeType)
+                    {
+                        xhr.overrideMimeType("application/json");
+                    }
+                    },
+                dataType: 'json',
+            }).then(function(data){
+                var firstCheck = true;
+                let recordslist = data;
+                console.log(recordslist)
+                getPicture(recordslist)
+                for (key in recordslist){
+                    let record = recordslist[key];
+                    
+                    firstCheck = toSQLDB(record, key, firstCheck);
+                }
             });
-            
-            // console.log(recordslist)
-            // getPicture(recordslist)
-            // for (key in recordslist){
-            //     let record = recordslist[key];
-                
-            //     firstCheck = toSQLDB(record, key, firstCheck);
-            // }
+
         }
 
-        function toSQLDB(record, firstCheck) {
+        function toSQLDB(record, key, firstCheck) {
+
             var db  = window.openDatabase('ArtTestNew4.2', '4.2', 'Test_Art_Test_New4.2', 1000000);
             var record = record;
+            var key = key;
             db.transaction(populateDB, errorCB, successCB);
 
             function populateDB(tx){    
-                let id = String(record.id);
+                let id = Number(record.id);
                 let artist = String(record.artist);                
                 let artwork = String(record.artwork);
                 var type = String(record.type);
@@ -572,17 +567,14 @@
                 let x_coordinate = String(record.x_coordinate);
                 let y_coordinate = String(record.y_coordinate);
                 var image = String(record.image);
-                if (image == null || image == "" || image ==" " || image == undefined ||image == 'undefined'){
+                if (image == null || image == "" || image == undefined ||image == 'undefined'){
                     image = 'temp.png'
                 }
                 if (firstCheck == true ){
                     tx.executeSql('DROP TABLE IF EXISTS ART');
                 }
                 tx.executeSql('CREATE TABLE IF NOT EXISTS ART (id unique, artist, artwork, type, type_description, description, floor, x_coordinate, y_coordinate, image)');
-                let sql = 'INSERT INTO ART (id, artist, artwork, type, type_description, description, floor, x_coordinate, y_coordinate, image) VALUES ("'+ id + '", "'+ artist + '", "'+ artwork + '", "'+ type + '", "'+ type_description + '", "'+ description + '", "'+ floor + '", "'+ x_coordinate + '", "'+ y_coordinate + '", "'+ image + '")';
-                if (artwork == "Language of Life (2019)"){
-                    alert(sql)
-                }
+                let sql = 'INSERT INTO ART (id, artist, artwork, type, type_description, description, floor, x_coordinate, y_coordinate, image) VALUES ('+ id + ', "'+ artist + '", "'+ artwork + '", "'+ type + '", "'+ type_description + '", "'+ description + '", "'+ floor + '", "'+ x_coordinate + '", "'+ y_coordinate + '", "'+ image + '")';
                 tx.executeSql(sql);                
             }
             return false; 
@@ -611,19 +603,19 @@
         }
 
         function querySuccess(tx, results) {
-            getPicture(results.rows, "SQL")
+            getPicture(results.rows)
         }
         function errorCB(err) {
             alert("Error processing SQL1: "+err.code);
         }
     }
     
-    function getPicture(recordlist, source){
+    function getPicture(recordlist){
+            console.log("PICS")
             // Select 3 random
             var random1 = 0
             var random2 = 0
             var random3 = 0
-            
             for(var i = 0; i< 3; i++){
                 console.log("FOR "+i)
                 if (i == 0){
@@ -643,25 +635,15 @@
                     }
                     while (random3 == random1 || random3 == random2)
                     var randomnow = random3
-                }
+                }               
                 let item = recordlist[randomnow];
-                let picId = ""
-                let picPath = ""
-                if (source == "Firebase"){
-                    picId = item[1]
-                    picPath = item[0]
-                }
-                else {
-                    picId = item.id
-                    picPath = item.image
-
-                }
                 console.log("PICS",randomnow," ", item, "id ", "#arttile"+i)
-                $('#arttile'+i).css({"background-image":"url('img/artworks/"+String(picPath)+"')"},{"background-color":"red"})
+                $('#arttile'+i).css({"background-image":"url('img/artworks/"+String(item.image)+"')"},{"background-color":"red"})
                 console.log("EXECUTED")
                 $('#arttile'+i).on('click', function(){
                     window.sessionStorage.setItem("page","artworks.html"); 
-                    sessionStorage.param1 = String(picId);
+                    let elementId = item.id;
+                    sessionStorage.param1 = elementId;
                     window.sessionStorage.setItem("artwork_map", "all");
                     window.location.replace("artwork.html");
                         
@@ -673,9 +655,11 @@
 
 // Firebase DB
  var dbFire = firebase.firestore();
-let currentPage = 'index.html';
-window.sessionStorage.setItem("page",currentPage); 
-window.sessionStorage.setItem("artwork_map", "all");
+
+
+    let currentPage = 'index.html';
+    window.sessionStorage.setItem("page",currentPage); 
+    window.sessionStorage.setItem("artwork_map", "all");
 
 
 </script>

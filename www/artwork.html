@@ -46,7 +46,7 @@
 </head>
 
 <body>
-    <!-- <div id="loader">
+    <div id="loader">
         <div id="bars">
             <div class="bar"></div>
             <div class="bar"></div>
@@ -56,11 +56,36 @@
             <div class="bar"></div>
             <p class="pulsate">loading</p>
         </div>
-    </div> -->
+    </div>
     <div id="navbar">
         <!-- buildmen.js -->
     </div>
 
+    <div id="archive_popup" class="archive_popup">
+        <h1>Archive</h1>
+        <a id="close_button">x</a>
+        <div id="content_archive" value="">
+                <div id="image_archive"></div>
+                <div id="audio_archive" class="archive_circle"><i class="fas fa-play"></i></div>        
+        </div>
+        <form data-ajax="false">
+            Meta1:<br>
+            <input type="text" name="meta1" value="">
+            <br>
+            Meta2:<br>
+            <input type="text" name="meta2" value="">
+            <br>
+            Meta3:<br>
+            <input type="text" name="meta3" value="">
+            <br>
+            <br>
+            <input id="submit_button" type="submit" value="Submit">
+        </form> 
+        <button id="share_button">Share</button>
+        <button id="keep_button">Keep</button>
+    </div>
+    <div id="archive_popup" class="archive_popup" style="position:fixed !important; z-index:999;">
+    </div>
     <div class="app">
         <div class="page_container artwork_container">
             <div style="padding:0px 15px 0 15px">
@@ -72,6 +97,13 @@
                 </div>
             </div>
             <div class="artwork_banner" >
+                <div id="archive_actions">
+                    <div class="archive_sub">
+                    <h5>Arhcive this Work</h5>
+                    <a id="mic_archive" class="archive_circle cirlce_popup"><i class="fas fa-microphone"></i></a>
+                    <a id="camera_archive" class="archive_circle cirlce_popup"><i class="fas fa-camera"></i></a>
+                </div>
+                </div>
                 <img id="artwork_image">
             </div>
         <div class="artwork_description">
@@ -91,17 +123,69 @@
 
     </div>
 
-    <script src="js/jquery-3.4.1.min.js"></script>
     <script type="text/javascript" src="cordova.js"></script>
     <script type="text/javascript" src="js/index.js"></script>
     <script type="text/javascript" src="js/buildmenu.js"></script>
+    <script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
+    <script type="text/javascript" src="js/jquerymobile/jquery.mobile-1.4.5.js"></script>
     <script type="text/javascript" src="js/jquery.touchSwipe.min.js"></script>
    
+       <!--FIREBASE STORAGE -->
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/6.2.4/firebase-app.js"></script>
+
+    <!-- TODO: Add SDKs for Firebase products that you want to use
+        https://firebase.google.com/docs/web/setup#config-web-app -->
+    <script src="https://www.gstatic.com/firebasejs/6.3.3/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/6.2.4/firebase-storage.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/6.3.4/firebase-firestore.js"></script>
+
+  <!-- Initialize Firebase -->
+  <script src="/__/firebase/init.js"></script>
+
+    <script>
+        // Your web app's Firebase configuration
+        var firebaseConfig = {
+          apiKey: "AIzaSyDMk_zJFzk4b_zLoms5FN9Kc-RDbpljbR0",
+          authDomain: "resound-e743c.firebaseapp.com",
+          databaseURL: "https://resound-e743c.firebaseio.com",
+          projectId: "resound-e743c",
+          storageBucket: "resound-e743c.appspot.com",
+          messagingSenderId: "444661942566",
+          appId: "1:444661942566:web:1234937ea5ea6351"
+        };
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+      </script>
+
+
+
+
     <script type="text/javascript">
         app.initialize();
         // $('#loader').fadeOut();
         $('#nav_home').addClass('active');
-
+        
+        // Auth
+        firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL)
+        .then(function() {
+            // Existing and future Auth states are now persisted in the current
+            // session only. Closing the window would clear any existing state even
+            // if a user forgets to sign out.
+            // ...
+            // New sign-in will be persisted with session persistence.
+            return firebase.auth().auth().signInAnonymously().catch(function(error) {
+            // Handle Errors here.
+            var errorCode = error.code;
+            var errorMessage = error.message;
+            console.log('Error: ', errorMessage+" "+errorCode)
+        });
+        })
+        .catch(function(error) {
+            // Handle Errors here.
+            var errorCode = error.code;
+            var errorMessage = error.message;
+        });
 
         var workId = sessionStorage.param1;
 
@@ -110,7 +194,7 @@
         db.transaction(GetInfo);
 
         function GetInfo(tx) {
-            let sqlQuery = 'SELECT * FROM ART WHERE id=' + Number(workId) +''; 
+            let sqlQuery = 'SELECT * FROM ART WHERE id="' + workId +'"'; 
             $('#artwork_description').text(sqlQuery);
             tx.executeSql(sqlQuery, [], querySuccess, errorCB);
         }
@@ -122,6 +206,7 @@
             $('#artist_name').text(item.artist);
             window.sessionStorage.setItem('floor', item.floor)
             $('#artwork_name').text(item.artwork);
+            $('#artwork_name').val(item.id);
             $('#artwork_typedescription').text(item.type + ' ('+ item.type_description+')')
             $('#artwork_description').text(item.description);
             $('#artwork_image').css({'background-image':'url("img/artworks/'+item.image+'"', 'background-size':'cover'});
@@ -142,11 +227,17 @@
 
     // Navigation
     $(window).swipe( {    
+        
         //Generic swipe handler for all directions
         swipe:function(event, direction, distance, duration, fingerCount, fingerData) {     
-            if (direction == 'right'){
+            if ($('.archive_popup').css('display') == "none"){
+                if (direction == 'right'){
                 window.location.replace('artworks.html')
+                }
+            }else {
+                // closepopup()
             }
+
             
         }
     });
@@ -159,9 +250,247 @@
     });
     let currentPage = 'artwork.html';
     window.sessionStorage.setItem("page",currentPage); 
+    
+    setTimeout(function(){ 
+        $('#loader').fadeOut();
+    }, 500);
+
+    // Archive
+    $(document).on('click', '.cirlce_popup', function(){
+        let id = this.id
+        if (id == 'mic_archive'){
+            // capture callback
+            let captureSuccess = function(mediaFiles) {
+                $('.archive_popup').css({'display':'block'})
+
+                var i, path, len;
+                for (i = 0, len = mediaFiles.length; i < len; i += 1) {
+                    path = mediaFiles[i].fullPath;
+                    // alert('PATH: '+String(path))
+                    $('#content_archive').val(path)
+                    playMedia(path)
+                    var start = true
+                    $('#audio_archive').on('click', function(){
+                        $(this).html(($(this).html()  == '<div>||</div>') ? '<i class="fas fa-play"></i>' : '<div>||</div>')
+                        
+                        if (start){
+                            player.start()
+                        }else{
+                            player.pause()
+                        }
+                        start = ((start == true) ? false : true)
+                        
+                    })
+
+                }
+            };
+
+            // capture error callback
+            let captureError = function(error) {
+                alert('Error code: ' + error.code, null, 'Capture Error');
+            };
+            var options = { limit: 1 };
+            // start audio capture
+            navigator.device.capture.captureAudio(captureSuccess, captureError, options);
+
+            $('#audio_archive').show()
+            $('#image_archive').hide()
+        }
+        else {
+            $('#image_archive').show()
+            $('#audio_archive').hide()
+            // Capture Image
+            let captureSuccess = function(mediaFiles) {
+                $('.archive_popup').css({'display':'block'})
+                var i, path, len;
+                for (i = 0, len = mediaFiles.length; i < len; i += 1) {
+                    path = mediaFiles[i].fullPath;
+                    // alert('PATH: '+String(path))
+                    $('#image_archive').css({'background-image':'url("'+path+'"', 'background-size':'cover'});
+                    $('#content_archive').val(path)
+                }
+                $("form").submit(function(e){
+                    e.preventDefault();
+                    var meta1 = $('[name = "meta1"]').val();
+                    // Checks
+                    if (meta1=="" || meta1==null){
+                    $("form").after(
+                        '<div class="alert alert-success alert-dismissable"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>Username already taken</div>');
+                    }
+                    else {
+                        submitFile('images', path)
+                        // $("form")[0].submit();
+
+                    }
+                        
+                });
+                $("#share_button").on("click", function(){
+
+                })
+                $("#keep_button").on("click", function(){
+
+                })
+                $("#close_button").on("click", function(){
+                    closepopup()
+                })
+
+            
+            }
+            // capture error callback
+            let captureError = function(error) {
+                alert('Error code: ' + error.code, null, 'Capture Error');
+            };
+
+            var options = { limit: 1 };
+            navigator.device.capture.captureImage(captureSuccess, captureError, options);
+
+            
+        }
+
+
+        
+    });
+// Handle back button
+    document.addEventListener("backbutton", function (e) {
+        if ($('.archive_popup').css('display') != "none"){
+            closepopup()
+            e.preventDefault();
+        }else{
+
+            window.history.back();
+
+        }
+    }, false );
+// Offline
+    var networkState = navigator.connection.type;  
+    if (networkState == "none"){
+        //HIDE Sched
+        $('#archive_actions').hide()
+    }
+
+    function closepopup(){
+        // Delete file
+        let file_path = $('#content_archive').val()
+        removefile(file_path)
+        $('.archive_popup').css({'display':'none'})
+    }
+
+    function removefile(filepath){
+        alert('File: '+String(filepath))
+        window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, function(fileSystem){
+        fileSystem.root.getFile(filepath, {create:false}, function(fileEntry){
+            fileEntry.remove(function(file){
+                alert("File removed!");
+            },function(){
+                alert("error deleting the file " + error.code);
+                });
+            },function(){
+                alert("file does not exist");
+            });
+        },function(evt){
+            alert(evt.target.error.code);
+    });
+    }
 
 
 
+
+    function playMedia(fileName){
+        // Play the audio file at url
+        // Play the audio file at url
+        var my_media = new Media(fileName,
+                        // success callback
+                        function () { playMedia(fileName) },
+                        // error callback
+                        function (err) { console.log("playAudio():Audio Error: " + err); }
+                    );
+
+                // Play audio
+
+        var start = true
+        $('#audio_archive').on('click', function(){            
+            if (start){
+                my_media.play()
+            }else{
+                my_media.pause()
+            }
+            start = ((start == true) ? false : true)  
+        })
+    }
+    // Submit
+    function submitFile(type, path){
+        let uidnumber="Q"
+        uidnumber = uidGenerate()
+
+        // Download from URL
+        // Get file name from url.
+        var filename = path.substring(path.lastIndexOf("/") + 1).split("?")[0];
+        var xhr = new XMLHttpRequest();
+        xhr.responseType = 'blob';
+        xhr.onload = function() {      
+            let file = xhr.response
+            
+            // Firebase
+
+            let filename = uidGenerate()+"_"+$('#artwork_name').text()
+            
+            // Create a storage reference from our storage service
+            var storageRef = firebase.storage().ref();
+            var imageRef = storageRef.child(type+'/'+filename);
+            imageRef.put(file).then(function(snapshot) {
+                
+                snapshot.ref.getDownloadURL().then(function(downloadURL) {
+                    // Update DB
+                    updateDB(filename, downloadURL,type)
+                });
+            });
+        };
+        xhr.open('GET', path);
+        xhr.send();
+
+    }
+// Firebase DB
+    // const firebase = require("firebase");
+    // // Required for side-effects
+    // require("firebase/firestore");
+    var dbFire = firebase.firestore();
+
+
+    function updateDB(filename, downloadURL, type){
+        let workname = $('#artwork_name').text()
+        let workid = $('#artwork_name').val()
+        let meta1 = $("#meta1").text()
+        let meta2 = $("#meta2").text()
+        let meta3 = $("#meta3").text()
+        let date = new Date()
+        alert(String(workname)+" "+String(workid)+" "+meta1+" "+meta2+" "+filename+" "+downloadURL+" "+type)
+        dbFire.collection("works/"+workId+"/uploads").doc(filename).set({
+            meta1:meta1,
+            meta2:meta2,
+            meta3:meta3,
+            workid:workid,
+            workname:workname,
+            uid:filename,
+            file_path:downloadURL,
+            type:type,
+            date:date
+        })
+        .then(function(docRef) {
+            console.log("Document written with ID: ", docRef.id);
+        })
+        .catch(function(error) {
+            console.error("Error adding document: ", error);
+        });
+
+
+    }
+
+    function uidGenerate() {
+                return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+                var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
+                return v.toString(16);
+                });
+    }
 
     </script>
 </body>

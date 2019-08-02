@@ -61,10 +61,10 @@
     </div>
     
     <div class="app">
-        <div class="page_container">
-            <!-- <a class="program_arttrack_banner">
+        <div class="page_container" style="background-color:black;">
+            <a class="program_arttrack_banner">
                 <h1 style="padding:15px;">What's On Next</h1>
-            </a> -->
+            </a>
                 <div id="artframe_partent" style="width:100%; height:100%;">
                         <div class="art_preview" style="height:100%; overflow:hidden;">
                             <iframe id="whatsnextiframe" src="https://resound2019.sched.com/monitors/?limit=3" style="width: 100%; height:100%; position: relative;top: -135px;" frameborder="0">
@@ -108,11 +108,11 @@
     window.sessionStorage.setItem("artTrack","yes_p");
     let iframeheight= $('#whatsnextiframe').height()
     console.log(iframeheight)
-    $('.art_preview').height(iframeheight)
+    $('.art_preview').height(iframeheight-135)
     // -135
-    $('#artframe_partent').height(iframeheight)
+    $('#artframe_partent').height(iframeheight-135)
     // -135
-    $('#whatsnextiframe').height(iframeheight+135)
+    $('#whatsnextiframe').height(iframeheight)
 
 
     $(document).on('click','.luxbar-brand', function(){

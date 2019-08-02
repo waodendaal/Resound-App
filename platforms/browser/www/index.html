@@ -48,52 +48,13 @@
     <!-- <div id="supersede_div" style="width: 100vw;height: 100vh;z-index: 500000;position: absolute;background-color: red;"> -->
     <div id="splash">
         <div style="top:58px;position:fixed;">
-                <img id="home_banner_img" style="opacity: 0.7;" src="img/home_banner_splash.png">
-                <div class="page">
-
-                </div>
-                
-                <div class="container">
-                  <svg class="loader" viewBox="0 0 100 100" overflow="visible">
-                    <g class="core">
-                      <circle class="path" cx="50" cy="50" r="1" fill="none" />
-                    </g>
-                    <g class="spinner">
-                      <circle class="path" cx="50" cy="50" r="20" fill="none" />
-                    </g>
-                    <g class="layer-1">
-                      <circle class="path" cx="50" cy="50" r="70" fill="none" />
-                    </g>
-                    <g class="layer-2">
-                      <circle class="path" cx="50" cy="50" r="120" fill="none" />
-                    </g>
-                    <g class="layer-3">
-                      <circle class="path" cx="50" cy="50" r="180" fill="none" />
-                    </g>
-                    <g class="layer-4">
-                      <circle class="path" cx="50" cy="50" r="240" fill="none" />
-                    </g>
-                    <g class="layer-5">
-                      <circle class="path" cx="50" cy="50" r="300" fill="none" />
-                    </g>
-                    <g class="layer-6">
-                      <circle class="path" cx="50" cy="50" r="380" fill="none" />
-                    </g>
-                    <g class="layer-7">
-                      <circle class="path" cx="50" cy="50" r="450" fill="none" />
-                    </g>
-                    <g class="layer-8">
-                      <circle class="path" cx="50" cy="50" r="540" fill="none" />
-                    </g>
-                  </svg>
-                </div>
-                
-                
+                <img id="home_banner_img" style="opacity: 0.7;" src="img/home_banner_splash.png">        
         </div>
+        <canvas  id="snow">
 
+        </canvas> 
     </div>
-
-    <div id="loader">
+    <!-- <div id="loader">
         <div id="bars">
             <div class="bar"></div>
             <div class="bar"></div>
@@ -103,7 +64,7 @@
             <div class="bar"></div>
             <p class="pulsate">loading</p>
         </div>
-    </div>
+    </div> -->
     <div id="navbar" class="home_nav">
         <!-- buildmen.js -->
     </div>
@@ -117,21 +78,21 @@
                 </div>
                     <div class="subcontent">
                     <div>
-                        <div class="click_header_home" onclick="location.href='happeningnow.html'" >
+                        <div class="click_header_home sched_online" onclick="location.href='happeningnow.html'" >
                             <h2 style="float:left;">What's On Next</h2>
                             <img class="arrow_img" src="img/arrow_right.png">
 
                         </div>
 
                     </div>
-                    <hr>
+                    <hr class="sched_online">
                     <div>
-                        <div class="click_header_home" onclick="location.href='schedule.html'">
+                        <div class="click_header_home sched_online" onclick="location.href='schedule.html'">
                             <h2 style="float:left; margin-bottom: 0;">See Full Program</h2>
                             <img class="arrow_img" src="img/arrow_right.png">
                         </div>
                     </div>
-                    <hr>
+                    <hr class="sched_online">
                     <div>
                         <div class="click_header_home" onclick="location.href='#'" >
                             <h2 style="float:left;">Download Program PDF</h2>
@@ -210,50 +171,247 @@
     <script type="text/javascript" src="js/jquerymobile/jquery.mobile-1.4.5.js"></script>
     <script type="text/javascript" src="js/jquery.touchSwipe.min.js"></script>
 
+    <!-- FireBase -->
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/6.2.4/firebase-app.js"></script>
+    <!-- SDK -->
+    <script src="https://www.gstatic.com/firebasejs/6.3.3/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/6.3.4/firebase-firestore.js"></script>
+
+    
+    <!-- Initialize Firebase -->
+    <script src="/__/firebase/init.js"></script>
+    
+        <script>
+            // Your web app's Firebase configuration
+            var firebaseConfig = {
+            apiKey: "AIzaSyDMk_zJFzk4b_zLoms5FN9Kc-RDbpljbR0",
+            authDomain: "resound-e743c.firebaseapp.com",
+            databaseURL: "https://resound-e743c.firebaseio.com",
+            projectId: "resound-e743c",
+            storageBucket: "resound-e743c.appspot.com",
+            messagingSenderId: "444661942566",
+            appId: "1:444661942566:web:1234937ea5ea6351"
+            };
+            // Initialize Firebase
+            firebase.initializeApp(firebaseConfig);
+        </script>
+
     <script type="text/javascript">
         app.initialize();
         $('#splash').hide()
-        
-        // window.alert(window.sessionStorage.getItem("page"))
-        if (window.sessionStorage.getItem("page") == null){
-            createDB();
-            $('#splash').show()
-            setTimeout(function(){ 
-                splash()
-                // $("#splash").fadeOut(2000)
-            }, 2000);
-        }else{
-            getPictureDB()
-        }
+
+        // Home Screens
         var center = 'center';
         $('#nav_home').addClass('active');
-        // Home Screens
         let screen_width = document.documentElement.clientWidth;
         $('#home_screen, #left_screen, #right_screen').css({'width':screen_width+'px'});
         $('#home_divs').css({'width':(screen_width*3)+'px'});
         $('#home_divs').css({'right':(-screen_width)+'px'});
         $('#home_divs').css({'left':(-screen_width)+'px'});
+        
         //Preview divs
         $('.art_preview div').css({'width':((screen_width-50)/3),'height':((screen_width-50)/3) });
-        $('#loader').fadeOut();
+        
+        // Splash screen
+        if (window.sessionStorage.getItem("page") == null){
+            $('#splash').show()
+            createDB();
+            setTimeout(function(){ 
+                console.log('cancel')
+                cancelAnimationFrame(snowloop)
+                $("#splash").fadeOut()
+            }, 2000);
+        }else{
+            getPictureDB()
+        }
+        
+        
+        //Menu
+        $(document).on('click','.luxbar-brand', function(){
+            if (center == 'right'){
+                center = swipeLeft()
+
+            }
+            if (center == 'left'){
+                center = swipeRight()
+            }
+        });
+
+        // Check network connection        
+        // var networkState = navigator.connection.type;  
+        // if (networkState == "none"){
+        //     //HIDE Sched
+        //     $('.sched_online').hide()
+        // }
+
+        // Splash
+
+        (function () {
+			var lastTime = 10;
+			var vendors = ['webkit', 'moz'];
+			for(var x = 0; x < vendors.length && !window.requestAnimationFrame; ++x) {
+				window.requestAnimationFrame = window[vendors[x]+'RequestAnimationFrame'];
+				window.cancelAnimationFrame =
+				window[vendors[x]+'CancelAnimationFrame'] || window[vendors[x]+'CancelRequestAnimationFrame'];
+			}
+
+			if (!window.requestAnimationFrame)
+				window.requestAnimationFrame = function(callback, element) {
+					var currTime = new Date().getTime();
+					var timeToCall = Math.max(0, 16 - (currTime - lastTime));
+					var id = window.setTimeout(function() { callback(currTime + timeToCall); },
+						timeToCall);
+					lastTime = currTime + timeToCall;
+					return id;
+				};
+
+			if (!window.cancelAnimationFrame)
+				window.cancelAnimationFrame = function(id) {
+				clearTimeout(id);
+			};	
+		})();
+	
+        var h;
+        var w;
+        var blocksize;
+        var tilesize;
+        var tiles_w;
+        var tiles_h;
+        var blocks_w = 0
+        var blocks_h = 0
+        var context;
+        var drawing;
+        var offBlockCanvas;
+        var offBlockContext;
+        
+        var colors = [
+            [255, 255, 255, 255],
+            [220, 220, 220, 255],
+            [170, 170, 170, 255],
+            [120, 120, 120, 255],
+            [0, 0, 0, 255]
+            ];
+        
+        function snowloop(value) {
+        // console.log(value)
+        if (value < 3500){
+            requestAnimationFrame(snowloop); 	
+        }
+            for (i = 0; i <= tiles_h; i++) {
+                for (j = 0; j <= tiles_w; j++) {
+                    var next_x = Math.floor(Math.random() * (blocksize - tilesize))
+                    var next_y = Math.floor(Math.random() * (blocksize - tilesize))
+                    context.drawImage(offBlockCanvas, next_x, next_y, tilesize, tilesize, j * tilesize, i * tilesize, tilesize, tilesize);
+                }
+            }
+            
+            
+        }
+        
+        function snowinit() {
+            var doc = document;
+        h = Math.max(
+            doc.body.scrollHeight, doc.documentElement.scrollHeight,
+            doc.body.offsetHeight, doc.documentElement.offsetHeight,
+            doc.body.clientHeight, doc.documentElement.clientHeight
+        );
+        w = Math.max(
+            doc.body.scrollWidth, doc.documentElement.scrollWidth,
+            doc.body.offsetWidth, doc.documentElement.offsetWidth,
+            doc.body.clientWidth, doc.documentElement.clientWidth
+        );
+        
+        blocksize = Math.floor(h / 2);
+        tilesize = Math.floor(blocksize / 8);
+        
+        tiles_w = Math.floor(w / tilesize);
+        tiles_h = Math.floor(h / tilesize);	
+        
+        drawing = document.getElementById("snow");
+        drawing.width = w;
+        drawing.height = h;
+        
+        context = drawing.getContext("2d");
+        context.beginPath();
+        context.rect(0, 0, w, h);
+        context.fillStyle = 'black';
+        context.fill();
+        offBlockCanvas = document.createElement("canvas");
+        offBlockContext = offBlockCanvas.getContext("2d");
+        offBlockCanvas.width = blocksize;
+        offBlockCanvas.height = blocksize;
+        
+        imageData = offBlockContext.getImageData(0, 0, blocksize, blocksize);
+        var imagedata = imageData.data;
+            
+        for (i = 0; i < blocksize * blocksize * 4; i+=4) {
+            var pixelcolor = parseInt(Math.random() * 8)
+            
+            if (pixelcolor > 3) {
+                pixelcolor = 4;
+            }
+                
+            imagedata[i] = colors[pixelcolor][0];
+            imagedata[i + 1] = colors[pixelcolor][1];
+            imagedata[i + 2] = colors[pixelcolor][2];
+            imagedata[i + 3] = colors[pixelcolor][3];
+        }
+        
+        offBlockContext.putImageData(imageData, 0, 0);
+
+        snowloop(0);	
+        }
+        snowinit();
+        
+        //Auth
+
+        firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL)
+        .then(function() {
+            // Existing and future Auth states are now persisted in the current
+            // session only. Closing the window would clear any existing state even
+            // if a user forgets to sign out.
+            // ...
+            // New sign-in will be persisted with session persistence.
+            return firebase.auth().auth().signInAnonymously().catch(function(error) {
+            // Handle Errors here.
+            var errorCode = error.code;
+            var errorMessage = error.message;
+            console.log('Error: ', errorMessage+" "+errorCode)
+        });
+        })
+        .catch(function(error) {
+            // Handle Errors here.
+            var errorCode = error.code;
+            var errorMessage = error.message;
+        });
+
+
+
+        firebase.auth().onAuthStateChanged(function(user) {
+            if (user) {
+                // User is signed in.
+                var isAnonymous = user.isAnonymous;
+                var uid = user.uid;
+                // alert('USERID: '+ uid)
+                // ...
+            } else {
+                // User is signed out.
+                // ...
+            }
+            // ...
+        });
+
+       
 
         window.sessionStorage.setItem("floor","ground"); 
         var previouspage = window.sessionStorage.getItem("page");
-        // var menuclick =  window.sessionStorage.getItem("menuClick");
-        // if (previouspage != '' || previouspage != null || previouspage !='index.html'){
-        //     if (menuclick != "home_menu")
-        //     alert('Swipe Left')
-        // }
-        // window.sessionStorage.setItem('menuClick', '')
         if (previouspage == 'artworks.html'){
             center = swipeLeft()
             
         }
         if (previouspage == 'schedule.html' || previouspage=='happeningnow.html'){
-            center = swipeRight()
-            // alert(center.toString())
-            
-            
+            center = swipeRight()          
         }
 
         $('#homebutton_ArtTrack').on('click', function(){
@@ -290,6 +448,7 @@
             }
         });
 
+        // Swipes
         function swipeLeft(){
 
             let currentLeft = $('#home_divs').css('left');
@@ -357,51 +516,44 @@
         }
  
 
-    //Menu
-    $(document).on('click','.luxbar-brand', function(){
-        if (center == 'right'){
-            center = swipeLeft()
-
-        }
-        if (center == 'left'){
-            center = swipeRight()
-        }
-    });
         // DB
         function createDB() {
-
-            $.ajax ({
-                url: "database/artworks.json",
-                beforeSend: function(xhr){
-                    if (xhr.overrideMimeType)
-                    {
-                        xhr.overrideMimeType("application/json");
-                    }
-                    },
-                dataType: 'json',
-            }).then(function(data){
-                var firstCheck = true;
-                let recordslist = data;
-                console.log(recordslist)
-                getPicture(recordslist)
-                for (key in recordslist){
-                    let record = recordslist[key];
+            // alert("DB")
+            var dbFire = firebase.firestore();
+            var DBRef = dbFire.collection("works");
+            var firstCheck = true;
+            var pictureList = []
+            DBRef.get().then(function(querySnapshot) {
+                querySnapshot.forEach(function(doc) {
+                    let record = (doc.data())
+                    firstCheck = toSQLDB(record, firstCheck);
+                    pictureList.push([record.image,record.id])
                     
-                    firstCheck = toSQLDB(record, key, firstCheck);
-                }
-            });
+                    if (pictureList.length==10){
+                        console.log("picturelist ", pictureList)
+                        // alert("PIC")
+                        getPicture(pictureList, "Firebase")
+                    }
 
+                });
+            });
+            
+            // console.log(recordslist)
+            // getPicture(recordslist)
+            // for (key in recordslist){
+            //     let record = recordslist[key];
+                
+            //     firstCheck = toSQLDB(record, key, firstCheck);
+            // }
         }
 
-        function toSQLDB(record, key, firstCheck) {
-
+        function toSQLDB(record, firstCheck) {
             var db  = window.openDatabase('ArtTestNew4.2', '4.2', 'Test_Art_Test_New4.2', 1000000);
             var record = record;
-            var key = key;
             db.transaction(populateDB, errorCB, successCB);
 
             function populateDB(tx){    
-                let id = Number(record.id);
+                let id = String(record.id);
                 let artist = String(record.artist);                
                 let artwork = String(record.artwork);
                 var type = String(record.type);
@@ -420,76 +572,21 @@
                 let x_coordinate = String(record.x_coordinate);
                 let y_coordinate = String(record.y_coordinate);
                 var image = String(record.image);
-                if (image == null || image == "" || image == undefined ||image == 'undefined'){
+                if (image == null || image == "" || image ==" " || image == undefined ||image == 'undefined'){
                     image = 'temp.png'
                 }
                 if (firstCheck == true ){
                     tx.executeSql('DROP TABLE IF EXISTS ART');
                 }
                 tx.executeSql('CREATE TABLE IF NOT EXISTS ART (id unique, artist, artwork, type, type_description, description, floor, x_coordinate, y_coordinate, image)');
-                let sql = 'INSERT INTO ART (id, artist, artwork, type, type_description, description, floor, x_coordinate, y_coordinate, image) VALUES ('+ id + ', "'+ artist + '", "'+ artwork + '", "'+ type + '", "'+ type_description + '", "'+ description + '", "'+ floor + '", "'+ x_coordinate + '", "'+ y_coordinate + '", "'+ image + '")';
-                // $('#program_arttrack_banner p').text(sql);
-                tx.executeSql(sql);
-                
-
-                //FIGURE OUT HOW TO READ >>> INTO DB
-                // tx.executeSql('INSERT INTO ART (id, artist, artwork, description, floor, x_coordiante, y_coordiante) VALUES ('+ id +','+ record.artist +','+ record.artwork +','+ record.description +','+ record.floor+','+ record.x_coordinate +','+ record.y_coordinate+')');
-                // tx.executeSql('INSERT INTO ART (id, artist, artwork, description, floor, x_coordiante, y_coordiante) VALUES ('+ 2 +','+ record.artist +','+ record.artwork +','+ record.description +','+ record.floor+','+ record.x_coordinate +','+ record.y_coordinate+')');
-                // tx.executeSql('INSERT INTO ART (id, artist, artwork, description, floor, x_coordiante, y_coordiante) VALUES ('+ 3 +','+ record.artist +','+ record.artwork +','+ record.description +','+ record.floor+','+ record.x_coordinate +','+ record.y_coordinate+')');
-                
+                let sql = 'INSERT INTO ART (id, artist, artwork, type, type_description, description, floor, x_coordinate, y_coordinate, image) VALUES ("'+ id + '", "'+ artist + '", "'+ artwork + '", "'+ type + '", "'+ type_description + '", "'+ description + '", "'+ floor + '", "'+ x_coordinate + '", "'+ y_coordinate + '", "'+ image + '")';
+                if (artwork == "Language of Life (2019)"){
+                    alert(sql)
+                }
+                tx.executeSql(sql);                
             }
-
             return false; 
-
         }
-    
-
-// imitation of new page loading
-
-    function splash(){
-  $body = $("#splash")
-
-  loader(10);
-
-  function loader(delay) {
-    setTimeout(function() {
-      $body.addClass("loading");
-    }, delay);
-
-    setTimeout(function() {
-      $body.addClass("loaded");
-    }, delay + 1700);
-
-    setTimeout(function() {
-      $body.removeClass("restart").addClass("new-page");
-    //   console.log('SPLASH')
-        $("#splash").fadeOut()
-    }, delay + 2550);
-
-    // Splash end
-
-  }
-
-  function getRandomNumber(min, max) {
-    return Math.floor(Math.random() * (max - min + 1)) + min;
-  }
-}
-
-
-    // let DOM2 = $('<div style="color: red;"><p>' + String(records[0]) + '</p></div>').appendTo($('#test2'));
-
-    // alert('foo');
-    // alert();
-    // for (let i = 0; i < records.length; i ++){
-    //     alert('bar');
-    //     let tester = ('INSERT INTO ART (id, artist, artwork, description, floor, x_coordiante, y_coordiante) VALUES ('+ records[i][0] +',' + records[i][1] +',' + records[i][2] +',' + records[i][3] +',' + records[i][4] +',' + records[i][5] +',' + records[i][6] +')');
-    //     for (let y = 0; y < records[i].length; y++)
-    //     {
-    //         let DOM2 = $('<div style="color: red;"><p>' + tester + '</p></div>').appendTo($('#test2'));
-            
-
-    //     }
-    // }
 
     function errorCB(tx, err) {
         alert("Error processing SQL2.3: "+err);
@@ -500,25 +597,6 @@
     function successCB() {
         // getPictures()
         console.log("success! Index.html ");
-    }
-
-    // Check network connection
-    checkConnection()
-    function checkConnection() {
-        // alert('Check connection')
-        var networkState = navigator.network.connection.type;
-        
-        // states[Connection.UNKNOWN]  = 'Unknown connection';
-        // states[Connection.ETHERNET] = 'Ethernet connection';
-        // states[Connection.WIFI]     = 'WiFi connection';
-        // states[Connection.CELL_2G]  = 'Cell 2G connection';
-        // states[Connection.CELL_3G]  = 'Cell 3G connection';
-        // states[Connection.CELL_4G]  = 'Cell 4G connection';
-        // states[Connection.NONE]     = 'No network connection';
-        // alert('Connection type: ' + networkState);
-        if (networkState == Connection.NONE){
-//          HIDE Sched
-        }
     }
     
     //The pictures
@@ -533,19 +611,19 @@
         }
 
         function querySuccess(tx, results) {
-            getPicture(results.rows)
+            getPicture(results.rows, "SQL")
         }
         function errorCB(err) {
             alert("Error processing SQL1: "+err.code);
         }
     }
     
-    function getPicture(recordlist){
-            console.log("PICS")
+    function getPicture(recordlist, source){
             // Select 3 random
             var random1 = 0
             var random2 = 0
             var random3 = 0
+            
             for(var i = 0; i< 3; i++){
                 console.log("FOR "+i)
                 if (i == 0){
@@ -565,15 +643,25 @@
                     }
                     while (random3 == random1 || random3 == random2)
                     var randomnow = random3
-                }               
+                }
                 let item = recordlist[randomnow];
+                let picId = ""
+                let picPath = ""
+                if (source == "Firebase"){
+                    picId = item[1]
+                    picPath = item[0]
+                }
+                else {
+                    picId = item.id
+                    picPath = item.image
+
+                }
                 console.log("PICS",randomnow," ", item, "id ", "#arttile"+i)
-                $('#arttile'+i).css({"background-image":"url('img/artworks/"+String(item.image)+"')"},{"background-color":"red"})
+                $('#arttile'+i).css({"background-image":"url('img/artworks/"+String(picPath)+"')"},{"background-color":"red"})
                 console.log("EXECUTED")
                 $('#arttile'+i).on('click', function(){
                     window.sessionStorage.setItem("page","artworks.html"); 
-                    let elementId = item.id;
-                    sessionStorage.param1 = elementId;
+                    sessionStorage.param1 = String(picId);
                     window.sessionStorage.setItem("artwork_map", "all");
                     window.location.replace("artwork.html");
                         
@@ -583,12 +671,11 @@
             
     }
 
-    let currentPage = 'index.html';
-    window.sessionStorage.setItem("page",currentPage); 
-    window.sessionStorage.setItem("artwork_map", "all");
-
-
-    $('#event-name').css({'background-color':'red !important'})
+// Firebase DB
+ var dbFire = firebase.firestore();
+let currentPage = 'index.html';
+window.sessionStorage.setItem("page",currentPage); 
+window.sessionStorage.setItem("artwork_map", "all");
 
 
 </script>

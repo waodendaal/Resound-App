@@ -20,8 +20,10 @@ document.addEventListener('deviceready', function() {
                     </div>\
                 </div>').appendTo(container);
                 
-    // Page dependend changes
 
+       
+     
+    // Page dependend changes
     if ($('body').prop('id') == 'index_page') {
         // alert(String(window.sessionStorage.getItem("artTrack")))
         if (window.sessionStorage.getItem("artTrack") == "no" || window.sessionStorage.getItem("artTrack") == null){
@@ -42,6 +44,16 @@ document.addEventListener('deviceready', function() {
         window.sessionStorage.setItem("page","index.html")
         window.sessionStorage.setItem("artTrack","no"); 
     })
+
+        // Check Connection
+    
+        var networkState = navigator.connection.type;
+        if (networkState == "none"){
+            
+    //          You are offline
+            $('.luxbar-brand').after('<span>You are currently offline</span>')
+        }
+
 });
 
 
