@@ -54,7 +54,7 @@
 
         </canvas> 
     </div>
-    <!-- <div id="loader">
+    <div id="loader">
         <div id="bars">
             <div class="bar"></div>
             <div class="bar"></div>
@@ -64,7 +64,7 @@
             <div class="bar"></div>
             <p class="pulsate">loading</p>
         </div>
-    </div> -->
+    </div>
     <div id="navbar" class="home_nav">
         <!-- buildmen.js -->
     </div>
@@ -200,7 +200,7 @@
     <script type="text/javascript">
         app.initialize();
         $('#splash').hide()
-
+        $('#loader').hide();
         // Home Screens
         var center = 'center';
         $('#nav_home').addClass('active');
@@ -223,6 +223,10 @@
                 $("#splash").fadeOut()
             }, 2000);
         }else{
+            $('#loader').show();
+            setTimeout(function(){
+                $('#loader').fadeOut();
+            },500)
             getPictureDB()
         }
         
