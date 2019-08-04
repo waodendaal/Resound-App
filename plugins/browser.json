@@ -39,6 +39,9 @@
         },
         "cordova-plugin-media-capture": {
             "PACKAGE_NAME": "com.resound.www"
+        },
+        "cordova-plugin-vibration": {
+            "PACKAGE_NAME": "com.resound.www"
         }
     },
     "dependent_plugins": {

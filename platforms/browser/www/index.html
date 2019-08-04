@@ -372,6 +372,7 @@
 
         firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL)
         .then(function() {
+            alert("AUTH 1")
             // Existing and future Auth states are now persisted in the current
             // session only. Closing the window would clear any existing state even
             // if a user forgets to sign out.
@@ -381,7 +382,7 @@
             // Handle Errors here.
             var errorCode = error.code;
             var errorMessage = error.message;
-            console.log('Error: ', errorMessage+" "+errorCode)
+            alert('Error: '+String(errorMessage)+" "+String(errorCode))
         });
         })
         .catch(function(error) {
@@ -393,6 +394,7 @@
 
 
         firebase.auth().onAuthStateChanged(function(user) {
+            alert('STATUS CHANG'+String(user))
             if (user) {
                 // User is signed in.
                 var isAnonymous = user.isAnonymous;
@@ -402,6 +404,7 @@
             } else {
                 // User is signed out.
                 // ...
+                alert("NO USER")
             }
             // ...
         });
@@ -602,7 +605,7 @@
 
     function successCB() {
         // getPictures()
-        console.log("success! Index.html ");
+        alert("success! Index.html ");
     }
     
     //The pictures
