@@ -299,7 +299,7 @@
         
         function snowloop(value) {
         // console.log(value)
-        if (value < 3500){
+        if (value < 4500){
             requestAnimationFrame(snowloop); 	
         }
             for (i = 0; i <= tiles_h; i++) {
@@ -397,7 +397,7 @@
                 // User is signed in.
                 var isAnonymous = user.isAnonymous;
                 var uid = user.uid;
-                // alert('USERID: '+ uid)
+                alert('USERID: '+ uid)
                 // ...
             } else {
                 // User is signed out.
@@ -522,7 +522,7 @@
 
         // DB
         function createDB() {
-            // alert("DB")
+            alert("DB")
             var dbFire = firebase.firestore();
             var DBRef = dbFire.collection("works");
             var firstCheck = true;
@@ -530,6 +530,8 @@
             DBRef.get().then(function(querySnapshot) {
                 querySnapshot.forEach(function(doc) {
                     let record = (doc.data())
+                    alert('RECORD')
+                    alert(String(record.artist))
                     firstCheck = toSQLDB(record, firstCheck);
                     pictureList.push([record.image,record.id])
                     
