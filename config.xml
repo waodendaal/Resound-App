@@ -122,4 +122,11 @@
         <allow-intent href="itms-apps:*" />
     </platform>
     <plugin name="cordova-plugin-device" spec="~1.1.7" />
+    <universal-links>
+        <host name="resound.page.link" scheme="https" />
+        <host name="resound-e743c.firebaseapp.com" scheme="https">
+            <path url="/__/auth/callback"/>
+        </host>
+    </universal-links>
+
 </widget>
