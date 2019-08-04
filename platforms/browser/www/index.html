@@ -243,11 +243,11 @@
         });
 
         // Check network connection        
-        // var networkState = navigator.connection.type;  
-        // if (networkState == "none"){
-        //     //HIDE Sched
-        //     $('.sched_online').hide()
-        // }
+        var networkState = navigator.connection.type;  
+        if (networkState == "none"){
+            //HIDE Sched
+            $('.sched_online').hide()
+        }
 
         // Splash
 
