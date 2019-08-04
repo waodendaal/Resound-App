@@ -15,6 +15,12 @@
     <allow-intent href="sms:*" />
     <allow-intent href="mailto:*" />
     <allow-intent href="geo:*" />
+    <universal-links>
+        <host name="resound.page.link" scheme="https" />
+        <host name="resound-e743c.firebaseapp.com" scheme="https">
+            <path url="/__/auth/callback" />
+        </host>
+    </universal-links>
     <preference name="DisallowOverscroll" value="true" />
     <preference name="android-minSdkVersion" value="20" />
     <preference name="AndroidLaunchMode" value="singleTask" />
