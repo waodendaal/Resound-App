@@ -11,11 +11,10 @@ document.addEventListener('deviceready', function() {
                                 <span></span>\
                             </label>\
                         </li>\
-                        <li id="nav_home" class="luxbar-item"><a href="index.html">Home</a></li>\
-                        <li id="nav_sched" class="luxbar-item"><a href="schedule.html">Program</a></li>\
-                        <li class="luxbar-item"><a href="floorplan.html">Map</a></li>\
-                        <li class="luxbar-item"><a href="artworks.html">Artworks</a></li>\
-                        <li class="luxbar-item"><a href="fileTest.html">Test</a></li>\
+                        <li id="nav_home" class="luxbar-item"><a href="index.html">HOME</a></li>\
+                        <li id="nav_sched" class="luxbar-item"><a href="schedule.html">PROGRAM</a></li>\
+                        <li class="luxbar-item"><a href="floorplan.html">MAP</a></li>\
+                        <li class="luxbar-item"><a href="artworks.html">ARTWORKS</a></li>\
                         </ul>\
                     </div>\
                 </div>').appendTo(container);

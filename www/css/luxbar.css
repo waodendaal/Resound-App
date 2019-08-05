@@ -51,7 +51,7 @@
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  height: 58px; }
+  height: 45px; }
 
 .luxbar-menu-left .luxbar-navigation,
 .luxbar-menu-left .luxbar-header {
@@ -65,7 +65,7 @@
   padding: 18px 24px 18px 24px; }
 
 .luxbar-menu {
-  min-height: 58px;
+  min-height: 45px;
   transition: 0.6s ease;
   width: 100%; 
   position: fixed;
@@ -111,11 +111,12 @@
   display: none; }
   .luxbar-checkbox:not(:checked) ~ .luxbar-menu {
     overflow: hidden;
-    height: 58px; }
+    height: 45px; }
   .luxbar-checkbox:checked ~ .luxbar-menu {
     transition: height 0.6s ease;
-    height: 100vh;
-    overflow: auto; }
+    height: fit-content;
+    overflow: auto;
+    padding-bottom: 20px;}
 
 .dropdown {
   position: relative;
@@ -305,3 +306,6 @@
 .luxbar-menu-material-cyan .luxbar-hamburger span::after {
   background-color: #fff; }
 
+  .luxbar-item:not(:last-child) {
+    border-bottom:white 1.5px solid
+  }

@@ -372,7 +372,6 @@
 
         firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL)
         .then(function() {
-            alert("AUTH 1")
             // Existing and future Auth states are now persisted in the current
             // session only. Closing the window would clear any existing state even
             // if a user forgets to sign out.
@@ -382,30 +381,27 @@
             // Handle Errors here.
             var errorCode = error.code;
             var errorMessage = error.message;
-            alert('Error: '+String(errorMessage)+" "+String(errorCode))
+            console.log('Error: '+String(errorMessage)+" "+String(errorCode))
         });
         })
         .catch(function(error) {
             // Handle Errors here.
             var errorCode = error.code;
             var errorMessage = error.message;
-            alert("ERROR: "+String(errorCode)+" "+String(errorMessage))
+            console.log("ERROR: "+String(errorCode)+" "+String(errorMessage))
         });
 
 
 
         firebase.auth().onAuthStateChanged(function(user) {
-            alert('STATUS CHANG'+String(user))
             if (user) {
                 // User is signed in.
                 var isAnonymous = user.isAnonymous;
                 var uid = user.uid;
-                alert('USERID: '+ uid)
                 // ...
             } else {
                 // User is signed out.
                 // ...
-                alert("NO USER")
             }
             // ...
         });
@@ -526,7 +522,6 @@
 
         // DB
         function createDB() {
-            alert("DB")
             var dbFire = firebase.firestore();
             var DBRef = dbFire.collection("works");
             var firstCheck = true;
@@ -534,14 +529,11 @@
             DBRef.get().then(function(querySnapshot) {
                 querySnapshot.forEach(function(doc) {
                     let record = (doc.data())
-                    alert('RECORD')
-                    alert(String(record.artist))
                     firstCheck = toSQLDB(record, firstCheck);
                     pictureList.push([record.image,record.id])
                     
                     if (pictureList.length==10){
                         console.log("picturelist ", pictureList)
-                        // alert("PIC")
                         getPicture(pictureList, "Firebase")
                     }
 
@@ -599,14 +591,13 @@
         }
 
     function errorCB(tx, err) {
-        alert("Error processing SQL2.3: "+err);
+        console.log("Error processing SQL2.3: "+err);
     }
 
     // Transaction success callback
 
     function successCB() {
         // getPictures()
-        alert("success! Index.html ");
     }
     
     //The pictures
@@ -624,7 +615,7 @@
             getPicture(results.rows, "SQL")
         }
         function errorCB(err) {
-            alert("Error processing SQL1: "+err.code);
+            console.log("Error processing SQL1: "+err.code);
         }
     }
     

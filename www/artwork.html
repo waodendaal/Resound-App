@@ -62,29 +62,46 @@
     </div>
 
     <div id="archive_popup" class="archive_popup">
+    <div style="padding:20px;">
         <h1>Archive</h1>
-        <a id="close_button">x</a>
+        <h2 id="artwork_name_archive" style="font-family: 'Roboto-Light-Italic';">Name</h2>
+        <hr style="margin-bottom:15px;">
+        <div id="upload_success"><div id="success_icon"><i class="fas fa-check-circle"></i></div>Uploading...</div>
         <div id="content_archive" value="">
+            <div id="archive_media">
                 <div id="image_archive"></div>
                 <div id="audio_archive" class="archive_circle"><i class="fas fa-play"></i></div>        
+            </div>
+            <div id="archive_meta">
+            <form id="archive_form" data-ajax="false">
+                    What did you experience?<br>
+                    <input type="text" name="meta1" value="" placeholder="Type your experience here">
+                    <br>
+                    Tag this artwork:<br>
+                    <input type="text" name="meta2" value="" placeholder="Seperate tags by comma">
+                    <br>
+                    What authors/theories did it bring to mind?<br>
+                    <input type="text" name="meta3" value="" placeholder="Seperate authors/theories by comma">
+                    <br>
+                    <br>
+                    <!-- <input id="submit_button" type="submit" value="Submit"> -->
+                </form> 
+            </div>
         </div>
-        <form data-ajax="false">
-            Meta1:<br>
-            <input type="text" name="meta1" value="">
-            <br>
-            Meta2:<br>
-            <input type="text" name="meta2" value="">
-            <br>
-            Meta3:<br>
-            <input type="text" name="meta3" value="">
-            <br>
-            <br>
-            <input id="submit_button" type="submit" value="Submit">
-        </form> 
-        <button id="share_button">Share</button>
-        <button id="keep_button">Keep</button>
+        <div id="archive_metaDIV">
+        <div style="display:flex; margin-bottom:5px;">
+        <input id="disclaimer_button" class="tickbox" type="checkbox" value="Disclaimer"><label id="disclaimer_label">This file will be anonymously uploaded to an external server where the RE:SOUND participatory archive is being stored. By uploading your media you accept taking part on the RE:SOUND digital archive.</label></div>
+        <div style="display:flex;">
+        <input id="keep_button" class="tickbox" type="checkbox" value="Keep"><label id="keep_label">Keep the image/audio file in my mobile device.</label></div>
+        </div>
+        <div style="display:flex; justify-content: center; margin-top:15px;">
+                <div id ="disclaimer_popup">You need to agree to participate with the archive before you can submit</div>
+        <button id="submit_button" type="submit" value="Submit" style="height: 40px; font-size: 10pt;" class="btn btn-small btn-gray btn-radius btn-gray_active">Submit</button>
+        <button id="close_button" class="btn btn-small btn-gray btn-radius btn-gray_active" style="height: 40px; font-size: 10pt; background-color:transparent; color:white;">Cancel</button>
+        </div>
     </div>
-    <div id="archive_popup" class="archive_popup" style="position:fixed !important; z-index:999;">
+    </div>
+    <div id="archive_popup" class="archive_popup" style="position:fixed !important; z-index:998; width:100%; padding:0 !important;">
     </div>
     <div class="app">
         <div class="page_container artwork_container">
@@ -99,7 +116,7 @@
             <div class="artwork_banner" >
                 <div id="archive_actions">
                     <div class="archive_sub">
-                    <h5>Arhcive this Work</h5>
+                    <h5>Collaborate with the archive</h5>
                     <a id="mic_archive" class="archive_circle cirlce_popup"><i class="fas fa-microphone"></i></a>
                     <a id="camera_archive" class="archive_circle cirlce_popup"><i class="fas fa-camera"></i></a>
                 </div>
@@ -156,14 +173,16 @@
         };
         // Initialize Firebase
         firebase.initializeApp(firebaseConfig);
-      </script>
+    </script>
 
 
 
 
     <script type="text/javascript">
         app.initialize();
-        // $('#loader').fadeOut();
+        setTimeout(function(){ 
+            $('#loader').fadeOut();
+        }, 500);
         $('#nav_home').addClass('active');
         
         // Auth
@@ -206,6 +225,7 @@
             $('#artist_name').text(item.artist);
             window.sessionStorage.setItem('floor', item.floor)
             $('#artwork_name').text(item.artwork);
+            $('#artwork_name_archive').text(item.artwork);
             $('#artwork_name').val(item.id);
             $('#artwork_typedescription').text(item.type + ' ('+ item.type_description+')')
             $('#artwork_description').text(item.description);
@@ -251,9 +271,7 @@
     let currentPage = 'artwork.html';
     window.sessionStorage.setItem("page",currentPage); 
     
-    setTimeout(function(){ 
-        $('#loader').fadeOut();
-    }, 500);
+
 
     // Archive
     $(document).on('click', '.cirlce_popup', function(){
@@ -287,7 +305,7 @@
 
             // capture error callback
             let captureError = function(error) {
-                alert('Error code: ' + error.code, null, 'Capture Error');
+                consol('Error code: ' + error.code, null, 'Capture Error');
             };
             var options = { limit: 1 };
             // start audio capture
@@ -309,27 +327,22 @@
                     $('#image_archive').css({'background-image':'url("'+path+'"', 'background-size':'cover'});
                     $('#content_archive').val(path)
                 }
-                $("form").submit(function(e){
-                    e.preventDefault();
+                // $("form").submit(function(e){
+                //     e.preventDefault();
+                $('#submit_button').on('click',function(){
                     var meta1 = $('[name = "meta1"]').val();
                     // Checks
-                    if (meta1=="" || meta1==null){
-                    $("form").after(
-                        '<div class="alert alert-success alert-dismissable"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>Username already taken</div>');
+                    if ($('#disclaimer_button').prop('checked')==false){
+                        $('#disclaimer_popup').css({'display':'none'});
                     }
                     else {
+                        uploadingPopup()
                         submitFile('images', path)
                         // $("form")[0].submit();
 
                     }
                         
                 });
-                $("#share_button").on("click", function(){
-
-                })
-                $("#keep_button").on("click", function(){
-
-                })
                 $("#close_button").on("click", function(){
                     closepopup()
                 })
@@ -350,6 +363,20 @@
 
         
     });
+$('#disclaimer_label').on('click', function(){
+    $('#disclaimer_button').prop('checked', ($
+    ('#disclaimer_button').prop('checked')== true ? false : true))
+
+})
+$('#keep_label').on('click', function(){
+
+    $('#keep_button').prop('checked', ($('#keep_button').prop('checked')== true ? false : true))
+
+})
+
+$('#disclaimer_button').on('change', function(){
+    $('#disclaimer_popup').css({'display':'none'});
+})
 // Handle back button
     document.addEventListener("backbutton", function (e) {
         if ($('.archive_popup').css('display') != "none"){
@@ -376,20 +403,39 @@
     }
 
     function removefile(filepath){
-        alert('File: '+String(filepath))
-        window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, function(fileSystem){
-        fileSystem.root.getFile(filepath, {create:false}, function(fileEntry){
-            fileEntry.remove(function(file){
-                alert("File removed!");
-            },function(){
-                alert("error deleting the file " + error.code);
-                });
-            },function(){
-                alert("file does not exist");
+        // Revert Changes
+        $('#upload_success').css({'display':'none'})
+        $('#content_archive').css({'display':'flex'})
+        $('#archive_metaDIV').css({'display':'block'})
+        $('#submit_button').css({'display':'block'})
+        $('#close_button').text("Cancel")
+        $('#upload_success').text("Uploading")
+        $('#success_icon').css({'display':'none'})
+
+        
+        
+
+        if ($('#keep_button').prop('checked') == true){
+            return
+        }
+
+        let lastindex = filepath.lastIndexOf('/')
+        let path = filepath.substr(0, lastindex)
+        let filename = filepath.substr(lastindex+1);
+        window.resolveLocalFileSystemURL(path, function(dir) {
+        dir.getFile(filename, {create:false}, function(fileEntry) {
+                    fileEntry.remove(function(){
+                        console("File has been Removed")
+                        // The file has been removed succesfully
+                    },function(error){
+                        // Error deleting the file
+                        console(String(error))
+                    },function(){
+                        // The file doesn't exist
+                        console("File Doesn't Exist")
+                    });
             });
-        },function(evt){
-            alert(evt.target.error.code);
-    });
+        });
     }
 
 
@@ -463,7 +509,7 @@
         let meta2 = $("#meta2").text()
         let meta3 = $("#meta3").text()
         let date = new Date()
-        alert(String(workname)+" "+String(workid)+" "+meta1+" "+meta2+" "+filename+" "+downloadURL+" "+type)
+        // alert(String(workname)+" "+String(workid)+" "+meta1+" "+meta2+" "+filename+" "+downloadURL+" "+type)
         dbFire.collection("works/"+workId+"/uploads").doc(filename).set({
             meta1:meta1,
             meta2:meta2,
@@ -476,6 +522,7 @@
             date:date
         })
         .then(function(docRef) {
+            successPopup()
             console.log("Document written with ID: ", docRef.id);
         })
         .catch(function(error) {
@@ -483,6 +530,18 @@
         });
 
 
+    }
+
+    function uploadingPopup(){
+        $('#content_archive').css({'display':'none'})
+        $('#archive_metaDIV').css({'display':'none'})
+        $('#upload_success').css({'display':'block'})
+        $('#submit_button').css({'display':'none'})
+        $('#close_button').text("Close")
+    }
+    function successPopup(){
+        $('#success_icon').css({'display':'block'})
+        $('#upload_success').text("Archive has been updated!")
     }
 
     function uidGenerate() {

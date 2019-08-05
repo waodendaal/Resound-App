@@ -146,11 +146,11 @@ h1 {
     -moz-transition:all 0.5s ease-out;
     -o-transition:all 0.5s ease-out;
     transition:all 0.5s ease-out;
-    top:58px;
+    top:45px;
     height: 100%;
 }
 .page_container {
-    top:58px;
+    top:45px;
     position:fixed;
     height: 100%;
     width: 100%;
@@ -326,9 +326,18 @@ input::placeholder {
 }
 /* Artwork page */
 .program_arttrack_banner {
+    background-color:rgba(0,0,0,0.7);
     padding: 15px 15px 0 15px;
     height: 100px;
     text-align:left !important;
+}
+#upload_success {
+    display:none;
+    text-align: center;
+    width: 100%;
+    font-size: 1.5em;
+    color: white;
+    padding: 50px 0 50px 0;
 }
 #archive_actions {
     z-index: 10;
@@ -336,7 +345,7 @@ input::placeholder {
     float: right;
     right: 0;
     bottom: 0;
-    padding: 25px;
+    padding: 25px 10px 25px 25px;
     display:flex;
     justify-content: end;
     flex-direction:column;
@@ -347,29 +356,38 @@ input::placeholder {
     flex-direction:row;
 }
 #archive_actions h5{
-    text-shadow: 0.1em 0.1em 0.2em black;
-    width:max-content;
-    float:left;
+    /* text-shadow: 0.1em 0.1em 0.2em black; */
+    width: max-content;
+    float: left;
     margin: auto;
     margin-right: 5px;
-    font-family: "Roboto-Light";
-    font-size: 15pt;
+    font-family: "Roboto-Bold";
+    background-color: #3460A9;
+    font-size: 10pt;
+    padding: 5px;
+    font-weight:bolder;
 }
 .archive_circle{
     float:left;
-    background-color:#3460A9;
-    height:35px;
-    width:35px;
+    /* background-color:#3460A9; */
+    background-color:white;
+    height:30px;
+    width:30px;
     padding:5px;
     text-align: center;
     border-radius:25px;
     border:white 1px solid;
-    color:white!important;
+    color:black!important;
     display:flex;
     flex-direction: column;
     justify-content:center;
     margin: 0px 5px 0px 5px;
     font-size:10pt;
+}
+#archive_form input:active, #archive_form input:focus {
+    border: none;
+    outline:none;
+    border-bottom: white 1.5px solid;
 }
 .archive_circle:hover, .archive_circle:active {
     background-color:rgb(115, 160, 233);
@@ -400,9 +418,6 @@ input::placeholder {
 
 /* Map */
 .level {
-    margin-top:15px;
-}
-#map_container {
     margin-top:15px;
 }
 .map_header {
@@ -439,7 +454,10 @@ map {
 .full_width {
     width: 100%;
 }
-hr, h2, h3 {
+hr {
+    background-color:white;
+}
+h2, h3 {
     color: white;
 }
 .click_header_home {
@@ -562,33 +580,86 @@ a.btn,.btn {
 
 /* Archive */
 #archive_popup{
-    width:100%; 
+    width:100vw;
     height:100vh; 
+    top:30vh;
+    border-radius: 25px 25px 0px 0px;
     background-color:#3460A9; 
     position: absolute; 
-    z-index: 1000;
+    z-index: 999;
     display:none;
 }
-.content_archive {
+#success_icon{
+    display: none; 
+    font-size: 4em; 
+    margin-bottom: 5px; 
+    color: white;
+}
+#disclaimer_popup {
+    position: absolute;
+    margin:0 5px 0 5px;
+    background-color: white;
+    padding: 20px;
+    border-radius: 25px;
+    display:none;
+}
+#content_archive {
     display:flex;
     width:100%;
-    justify-content: center;
+}
+#archive_form{
+    width:100%;
+    color:white;
+    font-weight:bold;
+}
+
+#archive_form input {
+    background-color: transparent;
+    border: none;
+    border-bottom: white 1.5px solid;
+    margin-bottom:10px;
+}
+.tickbox {
+    background-color: transparent;
+    color: white;
+    border: white 1px solid;
+    margin: 0 5px 0 0;
+}
+#archive_popup label {
+    color:white;
+    font-family: "Roboto-Light-Italic";
+    font-size: 80%;
+}
+#archive_form input::placeholder {
+    font-family: "Roboto-Light-Italic";
+    font-size: 80%;
+    opacity:0.7;
+
 }
 .archive_form{
     display:flex;
     flex-direction:column;
 }
 #image_archive {
-    width: 90vw;
-    height:90vw;
+    width: 30vw;
+    height:30vw;
+    float:left;
+    margin-right:20px;
     background-color:white;
 }
 #audio_archive{
-    height:50vw;
-    width:50vw;
+    width: 20vw;
+    height:20vw;
+    float:left;
+    margin-right:20px;
+    background-color:white;
     /* background-color:black; */
-    border: 1px solid white;
+    color:black;
     border-radius:25vw;
+}
+#audio_archive i, #audio_archive div{
+color:black;
+font-weight:bolder;
 }
 /* Loader */
 #snow {
@@ -604,7 +675,7 @@ a.btn,.btn {
     height:100%; 
     background-color:#3460A9; 
     position: absolute; 
-    z-index: 1000;
+    z-index: 1001;
 }
 #splash{
     /* background-image: url('../img/background.png'); */
