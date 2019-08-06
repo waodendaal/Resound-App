@@ -381,14 +381,14 @@
             // Handle Errors here.
             var errorCode = error.code;
             var errorMessage = error.message;
-            console.log('Error: '+String(errorMessage)+" "+String(errorCode))
+            alert('Error: '+String(errorMessage)+" "+String(errorCode))
         });
         })
         .catch(function(error) {
             // Handle Errors here.
             var errorCode = error.code;
             var errorMessage = error.message;
-            console.log("ERROR: "+String(errorCode)+" "+String(errorMessage))
+            alert("ERROR: "+String(errorCode)+" "+String(errorMessage))
         });
 
 
@@ -582,16 +582,13 @@
                 }
                 tx.executeSql('CREATE TABLE IF NOT EXISTS ART (id unique, artist, artwork, type, type_description, description, floor, x_coordinate, y_coordinate, image)');
                 let sql = 'INSERT INTO ART (id, artist, artwork, type, type_description, description, floor, x_coordinate, y_coordinate, image) VALUES ("'+ id + '", "'+ artist + '", "'+ artwork + '", "'+ type + '", "'+ type_description + '", "'+ description + '", "'+ floor + '", "'+ x_coordinate + '", "'+ y_coordinate + '", "'+ image + '")';
-                if (artwork == "Language of Life (2019)"){
-                    // alert(sql)
-                }
                 tx.executeSql(sql);                
             }
             return false; 
         }
 
     function errorCB(tx, err) {
-        console.log("Error processing SQL2.3: "+err);
+        alert("Error processing SQL2.3: "+err);
     }
 
     // Transaction success callback
@@ -615,7 +612,7 @@
             getPicture(results.rows, "SQL")
         }
         function errorCB(err) {
-            console.log("Error processing SQL1: "+err.code);
+            alert("Error processing SQL1: "+err.code);
         }
     }
     

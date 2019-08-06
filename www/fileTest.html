@@ -75,7 +75,12 @@
                 <img id="artwork_image">
             </div>
         <div class="artwork_description">
-            <input type="file" id="myFile">
+            <div class="input-container">
+                <input style="display:none;" type="file" accept="image/*" id="myFile">
+                <button id="upload_button" class="btn btn-small btn-gray btn-radius">
+                    Browse Files
+                  </button>
+              </div>
             <h1 id="artwork_name">Artwork</h1>
             <h2 id="artist_name" style="font-family: 'Roboto-Light-Italic';">Name</h2>
             <hr>
@@ -160,12 +165,23 @@
 
      
         // Firebase
+    const uploadButton = document.querySelector('#upload_button');
+    const realInput = document.getElementById('myFile');
+    
+    uploadButton.addEventListener('click', (e) => {
+        realInput.click();
+    });
+
+
     $('#myFile').on('change',function(){
         alert('Storage')
         var fileList = this.files
         alert('Filelist '+String(fileList[0]))
         let date = new Date();
         let artwork_name = $('#artwork_name').text()
+
+
+        return
         // Create a storage reference from our storage service
         var storageRef = firebase.storage().ref();
 

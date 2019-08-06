@@ -339,6 +339,26 @@ input::placeholder {
     color: white;
     padding: 50px 0 50px 0;
 }
+.archive_select {
+    width: 100%;
+    height: 15px;
+    font-size: 10px;
+    margin: 5px 0px 0px;
+}
+.archive_select:active, .archive_select:focus {
+    outline:none !important;
+    border:none;
+}
+.archive_select option {
+    height: 15px;
+    font-size: 10px;
+}
+.archive_select option:active, .archive_select option:focus {
+    height: 15px;
+    font-size: 10px;
+    outline:none !important;
+    border:none;
+}
 #archive_actions {
     z-index: 10;
     position: absolute;
@@ -383,6 +403,11 @@ input::placeholder {
     justify-content:center;
     margin: 0px 5px 0px 5px;
     font-size:10pt;
+}
+.archive_circle:active, .archive_circle:focus, .archive_circle:hover {
+    background-color:#3460A9 !important;
+    border:#3460A9 1px solid !important;
+    color:white!important;
 }
 #archive_form input:active, #archive_form input:focus {
     border: none;
@@ -590,7 +615,6 @@ a.btn,.btn {
     display:none;
 }
 #success_icon{
-    display: none; 
     font-size: 4em; 
     margin-bottom: 5px; 
     color: white;
@@ -616,6 +640,8 @@ a.btn,.btn {
 #archive_form input {
     background-color: transparent;
     border: none;
+    color:white;
+    width:100%;
     border-bottom: white 1.5px solid;
     margin-bottom:10px;
 }
@@ -635,6 +661,10 @@ a.btn,.btn {
     font-size: 80%;
     opacity:0.7;
 
+}
+#archive_form input{
+    font-family: "Roboto-Light-Italic";
+    opacity:1;
 }
 .archive_form{
     display:flex;

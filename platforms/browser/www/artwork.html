@@ -66,7 +66,16 @@
         <h1>Archive</h1>
         <h2 id="artwork_name_archive" style="font-family: 'Roboto-Light-Italic';">Name</h2>
         <hr style="margin-bottom:15px;">
-        <div id="upload_success"><div id="success_icon"><i class="fas fa-check-circle"></i></div>Uploading...</div>
+        <div id="upload_success">        
+            <div id="bars" style="top:auto;margin:0px 0 0 -20px;">
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <p class="pulsate">Uploading</p>
+        </div></div>
         <div id="content_archive" value="">
             <div id="archive_media">
                 <div id="image_archive"></div>
@@ -74,14 +83,20 @@
             </div>
             <div id="archive_meta">
             <form id="archive_form" data-ajax="false">
-                    What did you experience?<br>
+                    What was your experience?<br>
                     <input type="text" name="meta1" value="" placeholder="Type your experience here">
                     <br>
                     Tag this artwork:<br>
-                    <input type="text" name="meta2" value="" placeholder="Seperate tags by comma">
+                    <select class="archive_select" id="archive_select_meta2">
+                        <option id="select_placeholder" disabled selected hidden>Select from Available Tags</option>
+                    </select>
+                    <input class="meta_textfield" type="text" name="meta2" value="" placeholder="Add own tags seperate by commas">
                     <br>
-                    What authors/theories did it bring to mind?<br>
-                    <input type="text" name="meta3" value="" placeholder="Seperate authors/theories by comma">
+                    What does this work bring to mind?<br>
+                    <select class="archive_select" id="archive_select_meta3">
+                        <option id="select_placeholder" disabled selected hidden>Select from Available Tags</option>
+                    </select>
+                    <input class="meta_textfield" type="text" name="meta3" value="" placeholder="Add your own insights seperated by comma">
                     <br>
                     <br>
                     <!-- <input id="submit_button" type="submit" value="Submit"> -->
@@ -245,6 +260,119 @@
 //     console.log (info);
 // }
 
+//Keep Track
+// readDBArchived()
+// function readDBArchived(){
+//     var db  = window.openDatabase('ThisUser1.2', '1.2', 'ThisUser1.2', 1000000);
+//     db.transaction(populateDB, errorCB, successCB);
+//     tx.executeSql(readDB);
+//     function populateDB(tx){   
+//         tx.executeSql('CREATE TABLE IF NOT EXISTS ARCHIVE (id unique, artwork, archived_audio, archived_photo');
+//         let sqlQuery = 'INSERT INTO ARCHIVE (id, artwork, archived_audio, archived_photo) VALUES ("'+workId+'", "'+artwork+'", "false", "false") WHERE NOT EXISTS (SELECT * FROM ARCHIVE WHERE id="'+archive_id+'")'
+//         alert(String(sqlQuery))
+//         tx.executeSql(sqlQuery)
+
+//     function readDB(){
+//         let sqlQuery2 = 'SELECT * FROM ARCHIVE WHERE id="'+archive_id+'"'
+//         tx.executeSql(sqlQuery2, [], querySuccess, errorCB)
+//     }
+
+//     // Transaction success callback
+//     function successCB() {
+//         alert("DB SUCCESS")
+//         let item = results.rows.item(0);
+//         alert(String(item.archive_id))
+//     }
+//     function querySuccess(tx, results) {
+//         alert("querySUCCESS")
+        
+//     }
+//     function errorCB(tx, err) {
+//         alert("Error processing SQL2.3: "+err);
+//     }
+
+// }
+// function writeDBArchived(archiveAction){
+//     var db  = window.openDatabase('ThisUser1.2', '1.2', 'ThisUser1.2', 1000000);
+//     db.transaction(populateDB, errorCB, successCB);
+//     function populateDB(tx){   
+//         if (archiveAction == 'archived_audio'){
+//             let sqlQuery = ' UPDATE  ARCHIVE SET archived_audio = "true" WHERE id = "'+workId+'"'
+//         }
+//         else {
+//             let sqlQuery = ' UPDATE  ARCHIVE SET archive_photo = "true" WHERE id = "'+workId+'"'
+//         }
+
+//         alert(String(sqlQuery))
+//         tx.executeSql(sqlQuery);
+    
+//     function errorCB(tx, err) {
+//         alert("Error processing SQL2.3: "+err);
+//     }
+
+//     // Transaction success callback
+
+//     function successCB() {
+//         alert("DB SUCCESS")
+//     }}
+
+// }
+
+//Populate Selector 
+popSelector('archive_select_meta2','meta2')
+popSelector('archive_select_meta3','meta3')
+function popSelector(selectorID, metaNumber){
+    var dbFire = firebase.firestore();
+    dbFire.collection("works/"+workId+"/uploads")
+    .get()
+    .then(function(querySnapshot) {
+        querySnapshot.forEach(function(doc) {
+            var uploadedKeys = []
+            var rawValues =""
+            if (metaNumber = "meta2"){
+                rawValues = doc.data().meta2
+            }else{
+                rawValues = doc.data().meta3
+            }
+            if (rawValues.length < 1){
+                $('#'+selectorID).hide()
+            }
+            let commaSeperated = rawValues.split(',')
+            for (var i =0; i< commaSeperated.length; i++){
+                commaSeperated[i] = commaSeperated[i].trim()
+            }
+            commaSeperated.sort()
+            for (var i =0; i< commaSeperated.length; i++){
+                let newItem = commaSeperated[i]
+                if (uploadedKeys.indexOf(newItem.toLowerCase()) < 0){
+                    $('#'+selectorID).append('<option>'+newItem+'</option>')
+                    uploadedKeys.push(newItem.toLowerCase())
+                }
+
+                
+
+            }
+        });
+    })
+    .catch(function(error) {
+        $('#'+selectorID).hide()
+        return;
+    });
+}
+
+
+
+// Selectors
+$('.archive_select').on('change', function(){
+    let newValue = ($(this).find('option:selected').text())
+    let currentValue = $(".meta_textfield").prop("value")
+    if (currentValue !=""){
+        currentValue = currentValue+", "
+    }
+    $(this).next(".meta_textfield").prop("value",currentValue+newValue)
+    $(this).find('#select_placeholder').prop('selected',true)
+})
+
     // Navigation
     $(window).swipe( {    
         
@@ -330,7 +458,7 @@
                 // $("form").submit(function(e){
                 //     e.preventDefault();
                 $('#submit_button').on('click',function(){
-                    var meta1 = $('[name = "meta1"]').val();
+
                     // Checks
                     if ($('#disclaimer_button').prop('checked')==false){
                         $('#disclaimer_popup').css({'display':'none'});
@@ -351,7 +479,7 @@
             }
             // capture error callback
             let captureError = function(error) {
-                alert('Error code: ' + error.code, null, 'Capture Error');
+                console.log('Error code: ' + error.code, null, 'Capture Error');
             };
 
             var options = { limit: 1 };
@@ -409,8 +537,16 @@ $('#disclaimer_button').on('change', function(){
         $('#archive_metaDIV').css({'display':'block'})
         $('#submit_button').css({'display':'block'})
         $('#close_button').text("Cancel")
-        $('#upload_success').text("Uploading")
-        $('#success_icon').css({'display':'none'})
+        $('#upload_success').html('<div id="bars" style="top:auto;margin:0px 0 0 -20px;">\
+            <div class="bar"></div>\
+            <div class="bar"></div>\
+            <div class="bar"></div>\
+            <div class="bar"></div>\
+            <div class="bar"></div>\
+            <div class="bar"></div>\
+            <p class="pulsate">Uploading</p>\
+        </div>');
+        $('#close_button').show();
 
         
         
@@ -505,9 +641,9 @@ $('#disclaimer_button').on('change', function(){
     function updateDB(filename, downloadURL, type){
         let workname = $('#artwork_name').text()
         let workid = $('#artwork_name').val()
-        let meta1 = $("#meta1").text()
-        let meta2 = $("#meta2").text()
-        let meta3 = $("#meta3").text()
+        var meta1 = $('[name = "meta1"]').prop('value');
+        var meta2 = $('[name = "meta2"]').prop('value');
+        var meta3 = $('[name = "meta3"]').prop('value');
         let date = new Date()
         // alert(String(workname)+" "+String(workid)+" "+meta1+" "+meta2+" "+filename+" "+downloadURL+" "+type)
         dbFire.collection("works/"+workId+"/uploads").doc(filename).set({
@@ -536,12 +672,14 @@ $('#disclaimer_button').on('change', function(){
         $('#content_archive').css({'display':'none'})
         $('#archive_metaDIV').css({'display':'none'})
         $('#upload_success').css({'display':'block'})
+        $('#close_button').show();
         $('#submit_button').css({'display':'none'})
         $('#close_button').text("Close")
     }
     function successPopup(){
         $('#success_icon').css({'display':'block'})
-        $('#upload_success').text("Archive has been updated!")
+        $('#close_button').show();
+        $('#upload_success').html("<div id='success_icon'><i class='fas fa-check-circle'></i></div>Archive has been updated!")
     }
 
     function uidGenerate() {

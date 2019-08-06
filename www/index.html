@@ -522,7 +522,6 @@
 
         // DB
         function createDB() {
-            alert("DB")
             var dbFire = firebase.firestore();
             var DBRef = dbFire.collection("works");
             var firstCheck = true;
@@ -583,9 +582,6 @@
                 }
                 tx.executeSql('CREATE TABLE IF NOT EXISTS ART (id unique, artist, artwork, type, type_description, description, floor, x_coordinate, y_coordinate, image)');
                 let sql = 'INSERT INTO ART (id, artist, artwork, type, type_description, description, floor, x_coordinate, y_coordinate, image) VALUES ("'+ id + '", "'+ artist + '", "'+ artwork + '", "'+ type + '", "'+ type_description + '", "'+ description + '", "'+ floor + '", "'+ x_coordinate + '", "'+ y_coordinate + '", "'+ image + '")';
-                if (artwork == "Language of Life (2019)"){
-                    // alert(sql)
-                }
                 tx.executeSql(sql);                
             }
             return false; 
