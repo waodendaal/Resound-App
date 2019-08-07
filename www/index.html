@@ -47,15 +47,12 @@
 <body id="index_page">
     <!-- <div id="supersede_div" style="width: 100vw;height: 100vh;z-index: 500000;position: absolute;background-color: red;"> -->
     <div id="splash">
-        <div style="top:58px;position:fixed;">
-                <img id="home_banner_img" style="opacity: 0.7;" src="img/home_banner_splash.png">        
-        </div>
-        <canvas  id="snow">
-
-        </canvas> 
+        <div style="top:45px;position:fixed;">
+                <img id="home_banner_img" style="opacity: 0.7; display:none;" src="img/home_banner_splash.png">        
+        </div> 
     </div>
     <div id="loader">
-        <div id="bars">
+        <div id="bars" style="display:none;">
             <div class="bar"></div>
             <div class="bar"></div>
             <div class="bar"></div>
@@ -79,7 +76,7 @@
                     <div class="subcontent">
                     <div>
                         <div class="click_header_home sched_online" onclick="location.href='happeningnow.html'" >
-                            <h2 style="float:left;">What's On Next</h2>
+                            <h2 style="float:left;">See What's On Next</h2>
                             <img class="arrow_img" src="img/arrow_right.png">
 
                         </div>
@@ -95,7 +92,7 @@
                     <hr class="sched_online">
                     <div>
                         <div class="click_header_home" onclick="location.href='#'" >
-                            <h2 style="float:left;">Download Program PDF</h2>
+                            <h2 style="float:left;">Open Program PDF</h2>
                             <img class="arrow_img" src="img/arrow_right.png">
 
                         </div>
@@ -126,12 +123,12 @@
             <div id="right_screen">
                 <div class="background_blue program_arttrack_banner">
                     <h1>Art Track</h1>
-                    <p class="full_width">Explore the Conference Performances, Exhibitions, and Installations Below</p>
+                    <p class="full_width">Explore the Conference Performances, Exhibitions, Films, and Installations below.</p>
                 </div>
                 <div class="subcontent">
                     <div >
                         <div onclick="location.href='artworks.html'" class="click_header_home" >
-                            <h2 style="float:left;">Artwork</h2>
+                            <h2 style="float:left;">All Artworks</h2>
                             <img class="arrow_img" src="img/arrow_right.png">
                         </div>
                         <div class="art_preview">
@@ -147,8 +144,8 @@
                             <img class="arrow_img" src="img/arrow_right.png">
                         </div>
                         <p class="full_width">Explore CREATE Campus and Musikken Hus</p>
-                        <a class="btn btn-small btn-gray btn-radius floors" href="#" id="floor_basement">Basement</a>
-                        <a class="btn btn-small btn-gray btn-radius floors" href="#" id="floor_ground">Ground</a>
+                        <a class="btn btn-small btn-gray btn-radius floors" href="#" id="floor_basement">Basement Lvl</a>
+                        <a class="btn btn-small btn-gray btn-radius floors" href="#" id="floor_ground">Ground Lvl</a>
                         <a class="btn btn-small btn-gray btn-radius floors" href="#" id="floor_1">Lvl 1</a>
                         <a class="btn btn-small btn-gray btn-radius floors" href="#" id="floor_2">Lvl 2</a>
                         <!-- <a class="btn btn-small btn-gray btn-radius floors" href="#" id="floor_3">Level 3</a> -->
@@ -182,25 +179,24 @@
     <!-- Initialize Firebase -->
     <script src="/__/firebase/init.js"></script>
     
-        <script>
-            // Your web app's Firebase configuration
-            var firebaseConfig = {
-            apiKey: "AIzaSyDMk_zJFzk4b_zLoms5FN9Kc-RDbpljbR0",
-            authDomain: "resound-e743c.firebaseapp.com",
-            databaseURL: "https://resound-e743c.firebaseio.com",
-            projectId: "resound-e743c",
-            storageBucket: "resound-e743c.appspot.com",
-            messagingSenderId: "444661942566",
-            appId: "1:444661942566:web:1234937ea5ea6351"
-            };
-            // Initialize Firebase
-            firebase.initializeApp(firebaseConfig);
-        </script>
+    <script>
+        // Your web app's Firebase configuration
+        var firebaseConfig = {
+        apiKey: "AIzaSyDMk_zJFzk4b_zLoms5FN9Kc-RDbpljbR0",
+        authDomain: "resound-e743c.firebaseapp.com",
+        databaseURL: "https://resound-e743c.firebaseio.com",
+        projectId: "resound-e743c",
+        storageBucket: "resound-e743c.appspot.com",
+        messagingSenderId: "444661942566",
+        appId: "1:444661942566:web:1234937ea5ea6351"
+        };
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+    </script>
 
     <script type="text/javascript">
         app.initialize();
-        $('#splash').hide()
-        $('#loader').hide();
+
         // Home Screens
         var center = 'center';
         $('#nav_home').addClass('active');
@@ -209,27 +205,28 @@
         $('#home_divs').css({'width':(screen_width*3)+'px'});
         $('#home_divs').css({'right':(-screen_width)+'px'});
         $('#home_divs').css({'left':(-screen_width)+'px'});
-        
         //Preview divs
         $('.art_preview div').css({'width':((screen_width-50)/3),'height':((screen_width-50)/3) });
         
         // Splash screen
         if (window.sessionStorage.getItem("page") == null){
+            $('#loader').hide();
             $('#splash').show()
+            $('#home_banner_img').show()
             createDB();
             setTimeout(function(){ 
-                console.log('cancel')
-                cancelAnimationFrame(snowloop)
                 $("#splash").fadeOut()
-            }, 2000);
+            }, 1500);
         }else{
+            $('#splash').hide()
             $('#loader').show();
+            $('#bars').show()
+
             setTimeout(function(){
                 $('#loader').fadeOut();
             },500)
             getPictureDB()
         }
-        
         
         //Menu
         $(document).on('click','.luxbar-brand', function(){
@@ -245,131 +242,16 @@
         // Check network connection        
         var networkState = navigator.connection.type;  
         if (networkState == "none"){
-            //HIDE Sched
+            $('#home_banner').prepend('<div id ="disclaimer_popup" style="margin-top:10px; display: block !important;">You are currently offline. Some features might not be available</div>')
+            $(document).on('click',function(){
+                $('#disclaimer_popup').fadeOut()
+            })
             $('.sched_online').hide()
         }
+        
 
-        // Splash
 
-        (function () {
-			var lastTime = 10;
-			var vendors = ['webkit', 'moz'];
-			for(var x = 0; x < vendors.length && !window.requestAnimationFrame; ++x) {
-				window.requestAnimationFrame = window[vendors[x]+'RequestAnimationFrame'];
-				window.cancelAnimationFrame =
-				window[vendors[x]+'CancelAnimationFrame'] || window[vendors[x]+'CancelRequestAnimationFrame'];
-			}
-
-			if (!window.requestAnimationFrame)
-				window.requestAnimationFrame = function(callback, element) {
-					var currTime = new Date().getTime();
-					var timeToCall = Math.max(0, 16 - (currTime - lastTime));
-					var id = window.setTimeout(function() { callback(currTime + timeToCall); },
-						timeToCall);
-					lastTime = currTime + timeToCall;
-					return id;
-				};
-
-			if (!window.cancelAnimationFrame)
-				window.cancelAnimationFrame = function(id) {
-				clearTimeout(id);
-			};	
-		})();
-	
-        var h;
-        var w;
-        var blocksize;
-        var tilesize;
-        var tiles_w;
-        var tiles_h;
-        var blocks_w = 0
-        var blocks_h = 0
-        var context;
-        var drawing;
-        var offBlockCanvas;
-        var offBlockContext;
-        
-        var colors = [
-            [255, 255, 255, 255],
-            [220, 220, 220, 255],
-            [170, 170, 170, 255],
-            [120, 120, 120, 255],
-            [0, 0, 0, 255]
-            ];
-        
-        function snowloop(value) {
-        // console.log(value)
-        if (value < 4500){
-            requestAnimationFrame(snowloop); 	
-        }
-            for (i = 0; i <= tiles_h; i++) {
-                for (j = 0; j <= tiles_w; j++) {
-                    var next_x = Math.floor(Math.random() * (blocksize - tilesize))
-                    var next_y = Math.floor(Math.random() * (blocksize - tilesize))
-                    context.drawImage(offBlockCanvas, next_x, next_y, tilesize, tilesize, j * tilesize, i * tilesize, tilesize, tilesize);
-                }
-            }
-            
-            
-        }
-        
-        function snowinit() {
-            var doc = document;
-        h = Math.max(
-            doc.body.scrollHeight, doc.documentElement.scrollHeight,
-            doc.body.offsetHeight, doc.documentElement.offsetHeight,
-            doc.body.clientHeight, doc.documentElement.clientHeight
-        );
-        w = Math.max(
-            doc.body.scrollWidth, doc.documentElement.scrollWidth,
-            doc.body.offsetWidth, doc.documentElement.offsetWidth,
-            doc.body.clientWidth, doc.documentElement.clientWidth
-        );
-        
-        blocksize = Math.floor(h / 2);
-        tilesize = Math.floor(blocksize / 8);
-        
-        tiles_w = Math.floor(w / tilesize);
-        tiles_h = Math.floor(h / tilesize);	
-        
-        drawing = document.getElementById("snow");
-        drawing.width = w;
-        drawing.height = h;
-        
-        context = drawing.getContext("2d");
-        context.beginPath();
-        context.rect(0, 0, w, h);
-        context.fillStyle = 'black';
-        context.fill();
-        offBlockCanvas = document.createElement("canvas");
-        offBlockContext = offBlockCanvas.getContext("2d");
-        offBlockCanvas.width = blocksize;
-        offBlockCanvas.height = blocksize;
-        
-        imageData = offBlockContext.getImageData(0, 0, blocksize, blocksize);
-        var imagedata = imageData.data;
-            
-        for (i = 0; i < blocksize * blocksize * 4; i+=4) {
-            var pixelcolor = parseInt(Math.random() * 8)
-            
-            if (pixelcolor > 3) {
-                pixelcolor = 4;
-            }
-                
-            imagedata[i] = colors[pixelcolor][0];
-            imagedata[i + 1] = colors[pixelcolor][1];
-            imagedata[i + 2] = colors[pixelcolor][2];
-            imagedata[i + 3] = colors[pixelcolor][3];
-        }
-        
-        offBlockContext.putImageData(imageData, 0, 0);
-
-        snowloop(0);	
-        }
-        snowinit();
-        
-        //Auth
-
+        //Firebase Auth
         firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL)
         .then(function() {
             // Existing and future Auth states are now persisted in the current
@@ -381,33 +263,26 @@
             // Handle Errors here.
             var errorCode = error.code;
             var errorMessage = error.message;
-            alert('Error: '+String(errorMessage)+" "+String(errorCode))
+            console.log('Error: '+String(errorMessage)+" "+String(errorCode))
         });
         })
         .catch(function(error) {
             // Handle Errors here.
             var errorCode = error.code;
             var errorMessage = error.message;
-            alert("ERROR: "+String(errorCode)+" "+String(errorMessage))
+            console.log("ERROR: "+String(errorCode)+" "+String(errorMessage))
         });
 
-
-
-        firebase.auth().onAuthStateChanged(function(user) {
-            if (user) {
-                // User is signed in.
-                var isAnonymous = user.isAnonymous;
-                var uid = user.uid;
-                // ...
-            } else {
-                // User is signed out.
-                // ...
-            }
-            // ...
-        });
-
+        // //Check Login Auth
+        // firebase.auth().onAuthStateChanged(function(user) {
+        //     if (user) {
+        //         var isAnonymous = user.isAnonymous;
+        //         var uid = user.uid;
+        //     } else {
+        //         // User is signed out.
+        //     }
+        // });
        
-
         window.sessionStorage.setItem("floor","ground"); 
         var previouspage = window.sessionStorage.getItem("page");
         if (previouspage == 'artworks.html'){
@@ -539,14 +414,6 @@
 
                 });
             });
-            
-            // console.log(recordslist)
-            // getPicture(recordslist)
-            // for (key in recordslist){
-            //     let record = recordslist[key];
-                
-            //     firstCheck = toSQLDB(record, key, firstCheck);
-            // }
         }
 
         function toSQLDB(record, firstCheck) {
@@ -612,7 +479,7 @@
             getPicture(results.rows, "SQL")
         }
         function errorCB(err) {
-            alert("Error processing SQL1: "+err.code);
+            console("Error processing SQL1: "+err.code);
         }
     }
     
@@ -669,14 +536,15 @@
             
     }
 
-// Firebase DB
- var dbFire = firebase.firestore();
-let currentPage = 'index.html';
-window.sessionStorage.setItem("page",currentPage); 
-window.sessionStorage.setItem("artwork_map", "all");
+    // Firebase DB
+    var dbFire = firebase.firestore();
 
+    // Session trackers 
+    let currentPage = 'index.html';
+    window.sessionStorage.setItem("page",currentPage); 
+    window.sessionStorage.setItem("artwork_map", "all");
+    </script>
 
-</script>
     </div>
 </body>
 

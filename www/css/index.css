@@ -364,6 +364,7 @@ input::placeholder {
     position: absolute;
     float: right;
     right: 0;
+    width:100vw;
     bottom: 0;
     padding: 25px 10px 25px 25px;
     display:flex;
@@ -677,7 +678,7 @@ a.btn,.btn {
     margin-right:20px;
     background-color:white;
 }
-#audio_archive{
+#audio_archive, #audio_archive:active, #audio_archive:focus, #audio_archive:hover{
     width: 20vw;
     height:20vw;
     float:left;
@@ -718,7 +719,7 @@ font-weight:bolder;
     text-align: center;
     /* top: 58px; */
     z-index: 1000;
-    /* background-color:rgba(50,95,168,1); */
+    background-color:rgba(50,95,168,1);
     /* background-blend-mode: multiply; */
 
 }

@@ -18,6 +18,7 @@
      KIND, either express or implied.  See the License for the
     specific language governing permissions and limitations
     under the License.
+
 -->
 <html>
 
@@ -105,7 +106,7 @@
         </div>
         <div id="archive_metaDIV">
         <div style="display:flex; margin-bottom:5px;">
-        <input id="disclaimer_button" class="tickbox" type="checkbox" value="Disclaimer"><label id="disclaimer_label">This file will be anonymously uploaded to an external server where the RE:SOUND participatory archive is being stored. By uploading your media you accept taking part on the RE:SOUND digital archive.</label></div>
+        <input id="disclaimer_button" class="tickbox" type="checkbox" value="Disclaimer"><label id="disclaimer_label">This file will be anonymously uploaded to an external server where the RE:SOUND participatory archive is being stored. By uploading your media you accept taking part in building the RE:SOUND digital archive.</label></div>
         <div style="display:flex;">
         <input id="keep_button" class="tickbox" type="checkbox" value="Keep"><label id="keep_label">Keep the image/audio file in my mobile device.</label></div>
         </div>
@@ -131,9 +132,14 @@
             <div class="artwork_banner" >
                 <div id="archive_actions">
                     <div class="archive_sub">
-                    <h5>Collaborate with the archive</h5>
+                    <h5>Collaborate with the Archive</h5>
                     <a id="mic_archive" class="archive_circle cirlce_popup"><i class="fas fa-microphone"></i></a>
                     <a id="camera_archive" class="archive_circle cirlce_popup"><i class="fas fa-camera"></i></a>
+                    <!-- <div class="file_archive">
+                            <input style="display:none;" type="file" accept="file_extension|audio/*|image/*|media_type" id="myFile">
+                            <a id="upload_button" class="archive_circle cirlce_popup"><i class="fas fa-file-upload"></i></a>
+                    </div> -->
+                    <a id="text_archive" class="archive_circle cirlce_popup"><i class="fas fa-edit"></i></a>
                 </div>
                 </div>
                 <img id="artwork_image">
@@ -249,7 +255,7 @@
             window.sessionStorage.setItem('artwork_map', item.id)
         }
         function errorCB(err) {
-            alert("Error processing SQL1: "+err.code);
+            console.log("Error processing SQL1: "+err.code);
         }
 
 // function GetInfo(tx) {
@@ -322,20 +328,21 @@
 popSelector('archive_select_meta2','meta2')
 popSelector('archive_select_meta3','meta3')
 function popSelector(selectorID, metaNumber){
+    let showOptions = false 
+    var uploadedKeys = []
     var dbFire = firebase.firestore();
     dbFire.collection("works/"+workId+"/uploads")
     .get()
     .then(function(querySnapshot) {
         querySnapshot.forEach(function(doc) {
-            var uploadedKeys = []
             var rawValues =""
-            if (metaNumber = "meta2"){
+            if (metaNumber == "meta2"){
                 rawValues = doc.data().meta2
-            }else{
+            }else if (metaNumber=="meta3"){
                 rawValues = doc.data().meta3
             }
-            if (rawValues.length < 1){
-                $('#'+selectorID).hide()
+            if (rawValues.length > 0){
+                showOptions = true 
             }
             let commaSeperated = rawValues.split(',')
             for (var i =0; i< commaSeperated.length; i++){
@@ -344,23 +351,24 @@ function popSelector(selectorID, metaNumber){
             commaSeperated.sort()
             for (var i =0; i< commaSeperated.length; i++){
                 let newItem = commaSeperated[i]
-                if (uploadedKeys.indexOf(newItem.toLowerCase()) < 0){
+                if (uploadedKeys.indexOf(newItem.toLowerCase()) < 0 && newItem != ""){
                     $('#'+selectorID).append('<option>'+newItem+'</option>')
                     uploadedKeys.push(newItem.toLowerCase())
                 }
+  
+           }
 
-                
-
-            }
         });
+        if (showOptions == false ){
+        $('#'+selectorID).hide()
+    }
     })
     .catch(function(error) {
         $('#'+selectorID).hide()
         return;
     });
+
 }
-
-
 
 // Selectors
 $('.archive_select').on('change', function(){
@@ -401,9 +409,57 @@ $('.archive_select').on('change', function(){
     
 
 
+
+// File Selector - SECOND DRAFT?
+    // $('#myFile').on('change',function(){
+    //     alert('Storage')
+    //     var fileList = this.files
+    //     console.log('Filelist ', fileList[0])
+    //     var file = fileList[0]
+    //     var reader = new FileReader();
+    //     $('.archive_popup').css({'display':'block'})
+    //     $('#image_archive').show()
+    //     $('#audio_archive').hide()
+
+    //     reader.onload = function(event) {
+    //         alert("EVENT"+String(event.target.result))
+    //         $('#image_archive').src = event.target.result;
+    //     };
+
+    //     reader.readAsDataURL(file);
+    // })
+
     // Archive
     $(document).on('click', '.cirlce_popup', function(){
         let id = this.id
+        $('#keep_button').show()
+        $('#keep_label').show()
+        // if (id == 'upload_button'){
+        //     $('#myFile').click();
+        // }
+        if (id =="text_archive"){
+            $('#audio_archive').hide()
+            $('#image_archive').hide()
+            $('#keep_button').hide()
+            $('#keep_label').hide()
+            $('.archive_popup').css({'display':'block'})
+
+            $('#content_archive').val("text")
+            $('#submit_button').on('click',function(){
+                // Checks
+                if ($('#disclaimer_button').prop('checked')==false){
+                    $('#disclaimer_popup').css({'display':'none'});
+                }
+                else {
+                    uploadingPopup()
+                    submitFile('text', "text")
+                    // $("form")[0].submit();
+
+                }
+                    
+            });
+
+        }
         if (id == 'mic_archive'){
             // capture callback
             let captureSuccess = function(mediaFiles) {
@@ -427,6 +483,19 @@ $('.archive_select').on('change', function(){
                         start = ((start == true) ? false : true)
                         
                     })
+                    $('#submit_button').on('click',function(){
+                        // Checks
+                        if ($('#disclaimer_button').prop('checked')==false){
+                            $('#disclaimer_popup').css({'display':'none'});
+                        }
+                        else {
+                            uploadingPopup()
+                            submitFile('audio', path)
+                            // $("form")[0].submit();
+
+                        }
+                            
+                    });
 
                 }
             };
@@ -441,8 +510,9 @@ $('.archive_select').on('change', function(){
 
             $('#audio_archive').show()
             $('#image_archive').hide()
+
         }
-        else {
+        if (id == "camera_archive") {
             $('#image_archive').show()
             $('#audio_archive').hide()
             // Capture Image
@@ -452,6 +522,7 @@ $('.archive_select').on('change', function(){
                 for (i = 0, len = mediaFiles.length; i < len; i += 1) {
                     path = mediaFiles[i].fullPath;
                     // alert('PATH: '+String(path))
+                    
                     $('#image_archive').css({'background-image':'url("'+path+'"', 'background-size':'cover'});
                     $('#content_archive').val(path)
                 }
@@ -471,10 +542,6 @@ $('.archive_select').on('change', function(){
                     }
                         
                 });
-                $("#close_button").on("click", function(){
-                    closepopup()
-                })
-
             
             }
             // capture error callback
@@ -483,14 +550,15 @@ $('.archive_select').on('change', function(){
             };
 
             var options = { limit: 1 };
-            navigator.device.capture.captureImage(captureSuccess, captureError, options);
-
-            
+            navigator.device.capture.captureImage(captureSuccess, captureError, options);  
         }
-
-
         
     });
+
+$("#close_button").on("click", function(){
+                closepopup()
+            })
+
 $('#disclaimer_label').on('click', function(){
     $('#disclaimer_button').prop('checked', ($
     ('#disclaimer_button').prop('checked')== true ? false : true))
@@ -531,6 +599,7 @@ $('#disclaimer_button').on('change', function(){
     }
 
     function removefile(filepath){
+        alert("REMOVING")
         // Revert Changes
         $('#upload_success').css({'display':'none'})
         $('#content_archive').css({'display':'flex'})
@@ -551,27 +620,35 @@ $('#disclaimer_button').on('change', function(){
         
         
 
-        if ($('#keep_button').prop('checked') == true){
+        if ($('#keep_button').prop('checked') == true || filepath=="text"){
             return
         }
-
-        let lastindex = filepath.lastIndexOf('/')
-        let path = filepath.substr(0, lastindex)
-        let filename = filepath.substr(lastindex+1);
-        window.resolveLocalFileSystemURL(path, function(dir) {
-        dir.getFile(filename, {create:false}, function(fileEntry) {
-                    fileEntry.remove(function(){
-                        console("File has been Removed")
-                        // The file has been removed succesfully
-                    },function(error){
-                        // Error deleting the file
-                        console(String(error))
-                    },function(){
-                        // The file doesn't exist
-                        console("File Doesn't Exist")
-                    });
+        else {
+            // alert("REMOVE NOW")
+            let lastindex = filepath.lastIndexOf('/')
+            let path = filepath.substr(0, lastindex)
+            let filename = filepath.substr(lastindex+1);
+            alert(String(filepath))
+            alert(String(path))
+            alert(String(filename))
+            window.resolveLocalFileSystemURL(path, function(dir) {
+            dir.getFile(filename, {create:false}, function(fileEntry) {
+                        // alert("REMOVING...")
+                        fileEntry.remove(function(){
+                            // alert("File has been Removed")
+                            // The file has been removed succesfully
+                        },function(error){
+                            // Error deleting the file
+                            // alert(String(error))
+                        },function(){
+                            // The file doesn't exist
+                            // alert("File Doesn't Exist")
+                        });
+                });
             });
-        });
+        }
+
+
     }
 
 
@@ -601,6 +678,11 @@ $('#disclaimer_button').on('change', function(){
     }
     // Submit
     function submitFile(type, path){
+        if (type == "text"){
+            updateDB("", "text","text")
+        }
+        else {
+
         let uidnumber="Q"
         uidnumber = uidGenerate()
 
@@ -629,6 +711,7 @@ $('#disclaimer_button').on('change', function(){
         };
         xhr.open('GET', path);
         xhr.send();
+        }
 
     }
 // Firebase DB
@@ -646,7 +729,8 @@ $('#disclaimer_button').on('change', function(){
         var meta3 = $('[name = "meta3"]').prop('value');
         let date = new Date()
         // alert(String(workname)+" "+String(workid)+" "+meta1+" "+meta2+" "+filename+" "+downloadURL+" "+type)
-        dbFire.collection("works/"+workId+"/uploads").doc(filename).set({
+        if (filename ==""){
+            dbFire.collection("works/"+workId+"/uploads").add({
             meta1:meta1,
             meta2:meta2,
             meta3:meta3,
@@ -656,14 +740,38 @@ $('#disclaimer_button').on('change', function(){
             file_path:downloadURL,
             type:type,
             date:date
-        })
-        .then(function(docRef) {
-            successPopup()
-            console.log("Document written with ID: ", docRef.id);
-        })
-        .catch(function(error) {
-            console.error("Error adding document: ", error);
-        });
+            })
+            .then(function(docRef) {
+                successPopup()
+                console.log("Document written with ID: ", docRef.id);
+            })
+            .catch(function(error) {
+                console.error("Error adding document: ", error);
+            });
+
+
+        }
+        else {
+            dbFire.collection("works/"+workId+"/uploads").doc(filename).set({
+            meta1:meta1,
+            meta2:meta2,
+            meta3:meta3,
+            workid:workid,
+            workname:workname,
+            uid:filename,
+            file_path:downloadURL,
+            type:type,
+            date:date
+            })
+            .then(function(docRef) {
+                successPopup()
+                console.log("Document written with ID: ", docRef.id);
+            })
+            .catch(function(error) {
+                console.error("Error adding document: ", error);
+            });
+
+        }
 
 
     }
