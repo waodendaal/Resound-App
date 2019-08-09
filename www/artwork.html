@@ -407,10 +407,10 @@ $('.archive_select').on('change', function(){
     var previouspage = window.sessionStorage.getItem("page");
     alert("GET PREVIOUS PAGE"+String(previouspage))
 
-    $(document).on('click','.luxbar-brand', function(){
-        window.location.replace(previouspage);
-        // if comes from map...
-    });
+    // $(document).on('click','.luxbar-brand', function(){
+    //     window.location.replace(previouspage);
+    //     // if comes from map...
+    // });
     let currentPage = 'artwork.html';
     window.sessionStorage.setItem("page",currentPage); 
     

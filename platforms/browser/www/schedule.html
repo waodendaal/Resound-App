@@ -116,14 +116,15 @@
     var previouspage = window.sessionStorage.getItem("page");
     window.sessionStorage.setItem("artTrack","yes_p");
     window.sessionStorage.setItem("artwork_map", "all");
-    $(document).on('click','.luxbar-brand', function(){
-        window.history.back();
+    // $(document).on('click','.luxbar-brand', function(){
+    //     window.history.back();
 
-        // alert("BACK")
-        $.mobile.back();
-        // window.location.replace(previouspage);
-        // window.location.replace('index.html')
-    });
+    //     // alert("BACK")
+    //     window.history.back();
+    //     $.mobile.back();
+    //     // window.location.replace(previouspage);
+    //     // window.location.replace('index.html')
+    // });
 
     var networkState = navigator.connection.type;
         if (networkState == "none"){
