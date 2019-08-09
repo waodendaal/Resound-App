@@ -202,6 +202,7 @@
 
     <script type="text/javascript">
         app.initialize();
+
         setTimeout(function(){ 
             $('#loader').fadeOut();
         }, 500);
@@ -215,7 +216,7 @@
             // if a user forgets to sign out.
             // ...
             // New sign-in will be persisted with session persistence.
-            return firebase.auth().auth().signInAnonymously().catch(function(error) {
+            return firebase.auth().signInAnonymously().catch(function(error) {
             // Handle Errors here.
             var errorCode = error.code;
             var errorMessage = error.message;
@@ -329,6 +330,7 @@
 popSelector('archive_select_meta2','meta2')
 popSelector('archive_select_meta3','meta3')
 function popSelector(selectorID, metaNumber){
+    alert('POPSELECTOR')
     let showOptions = false 
     var uploadedKeys = []
     var dbFire = firebase.firestore();
@@ -389,6 +391,7 @@ $('.archive_select').on('change', function(){
         
         //Generic swipe handler for all directions
         swipe:function(event, direction, distance, duration, fingerCount, fingerData) {     
+            alert("SWIPE")
             if ($('.archive_popup').css('display') == "none"){
                 if (direction == 'right'){
                 window.location.replace('artworks.html')
@@ -402,6 +405,7 @@ $('.archive_select').on('change', function(){
     });
 
     var previouspage = window.sessionStorage.getItem("page");
+    alert("GET PREVIOUS PAGE"+String(previouspage))
 
     $(document).on('click','.luxbar-brand', function(){
         window.location.replace(previouspage);
@@ -433,7 +437,9 @@ $('.archive_select').on('change', function(){
     // })
 
     // Archive
+    alert("ARCHIVE MAIN")
     $(document).on('click', '.cirlce_popup', function(){
+        alert("ARCHIVE ACTIVATE")
         
         let id = this.id
         $('#keep_button').show()
