@@ -68,7 +68,7 @@
         <h2 id="artwork_name_archive" style="font-family: 'Roboto-Light-Italic';">Name</h2>
         <hr style="margin-bottom:15px;">
         <div id="upload_success">        
-            <div id="bars" style="top:auto;margin:0px 0 0 -20px;">
+            <div id="bars" style="top:auto;margin:20px 0 0 -20px;">
             <div class="bar"></div>
             <div class="bar"></div>
             <div class="bar"></div>
@@ -85,7 +85,7 @@
             <div id="archive_meta">
             <form id="archive_form" data-ajax="false">
                     What was your experience?<br>
-                    <input type="text" name="meta1" value="" placeholder="Type your experience here">
+                    <input class="meta_textfield"  type="text" name="meta1" value="" placeholder="Type your experience here">
                     <br>
                     Tag this artwork:<br>
                     <select class="archive_select" id="archive_select_meta2">
@@ -112,7 +112,8 @@
         </div>
         <div style="display:flex; justify-content: center; margin-top:15px;">
                 <div id ="disclaimer_popup">You need to agree to participate with the archive before you can submit</div>
-        <button id="submit_button" type="submit" value="Submit" style="height: 40px; font-size: 10pt;" class="btn btn-small btn-gray btn-radius btn-gray_active">Submit</button>
+                <div id ="disclaimer_popup2">You need to fill in at least one field</div>
+                <button id="submit_button" type="submit" value="Archive" style="height: 40px; font-size: 10pt;" class="btn btn-small btn-gray btn-radius btn-gray_active">Submit</button>
         <button id="close_button" class="btn btn-small btn-gray btn-radius btn-gray_active" style="height: 40px; font-size: 10pt; background-color:transparent; color:white;">Cancel</button>
         </div>
     </div>
@@ -369,7 +370,9 @@ function popSelector(selectorID, metaNumber){
     });
 
 }
-
+$('.meta_textfield').on('click', function(){
+    $('#disclaimer_popup2').hide()
+})
 // Selectors
 $('.archive_select').on('change', function(){
     let newValue = ($(this).find('option:selected').text())
@@ -431,6 +434,7 @@ $('.archive_select').on('change', function(){
 
     // Archive
     $(document).on('click', '.cirlce_popup', function(){
+        
         let id = this.id
         $('#keep_button').show()
         $('#keep_label').show()
@@ -447,8 +451,14 @@ $('.archive_select').on('change', function(){
             $('#content_archive').val("text")
             $('#submit_button').on('click',function(){
                 // Checks
+                var meta1 = $('[name = "meta1"]').prop('value')
+                var meta2 = $('[name = "meta2"]').prop('value')
+                var meta3 = $('[name = "meta3"]').prop('value')
+
                 if ($('#disclaimer_button').prop('checked')==false){
-                    $('#disclaimer_popup').css({'display':'none'});
+                    $('#disclaimer_popup').css({'display':'block'});
+                }else if (meta1=='' && meta2=='' && meta2=='' ) {
+                    $('#disclaimer_popup2').css({'display':'block'});
                 }
                 else {
                     uploadingPopup()
@@ -484,9 +494,14 @@ $('.archive_select').on('change', function(){
                         
                     })
                     $('#submit_button').on('click',function(){
+                        var meta1 = $('[name = "meta1"]').prop('value')
+                        var meta2 = $('[name = "meta2"]').prop('value')
+                        var meta3 = $('[name = "meta3"]').prop('value')
                         // Checks
                         if ($('#disclaimer_button').prop('checked')==false){
-                            $('#disclaimer_popup').css({'display':'none'});
+                            $('#disclaimer_popup').css({'display':'block'});
+                        }else if (meta1=='' && meta2=='' && meta2=='' ) {
+                            $('#disclaimer_popup2').css({'display':'block'});
                         }
                         else {
                             uploadingPopup()
@@ -529,10 +544,14 @@ $('.archive_select').on('change', function(){
                 // $("form").submit(function(e){
                 //     e.preventDefault();
                 $('#submit_button').on('click',function(){
-
+                    var meta1 = $('[name = "meta1"]').prop('value')
+                    var meta2 = $('[name = "meta2"]').prop('value')
+                    var meta3 = $('[name = "meta3"]').prop('value')
                     // Checks
                     if ($('#disclaimer_button').prop('checked')==false){
-                        $('#disclaimer_popup').css({'display':'none'});
+                        $('#disclaimer_popup').css({'display':'block'});
+                    }else if (meta1=='' && meta2=='' && meta2=='' ) {
+                        $('#disclaimer_popup2').css({'display':'block'});
                     }
                     else {
                         uploadingPopup()
@@ -560,8 +579,8 @@ $("#close_button").on("click", function(){
             })
 
 $('#disclaimer_label').on('click', function(){
-    $('#disclaimer_button').prop('checked', ($
-    ('#disclaimer_button').prop('checked')== true ? false : true))
+    $('#disclaimer_popup').hide()
+    $('#disclaimer_button').prop('checked', ($('#disclaimer_button').prop('checked')== true ? false : true))
 
 })
 $('#keep_label').on('click', function(){
@@ -779,14 +798,13 @@ $('#disclaimer_button').on('change', function(){
         $('#content_archive').css({'display':'none'})
         $('#archive_metaDIV').css({'display':'none'})
         $('#upload_success').css({'display':'block'})
-        $('#close_button').show();
+        $('#close_button').text('Cancel')
         $('#submit_button').css({'display':'none'})
-        $('#close_button').text("Close")
     }
     function successPopup(){
         $('#success_icon').css({'display':'block'})
-        $('#close_button').show();
-        $('#upload_success').html("<div id='success_icon'><i class='fas fa-check-circle'></i></div>Archive has been updated!")
+        $('#close_button').text('Close')
+        $('#upload_success').html("<div id='success_icon'><i class='fas fa-check-circle'></i></div>Thank you for taking part of the RE:SOUND 2019 collaborative archive")
     }
 
     function uidGenerate() {

@@ -96,7 +96,7 @@
             // alert(String(floor))
             if (floor[0] == "-1"){
                 $('.level').removeClass('btn-gray_active')
-                $(this).addClass('btn-gray_active')
+                $('#-1_M').addClass('btn-gray_active')
                 Promise.resolve(createMap('img/maps/Map_Basement.svg')).then(function(map){
                         createDB('-1', map)
                     }
@@ -104,7 +104,7 @@
             }
             else if (floor[0] == "1"){
                 $('.level').removeClass('btn-gray_active')
-                $(this).addClass('btn-gray_active')
+                $('#1_M').addClass('btn-gray_active')
                 Promise.resolve(createMap('img/maps/Map_1.svg')).then(function(map){
                         createDB('1', map)
                     }
@@ -112,7 +112,7 @@
             }
             else if (floor[0] == "2"){
                 $('.level').removeClass('btn-gray_active')
-                $(this).addClass('btn-gray_active')
+                $('#2_M').addClass('btn-gray_active')
                 createDB('2')
                 Promise.resolve(createMap('img/maps/Map_2.svg')).then(function(map){
                         createDB('2', map)

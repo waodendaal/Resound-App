@@ -25,7 +25,9 @@
     <meta charset="utf-8" />
     <meta name="format-detection" content="telephone=no" />
     <meta name="msapplication-tap-highlight" content="no" />
-    <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width" />
+    <!-- https://ayogo.com/blog/ios11-viewport/ -->
+    <!-- https://stackoverflow.com/questions/45817426/phone-gap-ios11-display-bar -->
+    <meta name="viewport" content="initial-scale=1, width=device-width, height=device-height, viewport-fit=cover">
     <!-- This is a wide open CSP declaration. To lock this down for production, see below. -->
     <meta http-equiv="Content-Security-Policy" content="default-src * 'unsafe-inline'; style-src 'self' 'unsafe-inline'; media-src *" />
     <!-- Good default declaration:
@@ -40,7 +42,6 @@
     <link rel="stylesheet" type="text/css" href="css/luxbar.css" />
     <link rel="stylesheet" type="text/css" href="css/index.css" />
     <link rel="stylesheet" type="text/css" href="css/all.css" />
-    <link rel="stylesheet" type="text/css" href="css/splash.css" />
     <title>RE:SOUND Conference 2019</title>
 </head>
 
@@ -128,8 +129,8 @@
                 <div class="subcontent">
                     <div >
                         <div onclick="location.href='artworks.html'" class="click_header_home" >
-                            <h2 style="float:left;">All Artworks</h2>
-                            <img class="arrow_img" src="img/arrow_right.png">
+                        <div><h2 style="float:left; width:100%; margin-bottom:5px;">All Artworks</h2><p>Browse the artwork gallery</p></div>                            
+                        <img class="arrow_img" src="img/arrow_right.png">
                         </div>
                         <div class="art_preview">
                             <div id="arttile0" class=""></div>
@@ -140,14 +141,14 @@
                     <hr>
                     <div>
                         <div class="click_header_home" onclick="location.href='floorplan.html'">
-                            <h2 style="float:left; margin-bottom: 0;">Map</h2>
+                            <div><h2 style="float:left; margin-bottom: 5px; width:100%;">Map</h2>
+                                <p>Explore CREATE Campus and Musikken Hus</p></div>
                             <img class="arrow_img" src="img/arrow_right.png">
                         </div>
-                        <p class="full_width">Explore CREATE Campus and Musikken Hus</p>
-                        <a class="btn btn-small btn-gray btn-radius floors" href="#" id="floor_basement">Basement Lvl</a>
-                        <a class="btn btn-small btn-gray btn-radius floors" href="#" id="floor_ground">Ground Lvl</a>
-                        <a class="btn btn-small btn-gray btn-radius floors" href="#" id="floor_1">Lvl 1</a>
-                        <a class="btn btn-small btn-gray btn-radius floors" href="#" id="floor_2">Lvl 2</a>
+                        <a class="btn btn-small btn-gray btn-radius floors" href="#" id="-1_M">Basement Lvl</a>
+                        <a class="btn btn-small btn-gray btn-radius floors" href="#" id="0_M">Ground Lvl</a>
+                        <a class="btn btn-small btn-gray btn-radius floors" href="#" id="1_M">Lvl 1</a>
+                        <a class="btn btn-small btn-gray btn-radius floors" href="#" id="2_M">Lvl 2</a>
                         <!-- <a class="btn btn-small btn-gray btn-radius floors" href="#" id="floor_3">Level 3</a> -->
                     </div>
                     
@@ -303,9 +304,9 @@
         })
 
         $('.floors').on("click", function(){
-            let floor = (this.id).split("_")
+            let floor = (this.id)
             // console.log("ID: ", this.id[1])
-            window.sessionStorage.setItem("floor",floor[1]); 
+            window.sessionStorage.setItem("floor",floor); 
             location.href='floorplan.html'
         })
         

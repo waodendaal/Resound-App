@@ -83,7 +83,7 @@
                 <table id="artwork_table" style="border-collapse: collapse;">
                                 <!-- Populate tracks -->
                 </table>
-                <h1 id="no_results" style="text-align:center; color: white; display: none;">No Results</h1>
+                <h1 id="no_results" style="text-align:center; color: white; display: none;font-family: 'Roboto-Light-Italic';">No Results</h1>
             </div>
             <div id="blue_bottom" style="position:absolute;" class="background_blue"></div>
         </div>
@@ -181,10 +181,9 @@ function GetInfo(tx) {
 }
 
 function querySuccess(tx, results) {
-    if (results.rows.length == 0){
-        $('#no_results').css({'display':'block'})
-    }
+
     $('#no_results').css({'display':'none'})
+    $('#blue_bottom').show()
     // Create DOM 
     let shellDOM = $('#artwork_table');
     // $('#program_arttrack_banner h1').text(String(results.rows.length));
@@ -287,9 +286,17 @@ function querySuccess(tx, results) {
         }
 
     }
+    if (results.rows.length == 0){
+        $('#no_results').show()
+        $('#blue_bottom').css({'display':'none'})
+    }
+    else {
+        setBlueBottom()
+    }
     setTimeout(function(){ 
             $('#loader').fadeOut();
-        }, 500);    setBlueBottom()
+        }, 500);    
+    
 
     // this will be true since it was a select statement and so rowsAffected was 0
     if (!results.rowsAffected) {

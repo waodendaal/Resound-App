@@ -12,9 +12,10 @@ document.addEventListener('deviceready', function() {
                             </label>\
                         </li>\
                         <li id="nav_home" class="luxbar-item"><a href="index.html">HOME</a></li>\
+                        <li class="luxbar-item"><a href="happeningnow.html">WHAT\'S ON NEXT</a></li>\
                         <li id="nav_sched" class="luxbar-item"><a href="schedule.html">PROGRAM</a></li>\
-                        <li class="luxbar-item"><a href="floorplan.html">MAP</a></li>\
                         <li class="luxbar-item"><a href="artworks.html">ARTWORKS</a></li>\
+                        <li class="luxbar-item"><a href="floorplan.html">MAP</a></li>\
                         </ul>\
                     </div>\
                 </div>').appendTo(container);

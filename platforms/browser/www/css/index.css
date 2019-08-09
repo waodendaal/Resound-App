@@ -628,6 +628,17 @@ a.btn,.btn {
     border-radius: 25px;
     display:none;
 }
+#disclaimer_popup2 {
+    position: absolute;
+    margin:0 5px 0 5px;
+    background-color: white;
+    padding: 20px;
+    border-radius: 25px;
+    display:none;
+}
+#archive_meta{
+    width:100%;
+}
 #content_archive {
     display:flex;
     width:100%;
