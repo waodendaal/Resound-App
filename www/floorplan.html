@@ -98,6 +98,7 @@
                 $('.level').removeClass('btn-gray_active')
                 $('#-1_M').addClass('btn-gray_active')
                 Promise.resolve(createMap('img/maps/Map_Basement.svg')).then(function(map){
+                        alert('MAP BUILD')
                         createDB('-1', map)
                     }
                 )
@@ -106,6 +107,7 @@
                 $('.level').removeClass('btn-gray_active')
                 $('#1_M').addClass('btn-gray_active')
                 Promise.resolve(createMap('img/maps/Map_1.svg')).then(function(map){
+                        alert('MAP BUILD')
                         createDB('1', map)
                     }
                 )
@@ -113,6 +115,7 @@
             else if (floor[0] == "2"){
                 $('.level').removeClass('btn-gray_active')
                 $('#2_M').addClass('btn-gray_active')
+                alert('MAP BUILD')
                 createDB('2')
                 Promise.resolve(createMap('img/maps/Map_2.svg')).then(function(map){
                         createDB('2', map)
@@ -132,6 +135,7 @@
         }
 
         function createMap(imageFile){
+            alert("CREATE MAP")
             // MAP
             var map = L.map('mapid', {
                     crs: L.CRS.Simple,
@@ -159,13 +163,14 @@
         }
 
         function createDB(DBfloor, map){
+            alert("CREATE DB")
             // DB
             // alert('createDB '+ String(DBfloor))
             var db  = window.openDatabase('ArtTestNew4.2', '4.2', 'Test_Art_Test_New4.2', 1000000);
             db.transaction(GetInfo);
 
             function GetInfo(tx) {
-                // alert('GetInfo')
+                alert('GetInfo')
                 let query = 'SELECT * FROM ART WHERE floor LIKE "%'+ DBfloor+'%"'
                 // let  query = 'SELECT * FROM ART'
                 // alert(String(query))
@@ -181,10 +186,10 @@
             }
 
             function querySuccess(tx, results) {
-                // alert('Lenght '+String(results.rows.length))
+                alert('Lenght '+String(results.rows.length))
                 for (var i = 0; i < results.rows.length; i++){
                     let record = results.rows[i];
-                    // alert('floor: '+ String(record.floor))
+                    alert('floor: '+ String(record.floor))
                     let marker = L.marker([(1800-Number(record.y_coordinate)), Number(record.x_coordinate)]).addTo(map);
                     marker.bindPopup("<b>"+record.artwork+"</b><br><em>"+record.artist+"</em><div onclick='clickWork(\""+ record.id+"\")' style='width:100%; height:100px; background-size:cover; background-image: url(\"img/artworks/"+record.image+"\");'></div><div style='background-color:black; width:100%; color:white; text-align:center;' onclick='clickWork("+ record.id+")'>View</div>").openPopup();
                 }
@@ -192,7 +197,7 @@
 
                 // this will be true since it was a select statement and so rowsAffected was 0
                 if (!results.rowsAffected) {
-                    console.log('No rows affected!');
+                    alert('No rows affected!');
                     return false;
                 }
             }
@@ -205,6 +210,7 @@
 
         // Buttons
         $('.level').on('click', function(){
+            alert('CLICK')
             $('.level').removeClass('btn-gray_active')
             $(this).addClass('btn-gray_active')
             $("#map_container").html('<div id="mapid" style="height: 500px; width: 500px;"></div>')
