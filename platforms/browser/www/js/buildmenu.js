@@ -1,5 +1,4 @@
 document.addEventListener('deviceready', function() {
-    alert("MENU BUILDING")
     // https://www.cssscript.com/responsive-css-header-navigation-luxbar/
     let container = $('#navbar');
     let navbar = $('<div class="luxbar luxbar-static">\
@@ -38,7 +37,6 @@ document.addEventListener('deviceready', function() {
      
     // Page dependend changes
     if ($('body').prop('id') == 'index_page') {
-        alert("MENU luxbar hide")
         // alert(String(window.sessionStorage.getItem("artTrack")))
         if (window.sessionStorage.getItem("artTrack") == "no" || window.sessionStorage.getItem("artTrack") == null){
             $('.luxbar').hide();
@@ -55,7 +53,6 @@ document.addEventListener('deviceready', function() {
         window.sessionStorage.setItem("artTrack","no"); 
     })
     $('#nav_home').on('click', function(){
-        alert("NAVEHOME")
         window.sessionStorage.setItem("page","index.html")
         window.sessionStorage.setItem("artTrack","no"); 
     })

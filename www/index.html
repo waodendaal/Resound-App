@@ -279,7 +279,6 @@
             if (user) {
                 var isAnonymous = user.isAnonymous;
                 var uid = user.uid;
-                alert('UID'+uid)
             } else {
                 // User is signed out.
             }
@@ -287,7 +286,6 @@
        
         window.sessionStorage.setItem("floor","ground"); 
         var previouspage = window.sessionStorage.getItem("page");
-        alert("PREV PAGE"+previouspage)
         if (previouspage == 'artworks.html' || previouspage == 'artwork.html' ||previouspage == 'floorplan.html'){
             center = swipeLeft()
             
@@ -316,7 +314,6 @@
             
             //Generic swipe handler for all directions
             swipe:function(event, direction, distance, duration, fingerCount, fingerData) {
-                alert("SWIPE")
                 
                 if (direction == 'left'){
                     center = swipeLeft()
@@ -458,7 +455,7 @@
         }
 
     function errorCB(tx, err) {
-        alert("Error processing SQL2.3: "+err);
+        alert("Error Processing Database - Please Restart App");
     }
 
     // Transaction success callback
