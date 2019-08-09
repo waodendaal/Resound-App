@@ -58,7 +58,7 @@ h1, h2, h3, h4, h5 {
 
 /* Portrait layout (default) */
 .app {
-    background-image: url('../img/background.png');
+    background-image: url('../img/background.jpg');
     background-repeat: no-repeat;
     background-size: cover;
     position:absolute;             /* position in the center of the screen */
@@ -364,6 +364,7 @@ input::placeholder {
     position: absolute;
     float: right;
     right: 0;
+    width:100vw;
     bottom: 0;
     padding: 25px 10px 25px 25px;
     display:flex;
@@ -677,7 +678,7 @@ a.btn,.btn {
     margin-right:20px;
     background-color:white;
 }
-#audio_archive{
+#audio_archive, #audio_archive:active, #audio_archive:focus, #audio_archive:hover{
     width: 20vw;
     height:20vw;
     float:left;

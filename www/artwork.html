@@ -599,7 +599,6 @@ $('#disclaimer_button').on('change', function(){
     }
 
     function removefile(filepath){
-        alert("REMOVING")
         // Revert Changes
         $('#upload_success').css({'display':'none'})
         $('#content_archive').css({'display':'flex'})
@@ -628,9 +627,9 @@ $('#disclaimer_button').on('change', function(){
             let lastindex = filepath.lastIndexOf('/')
             let path = filepath.substr(0, lastindex)
             let filename = filepath.substr(lastindex+1);
-            alert(String(filepath))
-            alert(String(path))
-            alert(String(filename))
+            // alert(String(filepath))
+            // alert(String(path))
+            // alert(String(filename))
             window.resolveLocalFileSystemURL(path, function(dir) {
             dir.getFile(filename, {create:false}, function(fileEntry) {
                         // alert("REMOVING...")

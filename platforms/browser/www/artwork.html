@@ -18,6 +18,7 @@
      KIND, either express or implied.  See the License for the
     specific language governing permissions and limitations
     under the License.
+
 -->
 <html>
 
@@ -105,7 +106,7 @@
         </div>
         <div id="archive_metaDIV">
         <div style="display:flex; margin-bottom:5px;">
-        <input id="disclaimer_button" class="tickbox" type="checkbox" value="Disclaimer"><label id="disclaimer_label">This file will be anonymously uploaded to an external server where the RE:SOUND participatory archive is being stored. By uploading your media you accept taking part on the RE:SOUND digital archive.</label></div>
+        <input id="disclaimer_button" class="tickbox" type="checkbox" value="Disclaimer"><label id="disclaimer_label">This file will be anonymously uploaded to an external server where the RE:SOUND participatory archive is being stored. By uploading your media you accept taking part in building the RE:SOUND digital archive.</label></div>
         <div style="display:flex;">
         <input id="keep_button" class="tickbox" type="checkbox" value="Keep"><label id="keep_label">Keep the image/audio file in my mobile device.</label></div>
         </div>
@@ -131,7 +132,7 @@
             <div class="artwork_banner" >
                 <div id="archive_actions">
                     <div class="archive_sub">
-                    <h5>Collaborate with the archive</h5>
+                    <h5>Collaborate with the Archive</h5>
                     <a id="mic_archive" class="archive_circle cirlce_popup"><i class="fas fa-microphone"></i></a>
                     <a id="camera_archive" class="archive_circle cirlce_popup"><i class="fas fa-camera"></i></a>
                     <!-- <div class="file_archive">
@@ -254,7 +255,7 @@
             window.sessionStorage.setItem('artwork_map', item.id)
         }
         function errorCB(err) {
-            alert("Error processing SQL1: "+err.code);
+            console.log("Error processing SQL1: "+err.code);
         }
 
 // function GetInfo(tx) {
@@ -328,7 +329,6 @@ popSelector('archive_select_meta2','meta2')
 popSelector('archive_select_meta3','meta3')
 function popSelector(selectorID, metaNumber){
     let showOptions = false 
-    alert(String(metaNumber))
     var uploadedKeys = []
     var dbFire = firebase.firestore();
     dbFire.collection("works/"+workId+"/uploads")
@@ -341,8 +341,6 @@ function popSelector(selectorID, metaNumber){
             }else if (metaNumber=="meta3"){
                 rawValues = doc.data().meta3
             }
-            alert(String(metaNumber+" "+String(rawValues)))
-            alert("Length: "+ String(rawValues.length))
             if (rawValues.length > 0){
                 showOptions = true 
             }
@@ -353,15 +351,12 @@ function popSelector(selectorID, metaNumber){
             commaSeperated.sort()
             for (var i =0; i< commaSeperated.length; i++){
                 let newItem = commaSeperated[i]
-                alert("New Item:"+String(newItem))
                 if (uploadedKeys.indexOf(newItem.toLowerCase()) < 0 && newItem != ""){
                     $('#'+selectorID).append('<option>'+newItem+'</option>')
                     uploadedKeys.push(newItem.toLowerCase())
                 }
-
-                
-
-            }
+  
+           }
 
         });
         if (showOptions == false ){
@@ -374,8 +369,6 @@ function popSelector(selectorID, metaNumber){
     });
 
 }
-
-
 
 // Selectors
 $('.archive_select').on('change', function(){
@@ -549,8 +542,6 @@ $('.archive_select').on('change', function(){
                     }
                         
                 });
-
-
             
             }
             // capture error callback
@@ -561,8 +552,6 @@ $('.archive_select').on('change', function(){
             var options = { limit: 1 };
             navigator.device.capture.captureImage(captureSuccess, captureError, options);  
         }
-
-
         
     });
 
@@ -610,6 +599,7 @@ $('#disclaimer_button').on('change', function(){
     }
 
     function removefile(filepath){
+        alert("REMOVING")
         // Revert Changes
         $('#upload_success').css({'display':'none'})
         $('#content_archive').css({'display':'flex'})
@@ -633,24 +623,32 @@ $('#disclaimer_button').on('change', function(){
         if ($('#keep_button').prop('checked') == true || filepath=="text"){
             return
         }
-
-        let lastindex = filepath.lastIndexOf('/')
-        let path = filepath.substr(0, lastindex)
-        let filename = filepath.substr(lastindex+1);
-        window.resolveLocalFileSystemURL(path, function(dir) {
-        dir.getFile(filename, {create:false}, function(fileEntry) {
-                    fileEntry.remove(function(){
-                        console("File has been Removed")
-                        // The file has been removed succesfully
-                    },function(error){
-                        // Error deleting the file
-                        console(String(error))
-                    },function(){
-                        // The file doesn't exist
-                        console("File Doesn't Exist")
-                    });
+        else {
+            // alert("REMOVE NOW")
+            let lastindex = filepath.lastIndexOf('/')
+            let path = filepath.substr(0, lastindex)
+            let filename = filepath.substr(lastindex+1);
+            alert(String(filepath))
+            alert(String(path))
+            alert(String(filename))
+            window.resolveLocalFileSystemURL(path, function(dir) {
+            dir.getFile(filename, {create:false}, function(fileEntry) {
+                        // alert("REMOVING...")
+                        fileEntry.remove(function(){
+                            // alert("File has been Removed")
+                            // The file has been removed succesfully
+                        },function(error){
+                            // Error deleting the file
+                            // alert(String(error))
+                        },function(){
+                            // The file doesn't exist
+                            // alert("File Doesn't Exist")
+                        });
+                });
             });
-        });
+        }
+
+
     }
 
 

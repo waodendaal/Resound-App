@@ -47,7 +47,7 @@
 <body id="index_page">
     <!-- <div id="supersede_div" style="width: 100vw;height: 100vh;z-index: 500000;position: absolute;background-color: red;"> -->
     <div id="splash">
-        <div style="top:58px;position:fixed;">
+        <div style="top:45px;position:fixed;">
                 <img id="home_banner_img" style="opacity: 0.7; display:none;" src="img/home_banner_splash.png">        
         </div> 
     </div>
@@ -242,14 +242,14 @@
         // Check network connection        
         var networkState = navigator.connection.type;  
         if (networkState == "none"){
-            
+            $('#home_banner').prepend('<div id ="disclaimer_popup" style="margin-top:10px; display: block !important;">You are currently offline. Some features might not be available</div>')
+            $(document).on('click',function(){
+                $('#disclaimer_popup').fadeOut()
+            })
             $('.sched_online').hide()
         }
         
-        $('#home_banner').prepend('<div id ="disclaimer_popup" style="margin-top:10px; display: block !important;">You are currently offline. Some features might not be available</div>')
-        $(document).on('click',function(){
-            $('#disclaimer_popup').fadeOut()
-        })
+
 
         //Firebase Auth
         firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL)
@@ -479,7 +479,7 @@
             getPicture(results.rows, "SQL")
         }
         function errorCB(err) {
-            alert("Error processing SQL1: "+err.code);
+            console("Error processing SQL1: "+err.code);
         }
     }
     

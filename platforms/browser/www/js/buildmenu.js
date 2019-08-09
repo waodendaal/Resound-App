@@ -18,7 +18,8 @@ document.addEventListener('deviceready', function() {
                         </ul>\
                     </div>\
                 </div>').appendTo(container);
-                
+                // <li class="luxbar-item"><a href="fileTest.html">TEST</a></li>\
+
 
        
      

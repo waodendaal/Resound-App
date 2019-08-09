@@ -204,13 +204,13 @@ function querySuccess(tx, results) {
         }
 
         if (item_floor[0]=='0'){
-            floor = floor + '- Groundfloor'
+            floor = floor + ' - Groundfloor'
         }
         else if (item_floor[0]=='-1'){
             floor = floor + ' - Basement'
         }
         else {
-            floor = floor + '- Level ' + item_floor[0]
+            floor = floor + ' - Level ' + item_floor[0]
         }
 
 //      Order By 
@@ -251,8 +251,10 @@ function querySuccess(tx, results) {
             <td class="table_description" valign="top" style="display:flex; flex-direction:column; justify-content: space-between;">\
                 <div><h2>' + item.artist + '</h2>\
                         <p>' +  item.artwork + '</p>\</div>\
-                <p style="background-color: black; margin-bottom:0px !important; width:max-content; float: right !important; font-size: 80%; padding:3px 10px 3px 10px;">'+ floor + '</p>\
-            </td>\
+                        <div>\
+                <p style="background-color: black; text-align: right; margin-bottom:0px !important; width:max-content; float: right !important; font-size: 80%; padding:3px 10px 3px 10px;">'+ floor + '</p>\
+                </div>\
+                </td>\
         </tr>').appendTo(shellDOM);
         // <td class="last_item">\
         //                     <div><img class="arrow_img" src="img/arrow_right.png"></div>\
