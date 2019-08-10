@@ -68,7 +68,7 @@
         <h2 id="artwork_name_archive" style="font-family: 'Roboto-Light-Italic';">Name</h2>
         <hr style="margin-bottom:15px;">
         <div id="upload_success">        
-            <div id="bars" style="top:auto;margin:20px 0 0 -20px;">
+            <div id="bars" style="top:auto;">
             <div class="bar"></div>
             <div class="bar"></div>
             <div class="bar"></div>
@@ -80,7 +80,7 @@
         <div id="content_archive" value="">
             <div id="archive_media">
                 <div id="image_archive"></div>
-                <div id="audio_archive" class="archive_circle"><i class="fas fa-play"></i></div>        
+                <div id="audio_archive" class="archive_circle"><img style="padding:5px;" src="img/noun_Soundwave_1786339.svg"></div>        
             </div>
             <div id="archive_meta">
             <form id="archive_form" data-ajax="false">
@@ -492,19 +492,19 @@ $('.archive_select').on('change', function(){
                 for (i = 0, len = mediaFiles.length; i < len; i += 1) {
                     path = mediaFiles[i].fullPath;
                     $('#content_archive').val(path)
-                    playMedia(path)
-                    var start = true
-                    $('#audio_archive').on('click', function(){
-                        $(this).html(($(this).html()  == '<div>||</div>') ? '<i class="fas fa-play"></i>' : '<div>||</div>')
+                    // playMedia(path)
+                    // var start = true
+                    // $('#audio_archive').on('click', function(){
+                    //     $(this).html(($(this).html()  == '<div>||</div>') ? '<i class="fas fa-play"></i>' : '<div>||</div>')
                         
-                        if (start){
-                            player.start()
-                        }else{
-                            player.pause()
-                        }
-                        start = ((start == true) ? false : true)
+                    //     if (start){
+                    //         player.start()
+                    //     }else{
+                    //         player.pause()
+                    //     }
+                    //     start = ((start == true) ? false : true)
                         
-                    })
+                    // })
                     $('#submit_button').on('click',function(){
                         var meta1 = $('[name = "meta1"]').prop('value')
                         var meta2 = $('[name = "meta2"]').prop('value')
