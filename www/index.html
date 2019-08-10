@@ -211,6 +211,7 @@
         
         // Splash screen
         if (window.sessionStorage.getItem("page") == null){
+            alert("noSESSION")
             $('#loader').hide();
             $('#splash').show()
             $('#home_banner_img').show()
@@ -279,6 +280,7 @@
             if (user) {
                 var isAnonymous = user.isAnonymous;
                 var uid = user.uid;
+                alert("UID:"+uid)
             } else {
                 // User is signed out.
             }
@@ -397,6 +399,7 @@
 
         // DB
         function createDB() {
+            alert("CREATE DB")
             var dbFire = firebase.firestore();
             var DBRef = dbFire.collection("works");
             var firstCheck = true;
@@ -406,7 +409,7 @@
                     let record = (doc.data())
                     firstCheck = toSQLDB(record, firstCheck);
                     pictureList.push([record.image,record.id])
-                    
+                    alert(String("record"))
                     if (pictureList.length==10){
                         console.log("picturelist ", pictureList)
                         getPicture(pictureList, "Firebase")
@@ -417,11 +420,13 @@
         }
 
         function toSQLDB(record, firstCheck) {
+            alert("toSQLDB")
             var db  = window.openDatabase('ArtTestNew4.2', '4.2', 'Test_Art_Test_New4.2', 1000000);
             var record = record;
             db.transaction(populateDB, errorCB, successCB);
 
-            function populateDB(tx){    
+            function populateDB(tx){ 
+                alert("populateDB")   
                 let id = String(record.id);
                 let artist = String(record.artist);                
                 let artwork = String(record.artwork);
@@ -461,11 +466,13 @@
     // Transaction success callback
 
     function successCB() {
+        alert("successCB")
         // getPictures()
     }
     
     //The pictures
     function getPictureDB(){
+        alert("getPictureDB")
         var db  = window.openDatabase('ArtTestNew4.2', '4.2', 'Test_Art_Test_New4.2', 1000000);
         db.transaction(GetInfo);
 
@@ -476,10 +483,11 @@
         }
 
         function querySuccess(tx, results) {
+            alert("querySucess getPictures"+String(results.length))
             getPicture(results.rows, "SQL")
         }
         function errorCB(err) {
-            console("Error processing SQL1: "+err.code);
+            alert("Error processing SQL1: "+err.code);
         }
     }
     
