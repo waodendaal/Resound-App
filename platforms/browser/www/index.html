@@ -198,7 +198,6 @@
     <script type="text/javascript">
         app.initialize();
         let firsTry = window.sessionStorage.getItem("page")
-        alert("FIRST TRY: "+firsTry)
         // Home Screens
         var center = 'center';
         $('#nav_home').addClass('active');
@@ -212,7 +211,6 @@
         
         // Splash screen
         function firstStart(){
-            alert("noSESSION")
             $('#loader').hide();
             $('#splash').show()
             $('#home_banner_img').show()
@@ -272,7 +270,6 @@
             if (user) {
                 var isAnonymous = user.isAnonymous;
                 var uid = user.uid;
-                alert("UID:"+uid)
                 if (firsTry == null){
                     firstStart()
                 }
@@ -404,7 +401,6 @@
 
         // DB
         function createDB() {
-            alert("CREATE DB")
             var dbFire = firebase.firestore();
             var DBRef = dbFire.collection("works");
             var firstCheck = true;
@@ -414,7 +410,6 @@
                     let record = (doc.data())
                     firstCheck = toSQLDB(record, firstCheck);
                     pictureList.push([record.image,record.id])
-                    alert(String("record"))
                     if (pictureList.length==10){
                         console.log("picturelist ", pictureList)
                         getPicture(pictureList, "Firebase")
@@ -425,13 +420,11 @@
         }
 
         function toSQLDB(record, firstCheck) {
-            alert("toSQLDB")
             var db  = window.openDatabase('ArtTestNew4.2', '4.2', 'Test_Art_Test_New4.2', 1000000);
             var record = record;
             db.transaction(populateDB, errorCB, successCB);
 
             function populateDB(tx){ 
-                alert("populateDB")   
                 let id = String(record.id);
                 let artist = String(record.artist);                
                 let artwork = String(record.artwork);
@@ -459,7 +452,6 @@
                 }
                 tx.executeSql('CREATE TABLE IF NOT EXISTS ART (id unique, artist, artwork, type, type_description, description, floor, x_coordinate, y_coordinate, image)');
                 let sql = 'INSERT INTO ART (id, artist, artwork, type, type_description, description, floor, x_coordinate, y_coordinate, image) VALUES ("'+ id + '", "'+ artist + '", "'+ artwork + '", "'+ type + '", "'+ type_description + '", "'+ description + '", "'+ floor + '", "'+ x_coordinate + '", "'+ y_coordinate + '", "'+ image + '")';
-                alert("SQL: "+sql)
                 tx.executeSql(sql);                
             }
             return false; 
@@ -472,13 +464,11 @@
     // Transaction success callback
 
     function successCB() {
-        alert("successCB")
         // getPictures()
     }
     
     //The pictures
     function getPictureDB(){
-        alert("getPictureDB")
         var db  = window.openDatabase('ArtTestNew4.2', '4.2', 'Test_Art_Test_New4.2', 1000000);
         db.transaction(GetInfo);
 
@@ -489,11 +479,10 @@
         }
 
         function querySuccess(tx, results) {
-            alert("querySucess getPictures"+String(results.length))
             getPicture(results.rows, "SQL")
         }
         function errorCB(err) {
-            alert("Error processing SQL1 GetPictures: "+err.code);
+            alert("Error Processing Database - Please Restart App");
         }
     }
     
