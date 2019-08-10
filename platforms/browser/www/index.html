@@ -458,6 +458,7 @@
                 }
                 tx.executeSql('CREATE TABLE IF NOT EXISTS ART (id unique, artist, artwork, type, type_description, description, floor, x_coordinate, y_coordinate, image)');
                 let sql = 'INSERT INTO ART (id, artist, artwork, type, type_description, description, floor, x_coordinate, y_coordinate, image) VALUES ("'+ id + '", "'+ artist + '", "'+ artwork + '", "'+ type + '", "'+ type_description + '", "'+ description + '", "'+ floor + '", "'+ x_coordinate + '", "'+ y_coordinate + '", "'+ image + '")';
+                alert("SQL: "+sql)
                 tx.executeSql(sql);                
             }
             return false; 
@@ -491,7 +492,7 @@
             getPicture(results.rows, "SQL")
         }
         function errorCB(err) {
-            alert("Error processing SQL1: "+err.code);
+            alert("Error processing SQL1 GetPictures: "+err.code);
         }
     }
     
