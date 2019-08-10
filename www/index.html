@@ -210,7 +210,7 @@
         $('.art_preview div').css({'width':((screen_width-50)/3),'height':((screen_width-50)/3) });
         
         // Splash screen
-        if (window.sessionStorage.getItem("page") == null){
+        function firstStart(){
             alert("noSESSION")
             $('#loader').hide();
             $('#splash').show()
@@ -219,15 +219,6 @@
             setTimeout(function(){ 
                 $("#splash").fadeOut()
             }, 1500);
-        }else{
-            $('#splash').hide()
-            $('#loader').show();
-            $('#bars').show()
-
-            setTimeout(function(){
-                $('#loader').fadeOut();
-            },500)
-            getPictureDB()
         }
         
         //Menu
@@ -281,6 +272,19 @@
                 var isAnonymous = user.isAnonymous;
                 var uid = user.uid;
                 alert("UID:"+uid)
+                if (window.sessionStorage.getItem("page") == null){
+                    firstStart()
+                }
+                else{
+                        $('#splash').hide()
+                        $('#loader').show();
+                        $('#bars').show()
+
+                        setTimeout(function(){
+                            $('#loader').fadeOut();
+                        },500)
+                        getPictureDB()
+                    }
             } else {
                 // User is signed out.
             }
