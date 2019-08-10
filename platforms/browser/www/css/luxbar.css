@@ -116,7 +116,8 @@
     transition: height 0.6s ease;
     height: fit-content;
     overflow: auto;
-    padding-bottom: 20px;}
+    /* padding-bottom: 20px; */
+  }
 
 .dropdown {
   position: relative;

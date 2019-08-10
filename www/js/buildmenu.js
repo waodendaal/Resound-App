@@ -22,18 +22,18 @@ document.addEventListener('deviceready', function() {
                 // <li class="luxbar-item"><a href="fileTest.html">TEST</a></li>\
 
 
-    $(document).on('click','.luxbar-brand', function(){
-        if ($('body').prop('id') != 'index_page'){
-            window.history.back();
+    // $(document).on('click','.luxbar-brand', function(){
+    //     if ($('body').prop('id') != 'index_page'){
+    //         window.history.back();
 
-            // alert("BACK")
-            window.history.back();
-            $.mobile.back();
-            // window.location.replace(previouspage);
-            // window.location.replace('index.html')
-        }
+    //         // alert("BACK")
+    //         window.history.back();
+    //         $.mobile.back();
+    //         // window.location.replace(previouspage);
+    //         // window.location.replace('index.html')
+    //     }
 
-    });
+    // });
      
     // Page dependend changes
     if ($('body').prop('id') == 'index_page') {

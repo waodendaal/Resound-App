@@ -323,7 +323,7 @@ function querySuccess(tx, results) {
         //Generic swipe handler for all directions
         swipe:function(event, direction, distance, duration, fingerCount, fingerData) {     
             if (direction == 'right'){
-                window.location.replace('index.html')
+                backPage()
             }
             
         }
@@ -332,10 +332,22 @@ function querySuccess(tx, results) {
     var previouspage = window.sessionStorage.getItem("page");
     window.sessionStorage.setItem("artTrack","yes");
 
-    // $(document).on('click','.luxbar-brand', function(){
-    //     // window.location.replace(previouspage);
-    //     window.location.replace('index.html')
-    // });
+    $(document).on('click','.luxbar-brand', function(){
+        // window.location.replace(previouspage);
+    });
+
+    var previouspage = window.sessionStorage.getItem("page");
+    document.addEventListener("backbutton", function (e) {
+        backPage()
+    })
+
+    $(document).on('click','.luxbar-brand', function(){
+        backPage()
+    });
+    function backPage(){
+        window.location.replace('index.html')
+    }
+
     let currentPage = 'artworks.html';
     window.sessionStorage.setItem("page",currentPage); 
     

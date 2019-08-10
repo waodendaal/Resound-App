@@ -221,6 +221,16 @@
         }
         
         //Menu
+        document.addEventListener("backbutton", function (e) {
+            if (center == 'right'){
+                center = swipeLeft()
+
+            }
+            if (center == 'left'){
+                center = swipeRight()
+            }
+        })
+
         $(document).on('click','.luxbar-brand', function(){
             if (center == 'right'){
                 center = swipeLeft()

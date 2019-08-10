@@ -215,10 +215,32 @@
         // Navigation
         var previouspage = window.sessionStorage.getItem("page");
 
-        // $(document).on('click','.luxbar-brand', function(){
-        //     window.location.replace(previouspage);
-        //     // window.location.replace('index.html')
-        // });
+    var previouspage = window.sessionStorage.getItem("page");
+    document.addEventListener("backbutton", function (e) {
+        backPage()
+    })
+
+    $(document).on('click','.luxbar-brand', function(){
+        backPage()
+    });
+    $(window).swipe( {    
+        //Generic swipe handler for all directions
+        swipe:function(event, direction, distance, duration, fingerCount, fingerData) {     
+            if (direction == 'right'){
+                backPage()
+            }
+            
+        }
+    });
+    function backPage(){
+        if (previouspage == 'index.html'){
+                window.location.replace('index.html')
+            }else if (previouspage == 'artwork.html') {
+                window.location.replace(previouspage);                
+            }
+    }
+
+
         let currentPage = 'floorplan.html';
         window.sessionStorage.setItem("page",currentPage); 
         window.sessionStorage.setItem("floor", "0_M")

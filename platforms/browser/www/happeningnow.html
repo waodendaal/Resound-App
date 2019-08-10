@@ -114,11 +114,14 @@
     // -135
     $('#whatsnextiframe').height(iframeheight)
 
+    document.addEventListener("backbutton", function (e) {
+        window.location.replace('index.html')
+    })
 
-    // $(document).on('click','.luxbar-brand', function(){
-    //     // window.location.replace(previouspage);
-    //     window.location.replace('index.html')
-    // });
+    $(document).on('click','.luxbar-brand', function(){
+        // window.location.replace(previouspage);
+        window.location.replace('index.html')
+    });
 
     let currentPage = 'happeningnow.html';
     window.sessionStorage.setItem("page",currentPage); 

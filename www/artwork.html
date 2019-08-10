@@ -120,7 +120,7 @@
     </div>
     <div id="archive_popup" class="archive_popup" style="position:fixed !important; z-index:998; width:100%; padding:0 !important;">
     </div>
-    <div class="app">
+    <div id = "app" class="app">
         <div class="page_container artwork_container">
             <div style="padding:0px 15px 0 15px">
                 <div style="width:100%;">
@@ -392,7 +392,7 @@ $('.archive_select').on('change', function(){
         swipe:function(event, direction, distance, duration, fingerCount, fingerData) {     
             if ($('.archive_popup').css('display') == "none"){
                 if (direction == 'right'){
-                window.location.replace('artworks.html')
+                    backPage()
                 }
             }else {
                 // closepopup()
@@ -403,11 +403,22 @@ $('.archive_select').on('change', function(){
     });
 
     var previouspage = window.sessionStorage.getItem("page");
+    document.addEventListener("backbutton", function (e) {
+        backPage()
+    })
 
-    // $(document).on('click','.luxbar-brand', function(){
-    //     window.location.replace(previouspage);
-    //     // if comes from map...
-    // });
+    $(document).on('click','.luxbar-brand', function(){
+        backPage()
+    });
+    function backPage(){
+        if (previouspage == 'floorplan.html'){
+            window.location.replace(previouspage);
+        }
+        else {
+            window.location.replace('artworks.html');
+        }
+        // if comes from map...
+    }
     let currentPage = 'artwork.html';
     window.sessionStorage.setItem("page",currentPage); 
     
@@ -435,6 +446,7 @@ $('.archive_select').on('change', function(){
 
     // Archive
     $(document).on('click', '.cirlce_popup', function(){
+        $('#app').css('overflow','hidden')
         
         let id = this.id
         $('#keep_button').show()
@@ -611,6 +623,7 @@ $('#disclaimer_button').on('change', function(){
     }
 
     function closepopup(){
+        $('#app').css({'overflow':'scroll'})
         // Delete file
         let file_path = $('#content_archive').val()
         removefile(file_path)

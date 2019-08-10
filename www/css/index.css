@@ -607,7 +607,7 @@ a.btn,.btn {
 /* Archive */
 #archive_popup{
     width:100vw;
-    height:100vh; 
+    height:70vh; 
     top:30vh;
     border-radius: 25px 25px 0px 0px;
     background-color:#3460A9; 
