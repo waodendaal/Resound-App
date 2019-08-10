@@ -197,7 +197,8 @@
 
     <script type="text/javascript">
         app.initialize();
-
+        let firsTry = window.sessionStorage.getItem("page")
+        alert("FIRST TRY: "+firsTry)
         // Home Screens
         var center = 'center';
         $('#nav_home').addClass('active');
@@ -272,7 +273,7 @@
                 var isAnonymous = user.isAnonymous;
                 var uid = user.uid;
                 alert("UID:"+uid)
-                if (window.sessionStorage.getItem("page") == null){
+                if (firsTry == null){
                     firstStart()
                 }
                 else{
