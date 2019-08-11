@@ -29,10 +29,10 @@ var previouspage = window.sessionStorage.getItem("page");
 window.sessionStorage.setItem("artTrack","yes_p");
 window.sessionStorage.setItem("artwork_map", "all");
 $(document).on('click','.luxbar-brand', function(){
+    // NOT FOR ANDROID
+    window.location.replace('index.html')
     window.history.back();
-
     alert("BACK")
-    window.history.back();
     $.mobile.back();
     // window.location.replace(previouspage);
     // window.location.replace('index.html')
