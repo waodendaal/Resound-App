@@ -1,4 +1,6 @@
 document.addEventListener('deviceready', function() {
+    navigator.splashscreen.hide();
+    cordova.exec(null, null, "SplashScreen", "hide", [])
     alert("indexSCripts")
 
     let firsTry = window.sessionStorage.getItem("page")
