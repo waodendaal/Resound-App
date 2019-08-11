@@ -10,7 +10,7 @@ $('#program_arttrack_banner').on("click", function(){
     alert("HI")
 })
 
-    $('#nav_home').addClass('active');
+$('#nav_home').addClass('active');
 
 
 // Navigation
@@ -31,7 +31,7 @@ window.sessionStorage.setItem("artwork_map", "all");
 $(document).on('click','.luxbar-brand', function(){
     window.history.back();
 
-    // alert("BACK")
+    alert("BACK")
     window.history.back();
     $.mobile.back();
     // window.location.replace(previouspage);
