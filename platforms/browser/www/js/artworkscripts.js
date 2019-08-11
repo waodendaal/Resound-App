@@ -607,6 +607,9 @@ function updateDB(filename, downloadURL, type){
 
 
 }
+$('#archive_actions').on('click', function(){
+    alert('HI')
+})
 
 function uploadingPopup(){
     $('#content_archive').css({'display':'none'})
