@@ -27,7 +27,7 @@
     <meta name="msapplication-tap-highlight" content="no" />
     <meta name="viewport" content="initial-scale=1, width=device-width, height=device-height, viewport-fit=cover">
     <!-- This is a wide open CSP declaration. To lock this down for production, see below. -->
-    <meta http-equiv="Content-Security-Policy" content="default-src * 'unsafe-inline'; style-src 'self' 'unsafe-inline'; media-src *" />
+    <meta http-equiv="Content-Security-Policy" content="default-src * gap://ready file:; style-src 'self' 'unsafe-inline'; img-src 'self' data:; script-src * 'unsafe-inline' 'unsafe-eval'">
     <!-- Good default declaration:
     * gap: is required only on iOS (when using UIWebView) and is needed for JS->native communication
     * https://ssl.gstatic.com is required only on Android and is needed for TalkBack to function properly
@@ -70,7 +70,7 @@
                         <!-- class="et_pb_column et_pb_column_4_4  et_pb_column_4 subcontent" -->
                         <div>
                             <!--  class="et_pb_code et_pb_module  et_pb_code_0" -->
-                            <a id="sched-embed" href="https://resound2019.sched.com/" data-sched-sidebar="no" scrolling="yes" style="display: none; overflow:scroll;">https://resound2019.sched.com/</a>
+                            <!-- <a id="sched-embed" href="https://resound2019.sched.com/" data-sched-sidebar="no" scrolling="yes" style="display: none; overflow:scroll;">https://resound2019.sched.com/</a> -->
                             <div id="sched-iframe">
                                 <iframe name="easyXDM_default2745_provider" id="easyXDM_default2745_provider" style="width: 100%; height:90vh; overflow:scroll;" scrolling="yes" src="https://resound2019.sched.com" frameborder="0"></iframe></div>
                         </div> <!-- .et_pb_code -->

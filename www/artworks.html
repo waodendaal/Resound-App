@@ -27,7 +27,7 @@
     <meta name="msapplication-tap-highlight" content="no" />
     <meta name="viewport" content="initial-scale=1, width=device-width, height=device-height, viewport-fit=cover">
     <!-- This is a wide open CSP declaration. To lock this down for production, see below. -->
-    <meta http-equiv="Content-Security-Policy" content="default-src * 'unsafe-inline'; style-src 'self' 'unsafe-inline'; media-src *" />
+    <meta http-equiv="Content-Security-Policy" content="default-src * gap://ready file:; style-src 'self' 'unsafe-inline'; img-src 'self' data:; script-src * 'unsafe-inline' 'unsafe-eval'">
     <!-- Good default declaration:
     * gap: is required only on iOS (when using UIWebView) and is needed for JS->native communication
     * https://ssl.gstatic.com is required only on Android and is needed for TalkBack to function properly
@@ -72,7 +72,7 @@
                         <a id="orderbyartist" class="btn btn-small btn-gray btn-radius" href="#">Artists</a>
                     </div>
                     <div style="overflow: auto;">
-                        <form id="search_form" class="btn btn-small btn-gray btn-radius search_bar">
+                        <form id="search_form" style="" class="btn btn-small btn-gray btn-radius search_bar">
                             <button type="submit"><i class="fa fa-search"></i></button>
                             <input id="search_input" type="text" placeholder="Search.." name="search">
                         </form>
