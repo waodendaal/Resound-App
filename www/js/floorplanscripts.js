@@ -95,6 +95,8 @@ document.addEventListener('deviceready', function() {
         }
 
         function querySuccess(tx, results) {
+            alert("querySuccess")
+            alert(String(results.rows.length))
             for (var i = 0; i < results.rows.length; i++){
                 let record = results.rows[i];
                 let marker = L.marker([(1800-Number(record.y_coordinate)), Number(record.x_coordinate)]).addTo(map);
