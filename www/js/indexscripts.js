@@ -3,6 +3,7 @@ document.addEventListener('deviceready', function() {
     alert("indexSCripts")
 
     let firsTry = window.sessionStorage.getItem("page")
+    alert(String(firsTry))
         // Home Screens
         var center = 'center';
         $('#nav_home').addClass('active');
@@ -305,6 +306,7 @@ document.addEventListener('deviceready', function() {
         }
 
         function querySuccess(tx, results) {
+            alert("SUCCESS getPictureDB")
             getPicture(results.rows, "SQL")
         }
         function errorCB(err) {
@@ -313,6 +315,7 @@ document.addEventListener('deviceready', function() {
     }
     
     function getPicture(recordlist, source){
+        alert("getPicture")
             // Select 3 random
             var random1 = 0
             var random2 = 0

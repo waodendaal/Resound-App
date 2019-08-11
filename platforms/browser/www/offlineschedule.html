@@ -19,7 +19,7 @@
     specific language governing permissions and limitations
     under the License.
 -->
-<html style="overflow-y: auto; -webkit-overflow-scrolling: touch;">
+<html>
 
 <head>
     <meta charset="utf-8" />
@@ -44,14 +44,7 @@
     <title>RE:SOUND Conference 2019 - Schedule</title>
 </head>
 
-<body style="
-overflow-y: auto;
--webkit-overflow-scrolling: touch;
-position: absolute;
-top: 0;
-left: 0;
-right: 0;
-bottom: 0;">
+<body>
     <div id="loader">
         <div id="bars">
             <div class="bar"></div>
@@ -68,8 +61,10 @@ bottom: 0;">
     </div>
     
     <div class="app">
-        <div class="page_container" style="background-image: url('img/offlineshed.jpg');">
-    </div>
+        <div class="page_container" >
+            <img src='../img/offlinesched.jpg' style="width:100vw;">
+            
+        </div>
 
     <!-- WTF? -->
     <script type="text/javascript" src="cordova.js"></script>
@@ -78,12 +73,59 @@ bottom: 0;">
     <script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
     <script type="text/javascript" src="js/jquerymobile/jquery.mobile-1.4.5.js"></script>
     <script type="text/javascript" src="js/jquery.touchSwipe.min.js"></script>
-    <script type="text/javascript" src="js/schedscripts.js"></script>
 
     
 
     <script type="text/javascript">
-        app.initialize();
+       app.initialize();
+        setTimeout(function(){ 
+            $('#loader').fadeOut();
+        }, 1000);
+        
+        $('#nav_home').addClass('active');
+
+    var networkState = navigator.connection.type;
+    if (networkState == "none"){
+        
+    //          You are offline
+            window.location.replace('index.html')
+
+            
+    }
+
+    // Navigation
+    $(window).swipe( {    
+        //Generic swipe handler for all directions
+        swipe:function(event, direction, distance, duration, fingerCount, fingerData) {     
+            if (direction == 'right'){
+                $.mobile.back();
+            }
+            
+        }
+    });
+
+    var previouspage = window.sessionStorage.getItem("page");
+    window.sessionStorage.setItem("artTrack","yes_p");
+    let iframeheight= $('#whatsnextiframe').height()
+    console.log(iframeheight)
+    $('.art_preview').height(iframeheight-135)
+    // -135
+    $('#artframe_partent').height(iframeheight-135)
+    // -135
+    $('#whatsnextiframe').height(iframeheight)
+
+    document.addEventListener("backbutton", function (e) {
+        window.location.replace('index.html')
+    })
+
+    $(document).on('click','.luxbar-brand', function(){
+        // window.location.replace(previouspage);
+        window.location.replace('index.html')
+    });
+
+    let currentPage = 'happeningnow.html';
+    window.sessionStorage.setItem("page",currentPage); 
+
         
 
     </script>
