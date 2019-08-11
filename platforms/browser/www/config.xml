@@ -24,7 +24,7 @@
     </universal-links>
     <preference name="DisallowOverscroll" value="true" />
     <preference name="android-targetSdkVersion" value="28" />
-    <preference name="android-minSdkVersion" value="20" />
+    <preference name="android-minSdkVersion" value="28" />
     <preference name="AndroidLaunchMode" value="singleTask" />
     <preference name="orientation" value="portrait" />
 </widget>
