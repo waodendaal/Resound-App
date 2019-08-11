@@ -231,7 +231,6 @@ document.addEventListener('deviceready', function() {
                 alert('DBRef'+String(querySnapshot.length))
                 querySnapshot.forEach(function(doc) {
                     let record = (doc.data())
-                    alert(String(record))
                     firstCheck = toSQLDB(record, firstCheck);
                     pictureList.push([record.image,record.id])
                     if (pictureList.length==10){
