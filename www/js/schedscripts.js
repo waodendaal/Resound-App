@@ -18,6 +18,7 @@ $(window).swipe( {
     //Generic swipe handler for all directions
     swipe:function(event, direction, distance, duration, fingerCount, fingerData) {     
         if (direction == 'right'){
+            alert("SWIPE")
             $.mobile.back();
         }
         

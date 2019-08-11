@@ -322,7 +322,7 @@ document.addEventListener('deviceready', function() {
             var random3 = 0
             
             for(var i = 0; i< 3; i++){
-                console.log("FOR "+i)
+                alert("FOR "+i)
                 if (i == 0){
                     random1 = Math.floor(Math.random()*recordlist.length);
                     var randomnow = random1
@@ -353,7 +353,7 @@ document.addEventListener('deviceready', function() {
                     picPath = item.image
 
                 }
-                console.log("PICS",randomnow," ", item, "id ", "#arttile"+i)
+                alert("PICS"+randomnow+" "+String(item.image)+"id "+"#arttile"+i)
                 $('#arttile'+i).css({"background-image":"url('img/artworks/"+String(picPath)+"')"},{"background-color":"red"})
                 console.log("EXECUTED")
                 $('#arttile'+i).on('click', function(){
