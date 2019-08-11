@@ -223,15 +223,15 @@
     $(document).on('click','.luxbar-brand', function(){
         backPage()
     });
-    $(window).swipe( {    
-        //Generic swipe handler for all directions
-        swipe:function(event, direction, distance, duration, fingerCount, fingerData) {     
-            if (direction == 'right'){
-                backPage()
-            }
+    // $(window).swipe( {    
+    //     //Generic swipe handler for all directions
+    //     swipe:function(event, direction, distance, duration, fingerCount, fingerData) {     
+    //         if (direction == 'right'){
+    //             backPage()
+    //         }
             
-        }
-    });
+    //     }
+    // });
     function backPage(){
         if (previouspage == 'index.html'){
                 window.location.replace('index.html')

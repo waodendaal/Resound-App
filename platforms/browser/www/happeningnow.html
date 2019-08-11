@@ -92,6 +92,14 @@
         
         $('#nav_home').addClass('active');
 
+    var networkState = navigator.connection.type;
+    if (networkState == "none"){
+        
+    //          You are offline
+            window.location.replace('index.html')
+
+            
+    }
 
     // Navigation
     $(window).swipe( {    

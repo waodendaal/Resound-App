@@ -92,11 +92,10 @@
                     </div>
                     <hr class="sched_online">
                     <div>
-                        <!-- <div class="click_header_home" onclick="location.href='#'" >
-                            <h2 style="float:left;">Open Program PDF</h2>
+                        <div id="openPDF" class="click_header_home" onclick="location.href='img/offlinesched.jpg'">
+                            <h2 style="float:left;">Open Offline Program</h2>
                             <img class="arrow_img" src="img/arrow_right.png">
-
-                        </div> -->
+                        </div>
 
                     </div>
                 </div>
@@ -244,7 +243,8 @@
         // Check network connection        
         var networkState = navigator.connection.type;  
         if (networkState == "none"){
-            $('#home_banner').prepend('<div id ="disclaimer_popup" style="margin-top:10px; display: block !important;">You are currently offline. Some features might not be available</div>')
+            $('.app').prepend('<div id ="disclaimer_popup" style="z-index:100; margin-top:10px; display: block !important;">You are currently offline. Some features might not be available</div>')
+            
             $(document).on('click',function(){
                 $('#disclaimer_popup').fadeOut()
             })
@@ -411,6 +411,12 @@
 
         // DB
         function createDB() {
+            if (networkState == "none"){
+                getPictureDB()
+            }
+            else {
+
+
             var dbFire = firebase.firestore();
             var DBRef = dbFire.collection("works");
             var firstCheck = true;
@@ -427,6 +433,7 @@
 
                 });
             });
+            }
         }
 
         function toSQLDB(record, firstCheck) {
@@ -548,6 +555,7 @@
             }
             
     }
+
 
     // Firebase DB
     var dbFire = firebase.firestore();
