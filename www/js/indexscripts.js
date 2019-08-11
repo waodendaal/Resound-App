@@ -324,8 +324,10 @@ document.addEventListener('deviceready', function() {
             for(var i = 0; i< 3; i++){
                 alert("FOR "+i)
                 if (i == 0){
+                    alert("FOO")
                     random1 = Math.floor(Math.random()*recordlist.length);
                     var randomnow = random1
+                    alert("BAR"+String(randomnow))
                 }
                 else if (i== 1){
                     do{
@@ -342,6 +344,7 @@ document.addEventListener('deviceready', function() {
                     var randomnow = random3
                 }
                 let item = recordlist[randomnow];
+                alert("ROO")
                 let picId = ""
                 let picPath = ""
                 if (source == "Firebase"){
@@ -349,8 +352,10 @@ document.addEventListener('deviceready', function() {
                     picPath = item[0]
                 }
                 else {
+                    alert("else"+String(item))
                     picId = item.id
                     picPath = item.image
+                    alert("XX"+String(picId))
 
                 }
                 alert("PICS"+randomnow+" "+String(item.image)+"id "+"#arttile"+i)
