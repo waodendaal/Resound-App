@@ -1,9 +1,7 @@
 document.addEventListener('deviceready', function() {
 
-    alert("indexSCripts")
-
     let firsTry = window.sessionStorage.getItem("page")
-    alert(String(firsTry))
+    // alert(String(firsTry))
         // Home Screens
         var center = 'center';
         $('#nav_home').addClass('active');
@@ -218,7 +216,7 @@ document.addEventListener('deviceready', function() {
 
         // DB
         function createDB() {
-            alert('createDB')
+            // alert('createDB')
             if (networkState == "none"){
                 getPictureDB()
             }
@@ -230,13 +228,13 @@ document.addEventListener('deviceready', function() {
             var firstCheck = true;
             var pictureList = []
             DBRef.get().then(function(querySnapshot) {
-                alert('DBRef'+String(querySnapshot.length))
+                // alert('DBRef'+String(querySnapshot.length))
                 querySnapshot.forEach(function(doc) {
                     let record = (doc.data())
                     firstCheck = toSQLDB(record, firstCheck);
                     pictureList.push([record.image,record.id])
                     if (pictureList.length==10){
-                        alert("picturelist ", String(pictureList))
+                        // alert("picturelist ", String(pictureList))
                         getPicture(pictureList, "Firebase")
                     }
 
@@ -295,7 +293,7 @@ document.addEventListener('deviceready', function() {
     
     //The pictures
     function getPictureDB(){
-        alert('getPictureDB')
+        // alert('getPictureDB')
         var db  = window.openDatabase('ArtTestNew4.2', '4.2', 'Test_Art_Test_New4.2', 1000000);
         db.transaction(GetInfo);
 
@@ -306,7 +304,7 @@ document.addEventListener('deviceready', function() {
         }
 
         function querySuccess(tx, results) {
-            alert("SUCCESS getPictureDB")
+            // alert("SUCCESS getPictureDB")
             getPicture(results.rows, "SQL")
         }
         function errorCB(err) {
@@ -315,19 +313,19 @@ document.addEventListener('deviceready', function() {
     }
     
     function getPicture(recordlist, source){
-        alert("getPicture")
+        // alert("getPicture")
             // Select 3 random
             var random1 = 0
             var random2 = 0
             var random3 = 0
             
             for(var i = 0; i< 3; i++){
-                alert("FOR "+i)
+                // alert("FOR "+i)
                 if (i == 0){
-                    alert("FOO")
+                    // alert("FOO")
                     random1 = Math.floor(Math.random()*recordlist.length);
                     var randomnow = random1
-                    alert("BAR"+String(randomnow))
+                    // alert("BAR"+String(randomnow))
                 }
                 else if (i== 1){
                     do{
@@ -343,25 +341,20 @@ document.addEventListener('deviceready', function() {
                     while (random3 == random1 || random3 == random2)
                     var randomnow = random3
                 }
-                alert("ROO")
                 let picId = ""
                 let picPath = ""
                 if (source == "Firebase"){
-                    alert("FIREBASE")
                     let item = recordlist[randomnow];
                     picId = item[1]
                     picPath = item[0]
                 }
                 else {
-                    alert("NOT FIREBASE")
                     let item = recordlist.item(randomnow);
-                    alert("else"+String(item))
                     picId = item.id
                     picPath = item.image
-                    alert("XX"+String(picId))
 
                 }
-                alert("PICS"+randomnow+" "+"id "+"#arttile"+i)
+                // alert("PICS"+randomnow+" "+"id "+"#arttile"+i)
                 $('#arttile'+i).css({"background-image":"url('img/artworks/"+String(picPath)+"')"},{"background-color":"red"})
                 console.log("EXECUTED")
                 $('#arttile'+i).on('click', function(){
