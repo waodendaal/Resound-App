@@ -1,13 +1,13 @@
 document.addEventListener('deviceready', function() {
-    alert("floorplanScripts")
-        
+
+    
     // Level selector
     var floor = window.sessionStorage.getItem("floor")
     floor = floor.split('_')
     levelSelector(floor)
 
     function levelSelector(floor){
-        alert(String(floor))
+        // alert(String(floor))
         if (floor[0] == "-1"){
             $('.level').removeClass('btn-gray_active')
             $('#-1_M').addClass('btn-gray_active')
@@ -34,7 +34,7 @@ document.addEventListener('deviceready', function() {
             )
         }
         else {
-            alert('Ground level')
+            // alert('Ground level')
             $('.level').removeClass('btn-gray_active')
             $('#0_M').addClass('btn-gray_active')
             Promise.resolve(createMap('img/maps/Map_Groundfloor.svg')).then(function(map){
@@ -61,7 +61,7 @@ document.addEventListener('deviceready', function() {
         map.setMinZoom(-1);
         map.setZoom(-1);
         // map.bounceAtZoomLimits = false
-        alert('Map Created')
+        // alert('Map Created')
         
         return map
     }
@@ -74,14 +74,13 @@ document.addEventListener('deviceready', function() {
 
     function createDB(DBfloor, map){
         // DB
-        alert('createDB '+ String(DBfloor))
+        // alert('createDB '+ String(DBfloor))
         var db  = window.openDatabase('ArtTestNew4.2', '4.2', 'Test_Art_Test_New4.2', 1000000);
         db.transaction(GetInfo);
 
         function GetInfo(tx) {
             let query = 'SELECT * FROM ART WHERE floor LIKE "%'+ DBfloor+'%"'
             // let  query = 'SELECT * FROM ART'
-            alert(String(query))
             tx.executeSql(query, [], querySuccess, errorCB);  
             // Last item
             var artworkLast = window.sessionStorage.getItem("artwork_map");
@@ -94,22 +93,21 @@ document.addEventListener('deviceready', function() {
         }
 
         function querySuccess(tx, results) {
-            alert("querySuccess")
+            
             alert(String(results.rows.length))
             for (var i = 0; i < results.rows.length; i++){
-                alert(String(i))
-                alert(String(results.rows.item(i)))
+                // alert(String(i))
+                // alert(String(results.rows.item(i)))
                 let record = results.rows.item(i)
-                alert(String(record.image))
+                // alert(String(record.image))
                 let marker = L.marker([(1800-Number(record.y_coordinate)), Number(record.x_coordinate)]).addTo(map);
-                alert(String("<b>"+record.artwork+"</b><br><em>"+record.artist+"</em><div onclick='clickWork(\""+ record.id+"\")' style='width:100%; height:100px; background-size:cover; background-image: url(\"img/artworks/"+record.image+"\");'></div><div style='background-color:black; width:100%; color:white; text-align:center;' onclick='clickWork("+ record.id+")'>View</div>"))
                 marker.bindPopup("<b>"+record.artwork+"</b><br><em>"+record.artist+"</em><div onclick='clickWork(\""+ record.id+"\")' style='width:100%; height:100px; background-size:cover; background-image: url(\"img/artworks/"+record.image+"\");'></div><div style='background-color:black; width:100%; color:white; text-align:center;' onclick='clickWork("+ record.id+")'>View</div>").openPopup();
             }
 
 
             // this will be true since it was a select statement and so rowsAffected was 0
             if (!results.rowsAffected) {
-                alert('No rows affected!');
+                console.log('No rows affected!');
                 return false;
             }
         }
@@ -126,9 +124,9 @@ document.addEventListener('deviceready', function() {
         $(this).addClass('btn-gray_active')
         $("#map_container").html('<div id="mapid" style="height: 500px; width: 500px;"></div>')
         let levelSelected = $(this).attr('id')
-        alert(String(levelSelected)) 
+        // alert(String(levelSelected)) 
         let  floor = levelSelected.split('_')
-        alert('click: '+String(floor))
+        // alert('click: '+String(floor))
         levelSelector(floor)
     })
 

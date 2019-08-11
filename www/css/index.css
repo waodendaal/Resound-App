@@ -415,10 +415,10 @@ input::placeholder {
     outline:none;
     border-bottom: white 1.5px solid;
 }
-.archive_circle:hover, .archive_circle:active {
+/* .archive_circle:hover, .archive_circle:active {
     background-color:rgb(115, 160, 233);
 
-}
+} */
 .artwork_description {
     height:fit-content;
     text-align: left;
@@ -638,6 +638,10 @@ a.btn,.btn {
 }
 #archive_meta{
     width:100%;
+}
+#archive_meta input {
+    -webkit-border-radius:0; 
+    border-radius:0;
 }
 #content_archive {
     display:flex;

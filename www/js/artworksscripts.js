@@ -1,5 +1,4 @@
 document.addEventListener('deviceready', function() {
-    alert("artworksscript")
     $('#nav_home').addClass('active');
     $("#blue_bottom").hide()
 
@@ -26,7 +25,6 @@ document.addEventListener('deviceready', function() {
 
     //Search
     $('#search_form').on('submit', function(e) { //use on if jQuery 1.7+
-        alert("SEARCH")
         e.preventDefault();  //prevent form from submitting
         db.transaction(GetSearch);
 
