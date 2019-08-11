@@ -1,8 +1,5 @@
 document.addEventListener('deviceready', function() {
-    setTimeout(function(){ 
-        alert('LOADER FADE')
-        $('#loader').fadeOut();
-    }, 1000);
+
     
 
 
@@ -49,4 +46,9 @@ var networkState = navigator.connection.type;
 
 let currentPage = 'schedule.html';
 window.sessionStorage.setItem("page",currentPage); 
+setTimeout(function(){ 
+    alert('LOADER FADE')
+    $('#loader').fadeOut();
+}, 1000);
+
 })

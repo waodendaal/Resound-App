@@ -1,8 +1,5 @@
 document.addEventListener('deviceready', function() {
-    setTimeout(function(){ 
-        alert('LOADER FADE')
-        $('#loader').fadeOut();
-    }, 1000);
+
     
 
 
@@ -29,10 +26,10 @@ var previouspage = window.sessionStorage.getItem("page");
 window.sessionStorage.setItem("artTrack","yes_p");
 window.sessionStorage.setItem("artwork_map", "all");
 $(document).on('click','.luxbar-brand', function(){
+    // NOT FOR ANDROID
+    window.location.replace('index.html')
     window.history.back();
-
     alert("BACK")
-    window.history.back();
     $.mobile.back();
     // window.location.replace(previouspage);
     // window.location.replace('index.html')
@@ -49,4 +46,9 @@ var networkState = navigator.connection.type;
 
 let currentPage = 'schedule.html';
 window.sessionStorage.setItem("page",currentPage); 
+setTimeout(function(){ 
+    alert('LOADER FADE')
+    $('#loader').fadeOut();
+}, 1000);
+
 })

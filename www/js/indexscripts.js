@@ -347,12 +347,14 @@ document.addEventListener('deviceready', function() {
                 let picId = ""
                 let picPath = ""
                 if (source == "Firebase"){
+                    alert("FIREBASE")
                     let item = recordlist[randomnow];
                     picId = item[1]
                     picPath = item[0]
                 }
                 else {
-                    let item = recordlist(randomnow);
+                    alert("NOT FIREBASE")
+                    let item = recordlist.item(randomnow);
                     alert("else"+String(item))
                     picId = item.id
                     picPath = item.image

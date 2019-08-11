@@ -1,6 +1,5 @@
 document.addEventListener('deviceready', function() {
     alert("floorplanScripts")
-    $('#nav_sched').addClass('active');
         
     // Level selector
     var floor = window.sessionStorage.getItem("floor")
@@ -99,8 +98,8 @@ document.addEventListener('deviceready', function() {
             alert(String(results.rows.length))
             for (var i = 0; i < results.rows.length; i++){
                 alert(String(i))
-                alert(String(results.rows(i)))
-                let record = results.rows(i)
+                alert(String(results.rows.item(i)))
+                let record = results.rows.item(i)
                 alert(String(record.image))
                 let marker = L.marker([(1800-Number(record.y_coordinate)), Number(record.x_coordinate)]).addTo(map);
                 alert(String("<b>"+record.artwork+"</b><br><em>"+record.artist+"</em><div onclick='clickWork(\""+ record.id+"\")' style='width:100%; height:100px; background-size:cover; background-image: url(\"img/artworks/"+record.image+"\");'></div><div style='background-color:black; width:100%; color:white; text-align:center;' onclick='clickWork("+ record.id+")'>View</div>"))

@@ -324,8 +324,10 @@ document.addEventListener('deviceready', function() {
             for(var i = 0; i< 3; i++){
                 alert("FOR "+i)
                 if (i == 0){
+                    alert("FOO")
                     random1 = Math.floor(Math.random()*recordlist.length);
                     var randomnow = random1
+                    alert("BAR"+String(randomnow))
                 }
                 else if (i== 1){
                     do{
@@ -341,19 +343,25 @@ document.addEventListener('deviceready', function() {
                     while (random3 == random1 || random3 == random2)
                     var randomnow = random3
                 }
-                let item = recordlist[randomnow];
+                alert("ROO")
                 let picId = ""
                 let picPath = ""
                 if (source == "Firebase"){
+                    alert("FIREBASE")
+                    let item = recordlist[randomnow];
                     picId = item[1]
                     picPath = item[0]
                 }
                 else {
+                    alert("NOT FIREBASE")
+                    let item = recordlist.item(randomnow);
+                    alert("else"+String(item))
                     picId = item.id
                     picPath = item.image
+                    alert("XX"+String(picId))
 
                 }
-                alert("PICS"+randomnow+" "+String(item.image)+"id "+"#arttile"+i)
+                alert("PICS"+randomnow+" "+"id "+"#arttile"+i)
                 $('#arttile'+i).css({"background-image":"url('img/artworks/"+String(picPath)+"')"},{"background-color":"red"})
                 console.log("EXECUTED")
                 $('#arttile'+i).on('click', function(){

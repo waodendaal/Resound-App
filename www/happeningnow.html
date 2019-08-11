@@ -19,7 +19,7 @@
     specific language governing permissions and limitations
     under the License.
 -->
-<html>
+<html style="overflow-y: auto; -webkit-overflow-scrolling: touch;">
 
 <head>
     <meta charset="utf-8" />
@@ -44,7 +44,14 @@
     <title>RE:SOUND Conference 2019 - Schedule</title>
 </head>
 
-<body>
+<body style="
+overflow-y: auto;
+-webkit-overflow-scrolling: touch;
+position: absolute;
+top: 0;
+left: 0;
+right: 0;
+bottom: 0;">
     <div id="loader">
         <div id="bars">
             <div class="bar"></div>
@@ -61,11 +68,12 @@
     </div>
     
     <div class="app">
-        <div class="page_container" style="background-color:rgba(0,0,0,0.7);">
-            <a class="program_arttrack_banner">
+        <div class="page_container" style="background-color:rgba(0,0,0,0.7);position:fixed; overflow:scroll;">
+                <a class="program_arttrack_banner">
                 <h1 style="padding:15px;">What's On Next</h1>
-            </a>
-                <div id="artframe_partent" style="width:100%; height:100%;">
+            </a>         
+
+                <div id="artframe_partent" style="width:100%; height:100%; position:fixed; top: 20%;">
                         <div class="art_preview" style="height:100%; overflow:hidden;">
                             <iframe id="whatsnextiframe" src="https://resound2019.sched.com/monitors/?limit=3" style="width: 100%; height:100%; position: relative;top: -135px;" frameborder="0">
                             </iframe>
