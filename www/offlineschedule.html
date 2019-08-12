@@ -69,6 +69,7 @@
     <script type="text/javascript" src="cordova.js"></script>
     <script type="text/javascript" src="js/index.js"></script>
     <script type="text/javascript" src="js/buildmenu.js"></script>
+    <script type="text/javascript" src="js/offlineschedscripts.js"></script>
     <script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
     <script type="text/javascript" src="js/jquerymobile/jquery.mobile-1.4.5.js"></script>
     <script type="text/javascript" src="js/jquery.touchSwipe.min.js"></script>
@@ -77,51 +78,7 @@
 
     <script type="text/javascript">
        app.initialize();
-        setTimeout(function(){ 
-            $('#loader').fadeOut();
-        }, 1000);
         
-        $('#nav_home').addClass('active');
-
-    var networkState = navigator.connection.type;
-    if (networkState == "none"){
-        
-    //          You are offline
-            window.location.replace('index.html')
-
-            
-    }
-
-    // Navigation
-    $(window).swipe( {    
-        //Generic swipe handler for all directions
-        swipe:function(event, direction, distance, duration, fingerCount, fingerData) {     
-            if (direction == 'right'){
-                window.location.replace('index.html')
-
-                // $.mobile.back();
-            }
-            
-        }
-    });
-
-    var previouspage = window.sessionStorage.getItem("page");
-    window.sessionStorage.setItem("artTrack","yes_p");
-
-
-    document.addEventListener("backbutton", function (e) {
-        window.location.replace('index.html')
-    })
-
-    $(document).on('click','#luxbar-brand', function(){
-        alert("CLICKED")
-        // window.location.replace(previouspage);
-        window.location.replace('index.html')
-    });
-
-    let currentPage = 'happeningnow.html';
-    window.sessionStorage.setItem("page",currentPage); 
-
         
 
     </script>

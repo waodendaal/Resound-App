@@ -23,7 +23,7 @@
         </host>
     </universal-links>
     <preference name="DisallowOverscroll" value="true" />
-    <preference name="AutoHideSplashScreen" value="true" />
+    <preference name="AutoHideSplashScreen" value="false" />
     <preference name="SplashScreenDelay" value="0" />
     <preference name="FadeSplashScreenDuration" value="0" />
     <preference name="android-targetSdkVersion" value="28" />
