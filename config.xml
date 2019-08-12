@@ -13,6 +13,8 @@
     <preference name="android-minSdkVersion" value="20" />
     <preference name="AndroidLaunchMode" value="singleTask" />
     <preference name="orientation" value="portrait" />
+    <preference name="AutoHideSplashScreen" value="true" />
+    <preference name="SplashScreenDelay" value="0"/>
     <plugin name="cordova-plugin-camera" source="npm" spec="~2.1.1" />
     <plugin name="cordova-plugin-media-capture" source="npm" spec="~1.2.0" />
     <plugin name="cordova-plugin-console" source="npm" spec="~1.0.2" />
