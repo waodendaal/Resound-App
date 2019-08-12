@@ -27,4 +27,6 @@
     <preference name="android-minSdkVersion" value="20" />
     <preference name="AndroidLaunchMode" value="singleTask" />
     <preference name="orientation" value="portrait" />
+    <preference name="AutoHideSplashScreen" value="true" />
+    <preference name="SplashScreenDelay" value="0" />
 </widget>
