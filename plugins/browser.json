@@ -1,55 +1,58 @@
 {
-    "prepare_queue": {
-        "installed": [],
-        "uninstalled": []
+  "prepare_queue": {
+    "installed": [],
+    "uninstalled": []
+  },
+  "config_munge": {
+    "files": {}
+  },
+  "installed_plugins": {
+    "cordova-plugin-battery-status": {
+      "PACKAGE_NAME": "com.resound.www"
     },
-    "config_munge": {
-        "files": {}
+    "cordova-plugin-camera": {
+      "PACKAGE_NAME": "com.resound.www"
     },
-    "installed_plugins": {
-        "cordova-plugin-battery-status": {
-            "PACKAGE_NAME": "com.resound.www"
-        },
-        "cordova-plugin-camera": {
-            "PACKAGE_NAME": "com.resound.www"
-        },
-        "cordova-plugin-console": {
-            "PACKAGE_NAME": "com.resound.www"
-        },
-        "cordova-plugin-contacts": {
-            "PACKAGE_NAME": "com.resound.www"
-        },
-        "cordova-plugin-device": {
-            "PACKAGE_NAME": "com.resound.www"
-        },
-        "cordova-plugin-device-motion": {
-            "PACKAGE_NAME": "com.resound.www"
-        },
-        "cordova-plugin-device-orientation": {
-            "PACKAGE_NAME": "com.resound.www"
-        },
-        "cordova-plugin-dialogs": {
-            "PACKAGE_NAME": "com.resound.www"
-        },
-        "cordova-plugin-nano-sqlite": {
-            "PACKAGE_NAME": "com.resound.www"
-        },
-        "cordova-plugin-file-transfer": {
-            "PACKAGE_NAME": "com.resound.www"
-        },
-        "cordova-plugin-media-capture": {
-            "PACKAGE_NAME": "com.resound.www"
-        },
-        "cordova-plugin-vibration": {
-            "PACKAGE_NAME": "com.resound.www"
-        }
+    "cordova-plugin-console": {
+      "PACKAGE_NAME": "com.resound.www"
     },
-    "dependent_plugins": {
-        "cordova-plugin-file": {
-            "PACKAGE_NAME": "com.resound.www"
-        },
-        "cordova-sqlite-storage": {
-            "PACKAGE_NAME": "com.resound.www"
-        }
+    "cordova-plugin-contacts": {
+      "PACKAGE_NAME": "com.resound.www"
+    },
+    "cordova-plugin-device": {
+      "PACKAGE_NAME": "com.resound.www"
+    },
+    "cordova-plugin-device-motion": {
+      "PACKAGE_NAME": "com.resound.www"
+    },
+    "cordova-plugin-device-orientation": {
+      "PACKAGE_NAME": "com.resound.www"
+    },
+    "cordova-plugin-dialogs": {
+      "PACKAGE_NAME": "com.resound.www"
+    },
+    "cordova-plugin-nano-sqlite": {
+      "PACKAGE_NAME": "com.resound.www"
+    },
+    "cordova-plugin-file-transfer": {
+      "PACKAGE_NAME": "com.resound.www"
+    },
+    "cordova-plugin-media-capture": {
+      "PACKAGE_NAME": "com.resound.www"
+    },
+    "cordova-plugin-vibration": {
+      "PACKAGE_NAME": "com.resound.www"
+    },
+    "cordova-plugin-splashscreen": {
+      "PACKAGE_NAME": "com.resound.www"
     }
+  },
+  "dependent_plugins": {
+    "cordova-plugin-file": {
+      "PACKAGE_NAME": "com.resound.www"
+    },
+    "cordova-sqlite-storage": {
+      "PACKAGE_NAME": "com.resound.www"
+    }
+  }
 }

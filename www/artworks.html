@@ -61,6 +61,8 @@
     </div>
     
     <div class="app">
+            <div class="appbackground">
+
         <div class="page_container">
             <div class="program_arttrack_banner" style="background-color:black;" >
                 <h1>Artworks</h1>
@@ -87,6 +89,7 @@
             </div>
             <div id="blue_bottom" style="position:absolute;" class="background_blue"></div>
         </div>
+        </div>
     </div>
 
     <script type="text/javascript" src="cordova.js"></script>
@@ -100,7 +103,6 @@
     <script type="text/javascript">
         app.initialize();
         function clickWork(id){
-    alert('click')
     let elementId = id;
     sessionStorage.param1 = elementId;
     window.location.replace("artwork.html");
