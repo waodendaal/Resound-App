@@ -1,5 +1,5 @@
 document.addEventListener('deviceready', function() {
-    $('#nav_home').addClass('active');
+    // $('#nav_home').addClass('active');
     $("#blue_bottom").hide()
 
     var screen_width = document.documentElement.clientWidth;

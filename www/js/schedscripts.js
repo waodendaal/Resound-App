@@ -1,9 +1,5 @@
 document.addEventListener('deviceready', function() {
 
-
-$('#nav_home').addClass('active');
-
-
 // Navigation
 $(window).swipe( {    
     //Generic swipe handler for all directions

@@ -1,9 +1,10 @@
 document.addEventListener('deviceready', function() {
+    alert("artworksscript")
     setTimeout(function(){ 
         $('#loader').fadeOut();
     }, 500);
-    $('#nav_home').addClass('active');
-    alert("HI")
+    // $('#nav_home').addClass('active');
+    
     // Auth
     firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL)
     .then(function() {
@@ -132,7 +133,7 @@ var dbFire = firebase.firestore();
 dbFire.collection("works/"+workId+"/uploads")
 .get()
 .then(function(querySnapshot) {
-    // alert('querySnapshot'+String(querySnapshot.length))
+    alert('querySnapshot'+String(querySnapshot.length))
     querySnapshot.forEach(function(doc) {
         var rawValues =""
         if (metaNumber == "meta2"){
@@ -150,7 +151,7 @@ dbFire.collection("works/"+workId+"/uploads")
         commaSeperated.sort()
         for (var i =0; i< commaSeperated.length; i++){
             let newItem = commaSeperated[i]
-            // alert(String(newItem))
+            alert(String(newItem))
             if (uploadedKeys.indexOf(newItem.toLowerCase()) < 0 && newItem != ""){
                 $('#'+selectorID).append('<option>'+newItem+'</option>')
                 uploadedKeys.push(newItem.toLowerCase())
@@ -206,7 +207,7 @@ document.addEventListener("backbutton", function (e) {
     backPage()
 })
 
-$(document).on('click','#luxbar-brand', function(){
+$(document).on('click','.luxbar-brand', function(){
     backPage()
 });
 function backPage(){
@@ -220,6 +221,7 @@ function backPage(){
 }
 let currentPage = 'artwork.html';
 window.sessionStorage.setItem("page",currentPage); 
+alert(currentPage)
 
 
 // File Selector - SECOND DRAFT?
@@ -242,6 +244,7 @@ window.sessionStorage.setItem("page",currentPage);
 // })
 
 // Archive
+alert('ARCHIVE')
 $(document).on('click', '.cirlce_popup', function(){
     alert("circlePopup")
     $('#app').css('overflow','hidden')
@@ -346,7 +349,7 @@ $(document).on('click', '.cirlce_popup', function(){
             var i, path, len;
             for (i = 0, len = mediaFiles.length; i < len; i += 1) {
                 path = mediaFiles[i].fullPath;
-                alert('PATH: '+String(path))
+                // alert('PATH: '+String(path))
                 
                 $('#image_archive').css({'background-image':'url("'+path+'"', 'background-size':'cover'});
                 $('#content_archive').val(path)
@@ -604,6 +607,9 @@ function updateDB(filename, downloadURL, type){
 
 
 }
+$('#archive_actions').on('click', function(){
+    alert('HI')
+})
 
 function uploadingPopup(){
     $('#content_archive').css({'display':'none'})

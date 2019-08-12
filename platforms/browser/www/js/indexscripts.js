@@ -4,7 +4,6 @@ document.addEventListener('deviceready', function() {
     // alert(String(firsTry))
         // Home Screens
         var center = 'center';
-        $('#nav_home').addClass('active');
         let screen_width = document.documentElement.clientWidth;
         $('#home_screen, #left_screen, #right_screen').css({'width':screen_width+'px'});
         $('#home_divs').css({'width':(screen_width*3)+'px'});
