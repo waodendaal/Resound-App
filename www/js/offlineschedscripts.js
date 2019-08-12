@@ -11,7 +11,6 @@ $(window).swipe( {
     //Generic swipe handler for all directions
     swipe:function(event, direction, distance, duration, fingerCount, fingerData) {     
         if (direction == 'right'){
-            alert("SWIPE")
             window.location.replace('index.html')
 
             // $.mobile.back();
@@ -29,7 +28,6 @@ window.location.replace('index.html')
 })
 
 $(document).on('click','#luxbar-brand', function(){
-alert("CLICKED")
 // window.location.replace(previouspage);
 window.location.replace('index.html')
 });
