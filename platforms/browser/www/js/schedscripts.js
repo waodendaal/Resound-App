@@ -1,11 +1,5 @@
 document.addEventListener('deviceready', function() {
 
-    
-
-
-$('#program_arttrack_banner').on("click", function(){
-    alert("HI")
-})
 
 $('#nav_home').addClass('active');
 
@@ -29,7 +23,6 @@ $(document).on('click','.luxbar-brand', function(){
     // NOT FOR ANDROID
     window.location.replace('index.html')
     // window.history.back();
-    alert("INDEX")
     // $.mobile.back();
 
     

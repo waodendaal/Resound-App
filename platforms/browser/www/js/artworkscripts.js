@@ -3,7 +3,7 @@ document.addEventListener('deviceready', function() {
         $('#loader').fadeOut();
     }, 500);
     $('#nav_home').addClass('active');
-    
+    alert("HI")
     // Auth
     firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL)
     .then(function() {

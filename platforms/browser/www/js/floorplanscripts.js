@@ -94,7 +94,7 @@ document.addEventListener('deviceready', function() {
 
         function querySuccess(tx, results) {
             
-            alert(String(results.rows.length))
+            // alert(String(results.rows.length))
             for (var i = 0; i < results.rows.length; i++){
                 // alert(String(i))
                 // alert(String(results.rows.item(i)))
