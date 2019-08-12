@@ -189,7 +189,7 @@ $(window).swipe( {
     //Generic swipe handler for all directions
     swipe:function(event, direction, distance, duration, fingerCount, fingerData) {     
         if ($('.archive_popup').css('display') == "none"){
-            // alert('Swipe')
+            alert('Swipe')
             if (direction == 'right'){
                 backPage()
             }
@@ -346,7 +346,7 @@ $(document).on('click', '.cirlce_popup', function(){
             var i, path, len;
             for (i = 0, len = mediaFiles.length; i < len; i += 1) {
                 path = mediaFiles[i].fullPath;
-                // alert('PATH: '+String(path))
+                alert('PATH: '+String(path))
                 
                 $('#image_archive').css({'background-image':'url("'+path+'"', 'background-size':'cover'});
                 $('#content_archive').val(path)
