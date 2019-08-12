@@ -6,7 +6,9 @@ document.addEventListener('deviceready', function() {
                     <div class="luxbar-menu luxbar-menu-material-bluegrey">\
                         <ul class="luxbar-navigation">\
                         <li class="luxbar-header">\
+                            <div id="luxbar-brand">\
                             <a class="luxbar-brand" href="#"><i class="fas fa-chevron-left"></i></a>\
+                            </div>\
                             <label class="luxbar-hamburger luxbar-hamburger-doublespin" for="luxbar-checkbox">\
                                 <span></span>\
                             </label>\

@@ -228,16 +228,14 @@ $(window).swipe( {
 var previouspage = window.sessionStorage.getItem("page");
 window.sessionStorage.setItem("artTrack","yes");
 
-$(document).on('click','.luxbar-brand', function(){
-    // window.location.replace(previouspage);
-});
+
 
 var previouspage = window.sessionStorage.getItem("page");
 document.addEventListener("backbutton", function (e) {
     backPage()
 })
 
-$(document).on('click','.luxbar-brand', function(){
+$(document).on('click','#luxbar-brand', function(){
     backPage()
 });
 function backPage(){

@@ -35,7 +35,7 @@ document.addEventListener('deviceready', function() {
             }
         })
 
-        $(document).on('click','.luxbar-brand', function(){
+        $(document).on('click','#luxbar-brand', function(){
             if (center == 'right'){
                 center = swipeLeft()
 
