@@ -1,6 +1,4 @@
 document.addEventListener('deviceready', function() {
-    navigator.splashscreen.hide();
-
     // https://www.cssscript.com/responsive-css-header-navigation-luxbar/
     let container = $('#navbar');
     let navbar = $('<div class="luxbar luxbar-static">\

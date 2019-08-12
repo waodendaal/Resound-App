@@ -9,7 +9,9 @@
     </author>
     <content src="index.html" />
     <preference name="DisallowOverscroll" value="true" />
-    <preference name="FadeSplashScreenDuration" value="0"/>
+<preference name="AutoHideSplashScreen" value="true" />
+<preference name="SplashScreenDelay" value="0"/>
+<preference name="FadeSplashScreenDuration" value="0"/>
     <preference name="android-targetSdkVersion" value="28" />
     <preference name="android-minSdkVersion" value="20" />
     <preference name="AndroidLaunchMode" value="singleTask" />
