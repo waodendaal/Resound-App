@@ -56,11 +56,16 @@ h1, h2, h3, h4, h5 {
     color: white;
 }
 
-/* Portrait layout (default) */
-.app {
+.appbackground {
     background-image: url('../img/background.jpg');
     background-repeat: no-repeat;
     background-size: cover;
+    height: 100vh;
+    width:100vw; 
+}
+/* Portrait layout (default) */
+.app {
+    background-color: #3460A9;
     position:absolute;             /* position in the center of the screen */
     /* height:calc(100vh - 58px);                 */
     height: 100vh;

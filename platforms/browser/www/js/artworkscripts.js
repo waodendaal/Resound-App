@@ -608,7 +608,7 @@ function updateDB(filename, downloadURL, type){
 
 }
 $('#archive_actions').on('click', function(){
-    alert('HI')
+  console.log("Hi, this is super messy code, sorry.")
 })
 
 function uploadingPopup(){
