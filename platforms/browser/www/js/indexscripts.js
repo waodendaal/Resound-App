@@ -155,6 +155,7 @@ document.addEventListener('deviceready', function() {
                 $('#home_divs').css({'right':(-screen_width)+'px'});
                 $('#home_divs').css({'left':(-screen_width)+'px'});
                 $('.luxbar').fadeOut();
+                $('#aboveNav').fadeOut();
                 $('.program_arttrack_banner').fadeOut();
                 $('.subcontent').fadeOut();
                 $('#home_banner').fadeIn();
