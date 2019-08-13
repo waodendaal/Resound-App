@@ -65,7 +65,7 @@ document.addEventListener('deviceready', function() {
         if (networkState == "none"){
             
     //          You are offline
-            $('.luxbar-brand').after('<span>You are currently offline</span>')
+            $('.luxbar-brand').after('<div style="text-align: center;"><span>You are currently offline</span></div>')
         }
 
 });

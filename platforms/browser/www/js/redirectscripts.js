@@ -1,11 +1,11 @@
 document.addEventListener('deviceready', function() {
     $('#aboveNav').fadeOut();
-    alert("REDIRECT 1")
     let firsTry = window.sessionStorage.getItem("page")
-    if (firstTry == "index.html"){
+    alert(String(firsTry))
+    if (firsTry == "index.html"){
+        alert('Luxbar fade?')
         $('.luxbar').fadeOut();
     }
-    alert("REDIRECT 2")
     // alert(String(firsTry))
         // Home Screens
         var center = 'center';
@@ -44,7 +44,6 @@ document.addEventListener('deviceready', function() {
         // Check network connection        
         var networkState = navigator.connection.type;  
         if (networkState == "none"){
-            alert("NO CONNECTION")
             $('.app').prepend('<div id ="disclaimer_popup" style="z-index:100; margin-top:10px; text-alignt:center; display: block !important;">You are currently offline. Some features might not be available</div>')
             
             $('#disclaimer_popup').on('click',function(){
@@ -59,7 +58,6 @@ document.addEventListener('deviceready', function() {
 
         setTimeout(function(){
             $('#loader').fadeOut();
-            alert("FADER OUT")
         },500)
         getPictureDB()
 

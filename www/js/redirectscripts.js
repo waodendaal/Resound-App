@@ -1,7 +1,9 @@
 document.addEventListener('deviceready', function() {
     $('#aboveNav').fadeOut();
     let firsTry = window.sessionStorage.getItem("page")
+    alert(String(firsTry))
     if (firsTry == "index.html"){
+        alert('Luxbar fade?')
         $('.luxbar').fadeOut();
     }
     // alert(String(firsTry))
@@ -90,7 +92,7 @@ document.addEventListener('deviceready', function() {
             
             //Generic swipe handler for all directions
             swipe:function(event, direction, distance, duration, fingerCount, fingerData) {
-                
+                $('#disclaimer_popup').fadeOut()       
                 if (direction == 'left'){
                     center = swipeLeft()
 

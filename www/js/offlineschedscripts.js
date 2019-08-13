@@ -4,7 +4,6 @@ setTimeout(function(){
     $('#loader').fadeOut();
 }, 1000);
 
-$('#nav_home').addClass('active');
 
 // Navigation
 $(window).swipe( {    
