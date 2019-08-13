@@ -335,7 +335,6 @@ document.addEventListener('deviceready', function() {
             
     }
 
-    alert(String(firsTry))
     if (firsTry == "index.html"){
         $('.luxbar').hide();
         $('.luxbar').css({'display':'none'})
