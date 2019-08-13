@@ -49,6 +49,7 @@ document.addEventListener('deviceready', function() {
         var networkState = navigator.connection.type;  
         if (networkState == "none"){
             if (firsTry ==null){
+                window.sessionStorage.setItem("page","index.html"); 
                 location.href='index.html'
             }
             $('.app').prepend('<div id ="disclaimer_popup" style="z-index:100; margin-top:10px; text-alignt:center; display: block !important;">You are currently offline. Some features might not be available</div>')
