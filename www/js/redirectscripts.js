@@ -54,10 +54,10 @@ document.addEventListener('deviceready', function() {
 
         setTimeout(function(){
             if (firsTry == "index.html"){
-                alert('Luxbar fade?')
+             
                 $('.luxbar').hide();
                 $('.luxbar').css({'display':'none'})
-                alert(String($('.luxbar').css('display')))
+             
             }
             $('#loader').fadeOut();
 
@@ -67,7 +67,6 @@ document.addEventListener('deviceready', function() {
        
         window.sessionStorage.setItem("floor","ground"); 
         var previouspage = window.sessionStorage.getItem("page");
-        alert("PREV"+String(previouspage))
         if (previouspage == 'artworks.html' || previouspage == 'artwork.html' ||previouspage == 'floorplan.html'){
             center = swipeLeft()
             
@@ -338,10 +337,8 @@ document.addEventListener('deviceready', function() {
 
     alert(String(firsTry))
     if (firsTry == "index.html"){
-        alert('Luxbar fade?')
         $('.luxbar').hide();
         $('.luxbar').css({'display':'none'})
-        alert(String($('.luxbar').css('display')))
     }
 
     // Session trackers 
