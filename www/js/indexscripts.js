@@ -1,5 +1,6 @@
 document.addEventListener('deviceready', function() {
 
+    $('#aboveNav').fadeOut();
     let firsTry = window.sessionStorage.getItem("page")
     // alert(String(firsTry))
         // Home Screens
@@ -201,6 +202,7 @@ document.addEventListener('deviceready', function() {
                 $('#home_divs').css({'right': 'calc('+currentRight+' - '+screen_width+'px)'});
                 $('#home_divs').css({'left': 'calc('+currentRight+' + '+screen_width+'px)'});
                 $('.luxbar').fadeIn();
+                $('#aboveNav').fadeIn();
                 $('.program_arttrack_banner').fadeIn();
                 $('.subcontent').fadeIn();
                 $('#homebutton_Program').css({'right': screen_width+'px'});

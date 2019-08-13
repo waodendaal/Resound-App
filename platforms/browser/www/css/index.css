@@ -64,7 +64,7 @@ h1, h2, h3, h4, h5 {
 }
 
 .appbackground {
-    position:absolute;
+    position:fixed;
     top:0;
     background-image: url('../img/background.jpg');
     /* background-repeat: no-repeat; */
@@ -77,9 +77,9 @@ h1, h2, h3, h4, h5 {
 /* Portrait layout (default) */
 .app {
 
-    background-image: url('../img/background.jpg');
+    /* background-image: url('../img/background.jpg');
     background-repeat: no-repeat;
-    background-size: cover;
+    background-size: cover; */
     background-color: #3460A9;
     position:absolute;             /* position in the center of the screen */
     /* height:calc(100vh - 58px);                 */
@@ -347,8 +347,8 @@ input::placeholder {
 }
 /* Artwork page */
 .program_arttrack_banner {
-    background-color:rgba(0,0,0,0.7);
-    padding: 45px 15px 0 15px;
+    background-color:rgba(0,0,0,1);
+    padding: 55px 15px 0 15px;
     height: 100px;
     text-align:left !important;
 }
