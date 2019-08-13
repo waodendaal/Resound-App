@@ -81,7 +81,9 @@
         <splash height="1024" platform="ios" src="www/res/screen/ios/Default-Portrait~ipad.png" width="768" />
         <splash height="960" platform="ios" src="www/res/screen/ios/Default@2x~iphone.png" width="640" />
         <splash height="480" platform="ios" src="www/res/screen/ios/Default~iphone.png" width="320" />
+        <splash src="www/splash/ios/Default@2x~universal~anyany.png"/>
         <preference name="SplashScreenDelay" value="0"/>
+        <preference name="SplashScreenSpinnerColor" value="#3460A9" />
         <preference name="FadeSplashScreenDuration" value="0"/> 
     </platform>
     <platform name="wp8">
