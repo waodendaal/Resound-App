@@ -60,7 +60,7 @@ h1, h2, h3, h4, h5 {
 }
 
 #aboveNav {
-    background-color:#3460A9;position:absolute;z-index:0;top:0;width:100vw; height:50px;
+    background-color:#3460A9;position:absolute;z-index:1;top:0;width:100vw; height:50px;
 }
 
 .appbackground {
