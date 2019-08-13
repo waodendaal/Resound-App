@@ -61,7 +61,7 @@ h1, h2, h3, h4, h5 {
 
 .appbackground {
     background-image: url('../img/background.jpg');
-    background-repeat: no-repeat;
+    /* background-repeat: no-repeat; */
     background-size: cover;
     height: 100vh;
     width:100vw; 
@@ -156,6 +156,7 @@ h1 {
     -o-transition:all 0.5s ease-out;
     transition:all 0.5s ease-out;
     top:45px;
+    padding-top:20px;
     height: 100%;
 }
 .page_container {
@@ -336,7 +337,7 @@ input::placeholder {
 /* Artwork page */
 .program_arttrack_banner {
     background-color:rgba(0,0,0,0.7);
-    padding: 15px 15px 0 15px;
+    padding: 35px 15px 0 15px;
     height: 100px;
     text-align:left !important;
 }

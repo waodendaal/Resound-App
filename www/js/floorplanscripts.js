@@ -68,11 +68,13 @@ document.addEventListener('deviceready', function() {
         return map
     }
 
-    function clickWork(id){
-        let elementId = id;
-        sessionStorage.param1 = elementId;
+    $(document).on('click', '.popUp', function(){
+        let splitter = $(this).attr('id')
+        let elementId = splitter.split("_")
+        sessionStorage.param1 = elementId[1];
+        console.log(elementId)
         window.location.replace("artwork.html");
-    }
+    })
 
     function createDB(DBfloor, map){
         // DB
@@ -103,7 +105,7 @@ document.addEventListener('deviceready', function() {
                 let record = results.rows.item(i)
                 // alert(String(record.image))
                 let marker = L.marker([(1800-Number(record.y_coordinate)), Number(record.x_coordinate)]).addTo(map);
-                marker.bindPopup("<b>"+record.artwork+"</b><br><em>"+record.artist+"</em><div onclick='clickWork(\""+ record.id+"\")' style='width:100%; height:100px; background-size:cover; background-image: url(\"img/artworks/"+record.image+"\");'></div><div style='background-color:black; width:100%; color:white; text-align:center;' onclick='clickWork("+ record.id+")'>View</div>").openPopup();
+                marker.bindPopup("<b>"+record.artwork+"</b><br><em>"+record.artist+"</em><div id='popUp_"+record.id+"' class='popUp' style='width:100%; height:100px; background-size:cover; background-image: url(\"img/artworks/"+record.image+"\");'></div><div style='background-color:black; width:100%; color:white; text-align:center;' id='popUp_"+record.id+"' class='popUp'>View</div>").openPopup();
             }
 
 
