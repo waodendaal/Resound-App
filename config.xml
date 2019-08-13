@@ -18,6 +18,7 @@
     <preference name="AutoHideSplashScreen" value="true" />
     <preference name="FadeSplashScreen" value="0"/>
     <preference name="SplashScreenDelay" value="0"/>
+    <!-- <preference name="ShowSplashScreenSpinner" value="false"/> -->
     <plugin name="cordova-plugin-camera" source="npm" spec="~2.1.1" />
     <plugin name="cordova-plugin-media-capture" source="npm" spec="~1.2.0" />
     <plugin name="cordova-plugin-device-motion" source="npm" spec="~1.2.0" />

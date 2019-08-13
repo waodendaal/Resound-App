@@ -50,7 +50,7 @@ document.addEventListener('deviceready', function() {
             if (firsTry ==null){
                 window.sessionStorage.setItem("page","index.html"); 
 
-                location.href='artworks.html'
+                location.href='redirect.html'
             }
             $('.app').prepend('<div id ="disclaimer_popup" style="z-index:100; margin-top:10px; text-alignt:center; display: block !important;">You are currently offline. Some features might not be available</div>')
             

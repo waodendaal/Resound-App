@@ -60,7 +60,7 @@ h1, h2, h3, h4, h5 {
 }
 
 #aboveNav {
-    background-color:#3460A9;position:absolute;z-index:1;top:0;width:100vw; height:50px;
+    background-color:#3460A9;position:fixed;z-index:500;top:0;width:100vw; height:50px;
 }
 
 .appbackground {
@@ -167,7 +167,7 @@ h1 {
     -o-transition:all 0.5s ease-out;
     transition:all 0.5s ease-out;
     top:45px;
-    padding-top:20px;
+    /* padding-top:20px; */
     height: 100%;
 }
 .page_container {
