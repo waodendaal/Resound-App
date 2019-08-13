@@ -61,6 +61,7 @@ document.addEventListener('deviceready', function() {
         }
         
 
+        if (networkState != "none"){
 
         //Firebase Auth
         firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL)
@@ -106,6 +107,7 @@ document.addEventListener('deviceready', function() {
                 // User is signed out.
             }
         });
+    };
        
         window.sessionStorage.setItem("floor","ground"); 
         var previouspage = window.sessionStorage.getItem("page");
@@ -378,11 +380,11 @@ document.addEventListener('deviceready', function() {
     }
 
 
-    // Firebase DB
-    var dbFire = firebase.firestore();
 
     // Session trackers 
     let currentPage = 'index.html';
     window.sessionStorage.setItem("page",currentPage); 
     window.sessionStorage.setItem("artwork_map", "all");
+
+
 })
