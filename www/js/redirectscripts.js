@@ -53,13 +53,21 @@ document.addEventListener('deviceready', function() {
         $('#bars').show()
 
         setTimeout(function(){
+            if (firsTry == "index.html"){
+                alert('Luxbar fade?')
+                $('.luxbar').hide();
+                $('.luxbar').css({'display':'none'})
+                alert(String($('.luxbar').css('display')))
+            }
             $('#loader').fadeOut();
+
         },500)
         getPictureDB()
 
        
         window.sessionStorage.setItem("floor","ground"); 
         var previouspage = window.sessionStorage.getItem("page");
+        alert("PREV"+String(previouspage))
         if (previouspage == 'artworks.html' || previouspage == 'artwork.html' ||previouspage == 'floorplan.html'){
             center = swipeLeft()
             

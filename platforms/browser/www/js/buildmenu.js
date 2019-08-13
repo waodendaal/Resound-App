@@ -64,7 +64,7 @@ document.addEventListener('deviceready', function() {
         var networkState = navigator.connection.type;
         if (networkState == "none"){
             $('#nav_happening').hide()
-            $('#nav_sched').attr("href", "offlineschedule.html")   
+            $('#nav_sched a').attr("href", "offlineschedule.html")   
     //          You are offline
             $('#luxbar-brand').after('<span>You are currently offline</span>')
         }
