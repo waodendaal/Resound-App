@@ -167,6 +167,7 @@ document.addEventListener('deviceready', function() {
                 $('#home_divs').css({'left': 'calc('+currentRight+' - '+screen_width+'px)'});
                 $('#home_divs').css({'right': 'calc('+currentRight+' + '+screen_width+'px)'});
                 $('.luxbar').fadeIn();
+                $('#aboveNav').fadeIn();
                 $('.program_arttrack_banner').fadeIn();
                 $('.subcontent').fadeIn();
                 $('#homebutton_ArtTrack').css({'left': screen_width+'px'});
@@ -188,6 +189,7 @@ document.addEventListener('deviceready', function() {
                 $('#home_divs').css({'right':(-screen_width)+'px'});
                 $('#home_divs').css({'left':(-screen_width)+'px'});
                 $('.luxbar').fadeOut();
+                $('#aboveNav').fadeOut();
                 $('.program_arttrack_banner').fadeOut();
                 $('.subcontent').fadeOut();
                 $('#home_banner').fadeIn();

@@ -59,6 +59,10 @@ h1, h2, h3, h4, h5 {
     color: white;
 }
 
+#aboveNav {
+    background-color:#3460A9;position:absolute;z-index:0;top:0;width:100vw; height:50px;
+}
+
 .appbackground {
     position:absolute;
     top:0;
