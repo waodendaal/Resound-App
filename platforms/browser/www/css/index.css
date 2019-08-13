@@ -68,6 +68,7 @@ h1, h2, h3, h4, h5 {
     height: 100%;
     width:100vw; 
     background-color: #3460A9;
+    overflow:hidden;
 }
 /* Portrait layout (default) */
 .app {
@@ -343,7 +344,7 @@ input::placeholder {
 /* Artwork page */
 .program_arttrack_banner {
     background-color:rgba(0,0,0,0.7);
-    padding: 35px 15px 0 15px;
+    padding: 45px 15px 0 15px;
     height: 100px;
     text-align:left !important;
 }

@@ -1,5 +1,5 @@
 document.addEventListener('deviceready', function() {
-    let heightofTop = $('.program_arttrack_banner').height() + 45;
+    let heightofTop = $('.program_arttrack_banner').height() + 55;
     let windowHeight = window.innerHeight
     $('#mapid').height(windowHeight-heightofTop)
     
