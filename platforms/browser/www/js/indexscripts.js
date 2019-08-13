@@ -48,7 +48,7 @@ document.addEventListener('deviceready', function() {
         var networkState = navigator.connection.type;  
         if (networkState == "none"){
             
-            window.sessionStorage.setItem("page","index.html"); 
+             
 
             location.href='redirect.html'
         
