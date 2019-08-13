@@ -48,10 +48,10 @@ body {
     font-size:12px;
     height:100%;
     margin:0px;
-    padding:0px;
     width:100%;
     padding-top: constant(safe-area-inset-top);
     padding-top: env(safe-area-inset-top);
+
 }
 
 h1, h2, h3, h4, h5 {
@@ -68,6 +68,7 @@ h1, h2, h3, h4, h5 {
 }
 /* Portrait layout (default) */
 .app {
+
     background-color: #3460A9;
     position:absolute;             /* position in the center of the screen */
     /* height:calc(100vh - 58px);                 */
