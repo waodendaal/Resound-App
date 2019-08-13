@@ -48,11 +48,6 @@
 
 <body id="index_page" style="background-image: url('../img/background.jpg');background-repeat: no-repeat;background-size: cover;">
     <!-- <div id="supersede_div" style="width: 100vw;height: 100vh;z-index: 500000;position: absolute;background-color: red;"> -->
-    <div id="splash" style="position:absolute; top:0">
-        <div style="top:45px;position:fixed;">
-                <img id="home_banner_img" style="opacity: 0.7; display:none;" src="img/home_banner_splash.png">        
-        </div> 
-    </div>
     <div id="loader" style="position:absolute; top:0">
         <div id="bars" style="display:none;">
             <div class="bar"></div>
@@ -178,6 +173,8 @@
 
     <script type="text/javascript">
         app.initialize();
+        navigator.splashscreen.hide();
+        
     </script>
 
     </div>
