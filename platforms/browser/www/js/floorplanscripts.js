@@ -1,5 +1,7 @@
 document.addEventListener('deviceready', function() {
-
+    let heightofTop = $('.program_arttrack_banner').height() + 25;
+    let windowHeight = window.innerHeight
+    $('#mapid').height(windowHeight-heightofTop)
     
     // Level selector
     var floor = window.sessionStorage.getItem("floor")
@@ -141,6 +143,11 @@ document.addEventListener("backbutton", function (e) {
 $(document).on('click','#luxbar-brand', function(){
     backPage()
 });
+$(document).on('click','.luxbar-brand', function(){
+    backPage()
+});
+
+
 // $(window).swipe( {    
 //     //Generic swipe handler for all directions
 //     swipe:function(event, direction, distance, duration, fingerCount, fingerData) {     

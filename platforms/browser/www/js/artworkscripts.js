@@ -207,6 +207,9 @@ document.addEventListener("backbutton", function (e) {
     backPage()
 })
 
+$(document).on('click','#luxbar-brand', function(){
+    backPage()
+});
 $(document).on('click','.luxbar-brand', function(){
     backPage()
 });

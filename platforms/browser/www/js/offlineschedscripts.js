@@ -1,4 +1,5 @@
 document.addEventListener('deviceready', function() {
+    alert('HI')
 
 setTimeout(function(){ 
     $('#loader').fadeOut();
@@ -31,6 +32,10 @@ $(document).on('click','#luxbar-brand', function(){
 // window.location.replace(previouspage);
 window.location.replace('index.html')
 });
+$(document).on('click','.luxbar-brand', function(){
+    window.location.replace('index.html')
+});
+
 
 let currentPage = 'happeningnow.html';
 window.sessionStorage.setItem("page",currentPage); 

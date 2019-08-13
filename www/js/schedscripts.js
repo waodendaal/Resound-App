@@ -24,7 +24,14 @@ $(document).on('click','#luxbar-brand', function(){
 
     
 });
+$(document).on('click','.luxbar-brand', function(){
+    // NOT FOR ANDROID
+    window.location.replace('index.html')
+    // window.history.back();
+    // $.mobile.back();
 
+    
+});
 var networkState = navigator.connection.type;
     if (networkState == "none"){
         
