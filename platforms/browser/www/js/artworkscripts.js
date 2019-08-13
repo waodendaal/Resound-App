@@ -1,4 +1,7 @@
 document.addEventListener('deviceready', function() {
+
+    var networkState = navigator.connection.type;  
+
     // alert("artworksscript")
     setTimeout(function(){ 
         $('#loader').fadeOut();
@@ -6,6 +9,7 @@ document.addEventListener('deviceready', function() {
     // $('#nav_home').addClass('active');
     
     // Auth
+    if (networkState !="none"){
     firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL)
     .then(function() {
         // Existing and future Auth states are now persisted in the current
@@ -25,7 +29,7 @@ document.addEventListener('deviceready', function() {
         var errorCode = error.code;
         var errorMessage = error.message;
     });
-
+}
     var workId = sessionStorage.param1;
 
     // DB
@@ -129,6 +133,7 @@ popSelector('archive_select_meta3','meta3')
 function popSelector(selectorID, metaNumber){
 let showOptions = false 
 var uploadedKeys = []
+if (networkState !="none"){
 var dbFire = firebase.firestore();
 dbFire.collection("works/"+workId+"/uploads")
 .get()
@@ -168,7 +173,7 @@ dbFire.collection("works/"+workId+"/uploads")
     $('#'+selectorID).hide()
     return;
 });
-
+}
 }
 $('.meta_textfield').on('click', function(){
 $('#disclaimer_popup2').hide()
@@ -420,7 +425,6 @@ document.addEventListener("backbutton", function (e) {
     }
 }, false );
 // Offline
-var networkState = navigator.connection.type;  
 if (networkState == "none"){
     //HIDE Sched
     $('#archive_actions').hide()
@@ -532,7 +536,6 @@ function submitFile(type, path){
         // Firebase
 
         let filename = uidGenerate()+"_"+$('#artwork_name').text()
-        
         // Create a storage reference from our storage service
         var storageRef = firebase.storage().ref();
         var imageRef = storageRef.child(type+'/'+filename);
@@ -543,6 +546,7 @@ function submitFile(type, path){
                 updateDB(filename, downloadURL,type)
             });
         });
+    
     };
     xhr.open('GET', path);
     xhr.send();
