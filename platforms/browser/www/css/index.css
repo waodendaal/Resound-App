@@ -454,7 +454,7 @@ input::placeholder {
 /* Map */
 .level {
     margin-top:15px;
-    margin-right:0px !important;
+    /* margin-right:0px !important; */
 }
 .map_header {
     color:white;
