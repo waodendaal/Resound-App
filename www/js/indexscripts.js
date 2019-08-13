@@ -48,6 +48,7 @@ document.addEventListener('deviceready', function() {
         // Check network connection        
         var networkState = navigator.connection.type;  
         if (networkState == "none"){
+            alert('OFFLINE')
             $('.app').prepend('<div id ="disclaimer_popup" style="z-index:100; margin-top:10px; display: block !important;">You are currently offline. Some features might not be available</div>')
             
             $(document).on('click',function(){
