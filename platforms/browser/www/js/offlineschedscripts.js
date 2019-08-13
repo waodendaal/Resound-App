@@ -1,5 +1,4 @@
 document.addEventListener('deviceready', function() {
-    alert('HI')
 
 setTimeout(function(){ 
     $('#loader').fadeOut();

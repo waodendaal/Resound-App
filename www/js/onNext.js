@@ -1,4 +1,12 @@
 document.addEventListener('deviceready', function() {
+    var networkState = navigator.connection.type;
+    if (networkState == "none"){
+        
+    //          You are offline
+            window.location.replace('index.html')
+
+            
+    }
 
 setTimeout(function(){ 
     $('#loader').fadeOut();

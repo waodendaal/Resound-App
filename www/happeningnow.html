@@ -101,6 +101,8 @@ bottom: 0;">
     <script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
     <script type="text/javascript" src="js/jquerymobile/jquery.mobile-1.4.5.js"></script>
     <script type="text/javascript" src="js/jquery.touchSwipe.min.js"></script>
+    <script type="text/javascript" src="js/onNext.js"></script>
+
 
     <script type="text/javascript">
         app.initialize();
@@ -119,40 +121,40 @@ bottom: 0;">
             
     }
 
-    // Navigation
-    $(window).swipe( {    
-        //Generic swipe handler for all directions
-        swipe:function(event, direction, distance, duration, fingerCount, fingerData) {     
-            if (direction == 'right'){
-                $.mobile.back();
-                window.location.replace('index.html')
+    // // Navigation
+    // $(window).swipe( {    
+    //     //Generic swipe handler for all directions
+    //     swipe:function(event, direction, distance, duration, fingerCount, fingerData) {     
+    //         if (direction == 'right'){
+    //             $.mobile.back();
+    //             window.location.replace('index.html')
 
-            }
+    //         }
             
-        }
-    });
+    //     }
+    // });
 
-    var previouspage = window.sessionStorage.getItem("page");
-    window.sessionStorage.setItem("artTrack","yes_p");
-    let iframeheight= $('#whatsnextiframe').height()
-    console.log(iframeheight)
-    $('.art_preview').height(iframeheight-135)
-    // -135
-    $('#artframe_partent').height(iframeheight-135)
-    // -135
-    $('#whatsnextiframe').height(iframeheight)
+    // var previouspage = window.sessionStorage.getItem("page");
+    // window.sessionStorage.setItem("artTrack","yes_p");
+    // let iframeheight= $('#whatsnextiframe').height()
+    // console.log(iframeheight)
+    // $('.art_preview').height(iframeheight-135)
+    // // -135
+    // $('#artframe_partent').height(iframeheight-135)
+    // // -135
+    // $('#whatsnextiframe').height(iframeheight)
 
-    document.addEventListener("backbutton", function (e) {
-        window.location.replace('index.html')
-    })
+    // document.addEventListener("backbutton", function (e) {
+    //     window.location.replace('index.html')
+    // })
 
-    $(document).on('click','#luxbar-brand', function(){
-        // window.location.replace(previouspage);
-        window.location.replace('index.html')
-    });
+    // $(document).on('click','#luxbar-brand', function(){
+    //     // window.location.replace(previouspage);
+    //     window.location.replace('index.html')
+    // });
 
-    let currentPage = 'happeningnow.html';
-    window.sessionStorage.setItem("page",currentPage); 
+    // let currentPage = 'happeningnow.html';
+    // window.sessionStorage.setItem("page",currentPage); 
 
     </script>
 </body>
