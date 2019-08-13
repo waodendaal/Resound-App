@@ -331,7 +331,9 @@ document.addEventListener('deviceready', function() {
     alert(String(firsTry))
     if (firsTry == "index.html"){
         alert('Luxbar fade?')
-        $('.luxbar').fadeOut();
+        $('.luxbar').hide();
+        $('.luxbar').css({'display':'none'})
+        alert(String($('.luxbar').css('display')))
     }
 
     // Session trackers 
