@@ -1,6 +1,11 @@
 document.addEventListener('deviceready', function() {
     $('#aboveNav').fadeOut();
+    alert("REDIRECT 1")
     let firsTry = window.sessionStorage.getItem("page")
+    if (firstTry == "index.html"){
+        $('.luxbar').fadeOut();
+    }
+    alert("REDIRECT 2")
     // alert(String(firsTry))
         // Home Screens
         var center = 'center';
@@ -13,15 +18,7 @@ document.addEventListener('deviceready', function() {
         $('.art_preview div').css({'width':((screen_width-50)/3),'height':((screen_width-50)/3) });
         
         // Splash screen
-        function firstStart(){
-            $('#loader').hide();
-            $('#splash').show()
-            $('#home_banner_img').show()
-            createDB();
-            setTimeout(function(){ 
-                $("#splash").fadeOut()
-            }, 1500);
-        }
+        
         
         //Menu
         document.addEventListener("backbutton", function (e) {
@@ -47,6 +44,7 @@ document.addEventListener('deviceready', function() {
         // Check network connection        
         var networkState = navigator.connection.type;  
         if (networkState == "none"){
+            alert("NO CONNECTION")
             $('.app').prepend('<div id ="disclaimer_popup" style="z-index:100; margin-top:10px; text-alignt:center; display: block !important;">You are currently offline. Some features might not be available</div>')
             
             $('#disclaimer_popup').on('click',function(){
@@ -56,53 +54,15 @@ document.addEventListener('deviceready', function() {
         }
         
 
-        if (networkState != "none"){
+        $('#loader').show();
+        $('#bars').show()
 
-        //Firebase Auth
-        firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL)
-        .then(function() {
-            // Existing and future Auth states are now persisted in the current
-            // session only. Closing the window would clear any existing state even
-            // if a user forgets to sign out.
-            // ...
-            // New sign-in will be persisted with session persistence.
-            return firebase.auth().signInAnonymously().catch(function(error) {
-            // Handle Errors here.
-            var errorCode = error.code;
-            var errorMessage = error.message;
-            console.log('Error: '+String(errorMessage)+" "+String(errorCode))
-        });
-        })
-        .catch(function(error) {
-            // Handle Errors here.
-            var errorCode = error.code;
-            var errorMessage = error.message;
-            console.log("ERROR: "+String(errorCode)+" "+String(errorMessage))
-        });
+        setTimeout(function(){
+            $('#loader').fadeOut();
+            alert("FADER OUT")
+        },500)
+        getPictureDB()
 
-        //Check Login Auth
-        firebase.auth().onAuthStateChanged(function(user) {
-            if (user) {
-                var isAnonymous = user.isAnonymous;
-                var uid = user.uid;
-                if (firsTry == null){
-                    firstStart()
-                }
-                else{
-                        $('#splash').hide()
-                        $('#loader').show();
-                        $('#bars').show()
-
-                        setTimeout(function(){
-                            $('#loader').fadeOut();
-                        },500)
-                        getPictureDB()
-                    }
-            } else {
-                // User is signed out.
-            }
-        });
-    };
        
         window.sessionStorage.setItem("floor","ground"); 
         var previouspage = window.sessionStorage.getItem("page");

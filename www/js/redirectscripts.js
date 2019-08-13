@@ -2,6 +2,9 @@ document.addEventListener('deviceready', function() {
     $('#aboveNav').fadeOut();
     alert("REDIRECT 1")
     let firsTry = window.sessionStorage.getItem("page")
+    if (firstTry == "index.html"){
+        $('.luxbar').fadeOut();
+    }
     alert("REDIRECT 2")
     // alert(String(firsTry))
         // Home Screens
