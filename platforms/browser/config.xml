@@ -28,5 +28,6 @@
     <preference name="AndroidLaunchMode" value="singleTask" />
     <preference name="orientation" value="portrait" />
     <preference name="AutoHideSplashScreen" value="true" />
+    <preference name="FadeSplashScreen" value="0" />
     <preference name="SplashScreenDelay" value="0" />
 </widget>
