@@ -60,6 +60,8 @@ h1, h2, h3, h4, h5 {
 }
 
 .appbackground {
+    position:absolute;
+    top:0;
     background-image: url('../img/background.jpg');
     /* background-repeat: no-repeat; */
     background-size: cover;
