@@ -1,11 +1,7 @@
 document.addEventListener('deviceready', function() {
     $('#aboveNav').fadeOut();
     let firsTry = window.sessionStorage.getItem("page")
-    alert(String(firsTry))
-    if (firsTry == "index.html"){
-        alert('Luxbar fade?')
-        $('.luxbar').fadeOut();
-    }
+
     // alert(String(firsTry))
         // Home Screens
         var center = 'center';
@@ -332,7 +328,13 @@ document.addEventListener('deviceready', function() {
             
     }
 
-
+    alert(String(firsTry))
+    if (firsTry == "index.html"){
+        alert('Luxbar fade?')
+        $('.luxbar').hide();
+        $('.luxbar').css({'display':'none'})
+        alert(String($('.luxbar').css('display')))
+    }
 
     // Session trackers 
     let currentPage = 'index.html';

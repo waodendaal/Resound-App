@@ -14,7 +14,7 @@ document.addEventListener('deviceready', function() {
                             </label>\
                         </li>\
                         <li id="nav_home" class="luxbar-item"><a href="index.html">HOME</a></li>\
-                        <li class="luxbar-item"><a href="happeningnow.html">WHAT\'S ON NEXT</a></li>\
+                        <li id="nav_happening" class="luxbar-item"><a href="happeningnow.html">WHAT\'S ON NEXT</a></li>\
                         <li id="nav_sched" class="luxbar-item"><a href="schedule.html">PROGRAM</a></li>\
                         <li class="luxbar-item"><a href="artworks.html">ARTWORKS</a></li>\
                         <li class="luxbar-item"><a href="floorplan.html">MAP</a></li>\
@@ -63,7 +63,8 @@ document.addEventListener('deviceready', function() {
     
         var networkState = navigator.connection.type;
         if (networkState == "none"){
-            
+            $('#nav_happening').hide()
+            $('#nav_sched').attr("href", "offlineschedule.html")   
     //          You are offline
             $('#luxbar-brand').after('<span>You are currently offline</span>')
         }
