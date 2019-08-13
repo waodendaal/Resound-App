@@ -1,5 +1,4 @@
 document.addEventListener('deviceready', function() {
-    navigator.splashcreen.hide()
     $('#aboveNav').fadeOut();
     let firsTry = window.sessionStorage.getItem("page")
     // alert(String(firsTry))
@@ -51,7 +50,7 @@ document.addEventListener('deviceready', function() {
             if (firsTry ==null){
                 window.sessionStorage.setItem("page","index.html"); 
 
-                location.href='index.html'
+                location.href='redirect.html'
             }
             $('.app').prepend('<div id ="disclaimer_popup" style="z-index:100; margin-top:10px; text-alignt:center; display: block !important;">You are currently offline. Some features might not be available</div>')
             
