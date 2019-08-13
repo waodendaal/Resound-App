@@ -708,9 +708,9 @@ a.btn,.btn {
     height:20vw;
     float:left;
     margin-right:20px;
-    background-color:white;
+    background-color:white !important;
     /* background-color:black; */
-    color:black;
+    color:black !important;
     border-radius:25vw;
 }
 #audio_archive i, #audio_archive div{
