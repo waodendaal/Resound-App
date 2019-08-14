@@ -58,7 +58,7 @@ document.addEventListener('deviceready', function() {
         map.fitBounds(bounds);
         map.setMaxBounds(bounds);
         map.setMaxZoom(2);
-        map.setMinZoom(-1);
+        map.setMinZoom(-2);
         map.setZoom(-1);
         // map.bounceAtZoomLimits = false
         // alert('Map Created')
