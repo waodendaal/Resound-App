@@ -53,7 +53,14 @@ document.addEventListener('deviceready', function() {
         $('#bars').show()
 
         setTimeout(function(){
+            if (firsTry == "index.html"){
+             
+                $('.luxbar').hide();
+                $('.luxbar').css({'display':'none'})
+             
+            }
             $('#loader').fadeOut();
+
         },500)
         getPictureDB()
 
@@ -328,12 +335,9 @@ document.addEventListener('deviceready', function() {
             
     }
 
-    alert(String(firsTry))
     if (firsTry == "index.html"){
-        alert('Luxbar fade?')
         $('.luxbar').hide();
         $('.luxbar').css({'display':'none'})
-        alert(String($('.luxbar').css('display')))
     }
 
     // Session trackers 

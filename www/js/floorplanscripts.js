@@ -1,7 +1,5 @@
 document.addEventListener('deviceready', function() {
-    let heightofTop = $('.program_arttrack_banner').height() + 60;
-    let windowHeight = window.innerHeight
-    $('#mapid').height(windowHeight-heightofTop)
+
     
     // Level selector
     var floor = window.sessionStorage.getItem("floor")
@@ -64,7 +62,11 @@ document.addEventListener('deviceready', function() {
         map.setZoom(-1);
         // map.bounceAtZoomLimits = false
         // alert('Map Created')
-        
+        let heightofTop = $('.program_arttrack_banner').height() + 60;
+        let windowHeight = window.innerHeight
+        $('#mapid').height(windowHeight-heightofTop)
+        $('#mapid').width(windowHeight-heightofTop)
+
         return map
     }
 
