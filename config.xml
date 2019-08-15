@@ -63,7 +63,8 @@
         <edit-config target="NSMicrophoneUsageDescription" file="*-Info.plist" mode="merge">
             <string>need microphone access to record sounds</string>
         </edit-config>
-        <icon height="57" platform="ios" src="www/res/icon/ios/icon.png" width="57" />
+        <icon src="www/res/icon/ios/icon.png" platform="ios" width="1024" height="1024" />
+        <icon height="57" platform="ios" src="www/res/icon/ios/icon-57.png" width="57" />
         <icon height="114" platform="ios" src="www/res/icon/ios/icon@2x.png" width="114" />
         <icon height="40" platform="ios" src="www/res/icon/ios/icon-40.png" width="40" />
         <icon height="80" platform="ios" src="www/res/icon/ios/icon-40@2x.png" width="80" />
@@ -79,6 +80,7 @@
         <icon height="29" platform="ios" src="www/res/icon/ios/icon-small.png" width="29" />
         <icon height="58" platform="ios" src="www/res/icon/ios/icon-small@2x.png" width="58" />
         <icon height="87" platform="ios" src="www/res/icon/ios/icon-small@3x.png" width="87" />
+        <icon height="167" platform="ios" src="www/res/icon/ios/icon-83.5@2x.png.png" width="167" />
         <!-- <splash src="res/screen/ios/Default@2x~universal~anyany.png" />  -->
 <splash src="www/splash/ios/Default@2x~iphone~anyany.png"/>
 
@@ -114,6 +116,7 @@
         <icon height="159" platform="wp8" src="www/res/icon/wp8/Background.png" width="159" />
     </platform>
     <platform name="windows">
+        
         <icon height="150" platform="windows" src="www/res/icon/windows/Square150x150Logo.scale-100.png" width="150" />
         <icon height="30" platform="windows" src="www/res/icon/windows/Square30x30Logo.scale-100.png" width="30" />
         <icon height="50" platform="windows" src="www/res/icon/windows/StoreLogo.scale-100.png" width="50" />
