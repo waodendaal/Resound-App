@@ -55,13 +55,15 @@
     </platform>
     <platform name="ios">
         <edit-config file="*-Info.plist" mode="merge" target="NSMicrophoneUsageDescription">
-            <string>need microphone access to record sounds</string>
+            <string>need microphone access to record sounds for the archive</string>
         </edit-config>
         <edit-config target="NSCameraUsageDescription" file="*-Info.plist" mode="merge">
-            <string>need camera access to take pictures</string>
+            <string>need camera access to take pictures for the archive</string>
         </edit-config>
-        <edit-config target="NSMicrophoneUsageDescription" file="*-Info.plist" mode="merge">
-            <string>need microphone access to record sounds</string>
+        <edit-config target="NSPhotoLibraryUsageDescription" file="*-Info.plist" mode="merge">
+            <string>need storage access to save or remove archive images from your storage</string>
+        </edit-config>
+
         </edit-config>
         <icon src="www/res/icon/ios/icon.png" platform="ios" width="1024" height="1024" />
         <icon height="57" platform="ios" src="www/res/icon/ios/icon-57.png" width="57" />
