@@ -19,7 +19,7 @@
     <preference name="FadeSplashScreen" value="0"/>
     <preference name="SplashScreenDelay" value="0"/>
     <!-- <preference name="ShowSplashScreenSpinner" value="false"/> -->
-    <plugin name="cordova-plugin-camera" source="npm" />
+    <!-- <plugin name="cordova-plugin-camera" source="npm" />
     <plugin name="cordova-plugin-media-capture" source="npm"/>
     <plugin name="cordova-plugin-device-motion" source="npm"/>
     <plugin name="cordova-plugin-device-orientation" source="npm"/>
@@ -32,7 +32,7 @@
     <plugin name="cordova-plugin-network-information" source="npm"/>
     <plugin name="cordova-plugin-statusbar" source="npm"/>
     <plugin name="cordova-plugin-splashscreen"/>
-    <plugin name="cordova-plugin-whitelist" source="npm"/>
+    <plugin name="cordova-plugin-whitelist" source="npm"/> -->
     <platform name="android">
         <icon density="ldpi" src="www/res/icon/android/drawable-ldpi-icon.png" />
         <icon density="mdpi" src="www/res/icon/android/drawable-mdpi-icon.png" />
@@ -145,7 +145,7 @@
         <allow-intent href="itms:*" />
         <allow-intent href="itms-apps:*" />
     </platform>
-    <plugin name="cordova-plugin-device"/>
+    <!-- <plugin name="cordova-plugin-device"/> -->
     <universal-links>
         <host name="resound.page.link" scheme="https" />
         <host name="resound-e743c.firebaseapp.com" scheme="https">
