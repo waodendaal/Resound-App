@@ -263,7 +263,7 @@ input::placeholder {
 .search_bar {
     text-align: left !important;
     width: 100%;
-    max-width: 200px;
+    max-width: 150px;
     display:flex !important;
 }
 .search_bar input {
