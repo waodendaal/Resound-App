@@ -10,7 +10,7 @@ $(window).swipe( {
     //Generic swipe handler for all directions
     swipe:function(event, direction, distance, duration, fingerCount, fingerData) {     
         if (direction == 'right'){
-            window.location.replace('index.html')
+            // window.location.replace('index.html')
 
             // $.mobile.back();
         }

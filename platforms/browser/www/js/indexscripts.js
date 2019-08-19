@@ -292,7 +292,7 @@ document.addEventListener('deviceready', function() {
         }
 
     function errorCB(tx, err) {
-        alert("Error Processing Database - Please Restart App");
+        console.log("Error Processing Database - Please Restart App");
     }
 
     // Transaction success callback
@@ -318,7 +318,7 @@ document.addEventListener('deviceready', function() {
             getPicture(results.rows, "SQL")
         }
         function errorCB(err) {
-            alert("Error Processing Database - Please Restart App");
+            console.log("Error Processing Database - Please Restart App");
         }
     }
     
