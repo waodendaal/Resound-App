@@ -6,15 +6,15 @@ It's a conference navigation app, with an added conceptual component: an interac
 
 *Made with Karla Zavala*
 
-![RE:SOUND App homescreen](https://i.imgur.com/eZ4Hr1p.png)
+![RE:SOUND App homescreen](https://i.imgur.com/eZ4Hr1p.png | width=200)
 
-![RE:SOUND App art work page](https://i.imgur.com/dZW0wZ2.png)
+![RE:SOUND App art work page](https://i.imgur.com/dZW0wZ2.png | width=200)
 
-![RE:SOUND App collaborative archive](https://i.imgur.com/q9BFCW4.png)
+![RE:SOUND App collaborative archive](https://i.imgur.com/q9BFCW4.png | width=200)
 
-![RE:SOUND App map](https://i.imgur.com/lH5mKL6.png)
+![RE:SOUND App map](https://i.imgur.com/lH5mKL6.png | width=200)
 
-![RE:SOUND App program navigation](https://i.imgur.com/xMazooO.png)
+![RE:SOUND App program navigation](https://i.imgur.com/xMazooO.png | width=200)
 
 
 Created with Phonegap/Cordova for iOs and Android, using Leaflet and Sched. 
