@@ -6,7 +6,7 @@ It's a conference navigation app, with an added conceptual component: an interac
 
 *Made with Karla Zavala*
 
-![RE:SOUND App homescreen](https://i.imgur.com/eZ4Hr1p.png | width=200)
+<img src="https://i.imgur.com/eZ4Hr1p.png" width="200" alt="RE:SOUND App homescreen">
 
 ![RE:SOUND App art work page](https://i.imgur.com/dZW0wZ2.png | width=200)
 
